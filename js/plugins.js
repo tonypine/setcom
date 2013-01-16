@@ -21,6 +21,392 @@
     }
 }());
 
+function dump(obj) {
+    var out = '';
+    for (var i in obj) {
+        out += i + ": " + obj[i] + "\n";
+    }
+
+    alert(out);
+}
+
 // Place any jQuery/helper plugins in here.
 // Lightbox
-(function(){var e,t,n;e=jQuery;n=function(){function e(){this.fileLoadingImage=url+"/img/loading.gif";this.fileCloseImage=url+"/img/close.png";this.resizeDuration=450;this.fadeDuration=300;this.labelImage="Image";this.labelOf="of"}return e}();t=function(){function t(e){this.options=e;this.album=[];this.currentImageIndex=void 0;this.init()}t.prototype.init=function(){this.enable();return this.build()};t.prototype.enable=function(){var t=this;return e("body").on("click","a[rel^=lightbox], area[rel^=lightbox]",function(n){t.start(e(n.currentTarget));return false})};t.prototype.build=function(){var t,n=this;e("<div>",{id:"lightboxOverlay"}).after(e("<div/>",{id:"lightbox"}).append(e("<div/>",{"class":"lb-outerContainer"}).append(e("<div/>",{"class":"lb-container"}).append(e("<img/>",{"class":"lb-image"}),e("<div/>",{"class":"lb-nav"}).append(e("<a/>",{"class":"lb-prev"}),e("<a/>",{"class":"lb-next"})),e("<div/>",{"class":"lb-loader"}).append(e("<a/>",{"class":"lb-cancel"}).append(e("<img/>",{src:this.options.fileLoadingImage}))))),e("<div/>",{"class":"lb-dataContainer"}).append(e("<div/>",{"class":"lb-data"}).append(e("<div/>",{"class":"lb-details"}).append(e("<span/>",{"class":"lb-caption"}),e("<span/>",{"class":"lb-number"})),e("<div/>",{"class":"lb-closeContainer"}).append(e("<a/>",{"class":"lb-close"}).append(e("<img/>",{src:this.options.fileCloseImage}))))))).appendTo(e("body"));e("#lightboxOverlay").hide().on("click",function(e){n.end();return false});t=e("#lightbox");t.hide().on("click",function(t){if(e(t.target).attr("id")==="lightbox")n.end();return false});t.find(".lb-outerContainer").on("click",function(t){if(e(t.target).attr("id")==="lightbox")n.end();return false});t.find(".lb-prev").on("click",function(e){n.changeImage(n.currentImageIndex-1);return false});t.find(".lb-next").on("click",function(e){n.changeImage(n.currentImageIndex+1);return false});t.find(".lb-loader, .lb-close").on("click",function(e){n.end();return false})};t.prototype.start=function(t){var n,r,i,s,o,u,a,f,l;e(window).on("resize",this.sizeOverlay);e("select, object, embed").css({visibility:"hidden"});e("#lightboxOverlay").width(e(document).width()).height(e(document).height()).fadeIn(this.options.fadeDuration);this.album=[];o=0;if(t.attr("rel")==="lightbox"){this.album.push({link:t.attr("href"),title:t.attr("title")})}else{l=e(t.prop("tagName")+'[rel="'+t.attr("rel")+'"]');for(s=0,f=l.length;s<f;s++){i=l[s];this.album.push({link:e(i).attr("href"),title:e(i).attr("title")});if(e(i).attr("href")===t.attr("href"))o=s}}r=e(window);a=r.scrollTop()+r.height()/10;u=r.scrollLeft();n=e("#lightbox");n.css({top:a+"px",left:u+"px"}).fadeIn(this.options.fadeDuration);this.changeImage(o)};t.prototype.changeImage=function(t){var n,r,i,s=this;this.disableKeyboardNav();r=e("#lightbox");n=r.find(".lb-image");this.sizeOverlay();e("#lightboxOverlay").fadeIn(this.options.fadeDuration);e(".loader").fadeIn("slow");r.find(".lb-image, .lb-nav, .lb-prev, .lb-next, .lb-dataContainer, .lb-numbers, .lb-caption").hide();r.find(".lb-outerContainer").addClass("animating");i=new Image;i.onload=function(){n.attr("src",s.album[t].link);n.width=i.width;n.height=i.height;return s.sizeContainer(i.width,i.height)};i.src=this.album[t].link;this.currentImageIndex=t};t.prototype.sizeOverlay=function(){return e("#lightboxOverlay").width(e(document).width()).height(e(document).height())};t.prototype.sizeContainer=function(t,n){var r,i,s,o,u,a,f,l,c,h,p,d=this;i=e("#lightbox");s=i.find(".lb-outerContainer");p=s.outerWidth();h=s.outerHeight();r=i.find(".lb-container");f=parseInt(r.css("padding-top"),10);a=parseInt(r.css("padding-right"),10);o=parseInt(r.css("padding-bottom"),10);u=parseInt(r.css("padding-left"),10);c=t+u+a;l=n+f+o;if(c!==p&&l!==h){s.animate({width:c,height:l},this.options.resizeDuration,"swing")}else if(c!==p){s.animate({width:c},this.options.resizeDuration,"swing")}else if(l!==h){s.animate({height:l},this.options.resizeDuration,"swing")}setTimeout(function(){i.find(".lb-dataContainer").width(c);i.find(".lb-prevLink").height(l);i.find(".lb-nextLink").height(l);d.showImage()},this.options.resizeDuration)};t.prototype.showImage=function(){var t;t=e("#lightbox");t.find(".lb-loader").hide();t.find(".lb-image").fadeIn("slow");this.updateNav();this.updateDetails();this.preloadNeighboringImages();this.enableKeyboardNav()};t.prototype.updateNav=function(){var t;t=e("#lightbox");t.find(".lb-nav").show();if(this.currentImageIndex>0)t.find(".lb-prev").show();if(this.currentImageIndex<this.album.length-1){t.find(".lb-next").show()}};t.prototype.updateDetails=function(){var t,n=this;t=e("#lightbox");if(typeof this.album[this.currentImageIndex].title!=="undefined"&&this.album[this.currentImageIndex].title!==""){t.find(".lb-caption").html(this.album[this.currentImageIndex].title).fadeIn("fast")}if(this.album.length>1){t.find(".lb-number").html(this.options.labelImage+" "+(this.currentImageIndex+1)+" "+this.options.labelOf+"  "+this.album.length).fadeIn("fast")}else{t.find(".lb-number").hide()}t.find(".lb-outerContainer").removeClass("animating");t.find(".lb-dataContainer").fadeIn(this.resizeDuration,function(){return n.sizeOverlay()})};t.prototype.preloadNeighboringImages=function(){var e,t;if(this.album.length>this.currentImageIndex+1){e=new Image;e.src=this.album[this.currentImageIndex+1].link}if(this.currentImageIndex>0){t=new Image;t.src=this.album[this.currentImageIndex-1].link}};t.prototype.enableKeyboardNav=function(){e(document).on("keyup.keyboard",e.proxy(this.keyboardAction,this))};t.prototype.disableKeyboardNav=function(){e(document).off(".keyboard")};t.prototype.keyboardAction=function(e){var t,n,r,i,s;t=27;n=37;r=39;s=e.keyCode;i=String.fromCharCode(s).toLowerCase();if(s===t||i.match(/x|o|c/)){this.end()}else if(i==="p"||s===n){if(this.currentImageIndex!==0){this.changeImage(this.currentImageIndex-1)}}else if(i==="n"||s===r){if(this.currentImageIndex!==this.album.length-1){this.changeImage(this.currentImageIndex+1)}}};t.prototype.end=function(){this.disableKeyboardNav();e(window).off("resize",this.sizeOverlay);e("#lightbox").fadeOut(this.options.fadeDuration);e("#lightboxOverlay").fadeOut(this.options.fadeDuration);return e("select, object, embed").css({visibility:"visible"})};return t}();e(function(){var e,r;r=new n;return e=new t(r)})}).call(this)
+
+/*
+Lightbox v2.51
+by Lokesh Dhakar - http://www.lokeshdhakar.com
+
+For more information, visit:
+http://lokeshdhakar.com/projects/lightbox2/
+
+Licensed under the Creative Commons Attribution 2.5 License - http://creativecommons.org/licenses/by/2.5/
+- free for use in both personal and commercial projects
+- attribution requires leaving author name, author link, and the license info intact
+    
+Thanks
+- Scott Upton(uptonic.com), Peter-Paul Koch(quirksmode.com), and Thomas Fuchs(mir.aculo.us) for ideas, libs, and snippets.
+- Artemy Tregubenko (arty.name) for cleanup and help in updating to latest proto-aculous in v2.05.
+
+
+Table of Contents
+=================
+LightboxOptions
+
+Lightbox
+- constructor
+- init
+- enable
+- build
+- start
+- changeImage
+- sizeContainer
+- showImage
+- updateNav
+- updateDetails
+- preloadNeigbhoringImages
+- enableKeyboardNav
+- disableKeyboardNav
+- keyboardAction
+- end
+
+options = new LightboxOptions
+lightbox = new Lightbox options
+*/
+
+(function() {
+  var $, Lightbox, LightboxOptions;
+
+  $ = jQuery;
+
+  LightboxOptions = (function() {
+
+    function LightboxOptions() {
+      this.fileLoadingImage = url + '/img/loading.gif';
+      this.fileCloseImage = url + '/img/close.png';
+      this.resizeDuration = 700;
+      this.fadeDuration = 500;
+      this.labelImage = "Image";
+      this.labelOf = "of";
+    }
+
+    return LightboxOptions;
+
+  })();
+
+  Lightbox = (function() {
+
+    function Lightbox(options) {
+      this.options = options;
+      this.album = [];
+      this.currentImageIndex = void 0;
+      this.init();
+    }
+
+    Lightbox.prototype.init = function() {
+      this.enable();
+      return this.build();
+    };
+
+    Lightbox.prototype.enable = function() {
+      var _this = this;
+      return $('body').on('click', 'a[rel^=lightbox], area[rel^=lightbox]', function(e) {
+        _this.start($(e.currentTarget));
+        return false;
+      });
+    };
+
+    Lightbox.prototype.build = function() {
+      var $lightbox,
+        _this = this;
+      $("<div>", {
+        id: 'lightboxOverlay'
+      }).after($('<div/>', {
+        id: 'lightbox'
+      }).append($('<div/>', {
+        "class": 'lb-outerContainer'
+      }).append($('<div/>', {
+        "class": 'lb-container'
+      }).append($('<img/>', {
+        "class": 'lb-image'
+      }), $('<div/>', {
+        "class": 'lb-nav'
+      }).append($('<a/>', {
+        "class": 'lb-prev'
+      }), $('<a/>', {
+        "class": 'lb-next'
+      })), $('<div/>', {
+        "class": 'lb-loader'
+      }).append($('<a/>', {
+        "class": 'lb-cancel'
+      }).append($('<img/>', {
+        src: this.options.fileLoadingImage
+      }))))), $('<div/>', {
+        "class": 'lb-dataContainer'
+      }).append($('<div/>', {
+        "class": 'lb-data'
+      }).append($('<div/>', {
+        "class": 'lb-details'
+      }).append($('<span/>', {
+        "class": 'lb-caption'
+      }), $('<span/>', {
+        "class": 'lb-number'
+      })), $('<div/>', {
+        "class": 'lb-closeContainer'
+      }).append($('<a/>', {
+        "class": 'lb-close'
+      }).append($('<img/>', {
+        src: this.options.fileCloseImage
+      }))))))).appendTo($('body'));
+      $('#lightboxOverlay').hide().on('click', function(e) {
+        _this.end();
+        return false;
+      });
+      $lightbox = $('#lightbox');
+      $lightbox.hide().on('click', function(e) {
+        if ($(e.target).attr('id') === 'lightbox') _this.end();
+        return false;
+      });
+      $lightbox.find('.lb-outerContainer').on('click', function(e) {
+        if ($(e.target).attr('id') === 'lightbox') _this.end();
+        return false;
+      });
+      $lightbox.find('.lb-prev').on('click', function(e) {
+        _this.changeImage(_this.currentImageIndex - 1);
+        return false;
+      });
+      $lightbox.find('.lb-next').on('click', function(e) {
+        _this.changeImage(_this.currentImageIndex + 1);
+        return false;
+      });
+      $lightbox.find('.lb-loader, .lb-close').on('click', function(e) {
+        _this.end();
+        return false;
+      });
+    };
+
+    Lightbox.prototype.start = function($link) {
+      var $lightbox, $window, a, i, imageNumber, left, top, _len, _ref;
+      $(window).on("resize", this.sizeOverlay);
+      $('select, object, embed').css({
+        visibility: "hidden"
+      });
+      $('#lightboxOverlay').width($(document).width()).height($(document).height()).fadeIn(this.options.fadeDuration);
+      this.album = [];
+      imageNumber = 0;
+      if ($link.attr('rel') === 'lightbox') {
+        this.album.push({
+          link: $link.attr('href'),
+          title: $link.attr('title')
+        });
+      } else {
+        var rel = ($link.attr('rel').match(/lightbox\[[A-z]*[0-9]*\]*/));
+        _ref = $($link.prop("tagName") + '[rel*="' + rel + '"]');
+        for (i = 0, _len = _ref.length; i < _len; i++) {
+          a = _ref[i];
+          this.album.push({
+            link: $(a).attr('href'),
+            title: $(a).attr('title')
+          });
+          if ($(a).attr('href') === $link.attr('href')) imageNumber = i;
+        }
+      }
+      $window = $(window);
+      top = $window.scrollTop() + $window.height() / 10;
+      left = $window.scrollLeft();
+      $lightbox = $('#lightbox');
+      $lightbox.css({
+        top: top + 'px',
+        left: left + 'px'
+      }).fadeIn(this.options.fadeDuration);
+      this.changeImage(imageNumber);
+    };
+
+    Lightbox.prototype.changeImage = function(imageNumber) {
+      var $image, $lightbox, preloader,
+        _this = this;
+      this.disableKeyboardNav();
+      $lightbox = $('#lightbox');
+      $image = $lightbox.find('.lb-image');
+      this.sizeOverlay();
+      $('#lightboxOverlay').fadeIn(this.options.fadeDuration);
+      $('.loader').fadeIn('slow');
+      $lightbox.find('.lb-image, .lb-nav, .lb-prev, .lb-next, .lb-dataContainer, .lb-numbers, .lb-caption').hide();
+      $lightbox.find('.lb-outerContainer').addClass('animating');
+      preloader = new Image;
+      preloader.onload = function() {
+        $image.attr('src', _this.album[imageNumber].link);
+        
+        var containerWidth, containerHeight;
+        var doc = {
+            w: $(window).width() - 100,
+            h: $(window).height() - 160
+        };
+        var cont = {
+            w: preloader.width,
+            h: preloader.height
+        };
+
+        var aspect = preloader.width / preloader.height;
+        if(preloader.width > doc.w) {
+            if(doc.w / aspect > doc.h) {
+                cont.w = doc.h * aspect;
+                cont.h = doc.h;
+            } else {
+                cont.w = doc.w;
+                cont.h = doc.w / aspect;
+            }
+        } else if(preloader.height > doc.h) {
+            cont.w = doc.h * aspect;
+            cont.h = doc.h;
+        }
+        $image.css({
+            height: cont.h,
+            width: cont.w
+        });
+        return _this.sizeContainer(cont.w, cont.h);
+      };
+      preloader.src = this.album[imageNumber].link;
+      this.currentImageIndex = imageNumber;
+    };
+
+    Lightbox.prototype.sizeOverlay = function() {
+      return $('#lightboxOverlay').width($(document).width()).height($(document).height());
+    };
+
+    Lightbox.prototype.sizeContainer = function(imageWidth, imageHeight) {
+      var $container, $lightbox, $outerContainer, containerBottomPadding, containerLeftPadding, containerRightPadding, containerTopPadding, newHeight, newWidth, oldHeight, oldWidth,
+        _this = this;
+      $lightbox = $('#lightbox');
+      $outerContainer = $lightbox.find('.lb-outerContainer');
+      oldWidth = $outerContainer.outerWidth();
+      oldHeight = $outerContainer.outerHeight();
+      $container = $lightbox.find('.lb-container');
+      containerTopPadding = parseInt($container.css('padding-top'), 10);
+      containerRightPadding = parseInt($container.css('padding-right'), 10);
+      containerBottomPadding = parseInt($container.css('padding-bottom'), 10);
+      containerLeftPadding = parseInt($container.css('padding-left'), 10);
+      newWidth = imageWidth + containerLeftPadding + containerRightPadding;
+      newHeight = imageHeight + containerTopPadding + containerBottomPadding;
+      if (newWidth !== oldWidth && newHeight !== oldHeight) {
+        $outerContainer.animate({
+          width: newWidth,
+          height: newHeight
+        }, this.options.resizeDuration, 'swing');
+      } else if (newWidth !== oldWidth) {
+        $outerContainer.animate({
+          width: newWidth
+        }, this.options.resizeDuration, 'swing');
+      } else if (newHeight !== oldHeight) {
+        $outerContainer.animate({
+          height: newHeight
+        }, this.options.resizeDuration, 'swing');
+      }
+      setTimeout(function() {
+        $lightbox.find('.lb-dataContainer').width(newWidth);
+        $lightbox.find('.lb-prevLink').height(newHeight);
+        $lightbox.find('.lb-nextLink').height(newHeight);
+        _this.showImage();
+      }, this.options.resizeDuration);
+    };
+
+    Lightbox.prototype.showImage = function() {
+      var $lightbox;
+      $lightbox = $('#lightbox');
+      $lightbox.find('.lb-loader').hide();
+      $lightbox.find('.lb-image').fadeIn('slow');
+      this.updateNav();
+      this.updateDetails();
+      this.preloadNeighboringImages();
+      this.enableKeyboardNav();
+    };
+
+    Lightbox.prototype.updateNav = function() {
+      var $lightbox;
+      $lightbox = $('#lightbox');
+      $lightbox.find('.lb-nav').show();
+      if (this.currentImageIndex > 0) $lightbox.find('.lb-prev').show();
+      if (this.currentImageIndex < this.album.length - 1) {
+        $lightbox.find('.lb-next').show();
+      }
+    };
+
+    Lightbox.prototype.updateDetails = function() {
+      var $lightbox,
+        _this = this;
+      $lightbox = $('#lightbox');
+      if (typeof this.album[this.currentImageIndex].title !== 'undefined' && this.album[this.currentImageIndex].title !== "") {
+        $lightbox.find('.lb-caption').html(this.album[this.currentImageIndex].title).fadeIn('fast');
+      }
+      if (this.album.length > 1) {
+        $lightbox.find('.lb-number').html(this.options.labelImage + ' ' + (this.currentImageIndex + 1) + ' ' + this.options.labelOf + '  ' + this.album.length).fadeIn('fast');
+      } else {
+        $lightbox.find('.lb-number').hide();
+      }
+      $lightbox.find('.lb-outerContainer').removeClass('animating');
+      $lightbox.find('.lb-dataContainer').fadeIn(this.resizeDuration, function() {
+        return _this.sizeOverlay();
+      });
+    };
+
+    Lightbox.prototype.preloadNeighboringImages = function() {
+      var preloadNext, preloadPrev;
+      if (this.album.length > this.currentImageIndex + 1) {
+        preloadNext = new Image;
+        preloadNext.src = this.album[this.currentImageIndex + 1].link;
+      }
+      if (this.currentImageIndex > 0) {
+        preloadPrev = new Image;
+        preloadPrev.src = this.album[this.currentImageIndex - 1].link;
+      }
+    };
+
+    Lightbox.prototype.enableKeyboardNav = function() {
+      $(document).on('keyup.keyboard', $.proxy(this.keyboardAction, this));
+    };
+
+    Lightbox.prototype.disableKeyboardNav = function() {
+      $(document).off('.keyboard');
+    };
+
+    Lightbox.prototype.keyboardAction = function(event) {
+      var KEYCODE_ESC, KEYCODE_LEFTARROW, KEYCODE_RIGHTARROW, key, keycode;
+      KEYCODE_ESC = 27;
+      KEYCODE_LEFTARROW = 37;
+      KEYCODE_RIGHTARROW = 39;
+      keycode = event.keyCode;
+      key = String.fromCharCode(keycode).toLowerCase();
+      if (keycode === KEYCODE_ESC || key.match(/x|o|c/)) {
+        this.end();
+      } else if (key === 'p' || keycode === KEYCODE_LEFTARROW) {
+        if (this.currentImageIndex !== 0) {
+          this.changeImage(this.currentImageIndex - 1);
+        }
+      } else if (key === 'n' || keycode === KEYCODE_RIGHTARROW) {
+        if (this.currentImageIndex !== this.album.length - 1) {
+          this.changeImage(this.currentImageIndex + 1);
+        }
+      }
+    };
+
+    Lightbox.prototype.end = function() {
+      this.disableKeyboardNav();
+      $(window).off("resize", this.sizeOverlay);
+      $('#lightbox').fadeOut(this.options.fadeDuration);
+      $('#lightboxOverlay').fadeOut(this.options.fadeDuration);
+      return $('select, object, embed').css({
+        visibility: "visible"
+      });
+    };
+
+    return Lightbox;
+
+  })();
+
+  $(function() {
+    var lightbox, options;
+    options = new LightboxOptions;
+    return lightbox = new Lightbox(options);
+  });
+
+}).call(this);

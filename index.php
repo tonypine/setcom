@@ -7,12 +7,14 @@
 
         <!-- Add your site or application content here -->
         <aside id="leftCol">
-            <nav id="nav">
+            <h3>Departamentos</h3>
+            <hr />
+            <nav class="nav">
                 <ul>
-                    <li><a href="#">Foundation</a></li>
-                    <li><a href="#">JQuery</a></li>
-                    <li><a href="#">Compass</a></li>
-                    <li><a href="#">Backbone.js</a></li>
+                    <li><a href="#">Marketing</a></li>
+                    <li><a href="#">TI</a></li>
+                    <li><a href="#">Administração</a></li>
+                    <li><a href="#">Recursos Humanos</a></li>
                 </ul>
             </nav>
         </aside>
@@ -21,17 +23,9 @@
         
     <?php if (have_posts()) : ?> 
         <section id="contentCol">
-            <?php while (have_posts()) : the_post(); ?>
-            <article>
-                <h3><?php the_title(); ?></h3>
-                <hr />
-                <span class="date"><?php echo get_the_date() ?></span>
-                
-                <?php 
-                    //custom_excerpt_length(50);
-                    the_excerpt(); ?>
-            </article>
-            <?php endwhile; ?>
+            <?php   while (have_posts()) : the_post();
+                        get_template_part("model-article");
+                    endwhile; ?>
         </section>
     <?php endif; ?>
 

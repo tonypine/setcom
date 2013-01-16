@@ -222,20 +222,48 @@ h4 {
 #wrapper #contentCol article:hover, body.single #wrapper #contentCol article {
   background-color: white;
   border: 1px solid #bbbbbb;
-  box-shadow: 1px 1px 10px #d9d9d9; }
+  box-shadow: 1px 1px 20px #d9d9d9; }
 
 #wrapper {
   width: 960px;
   margin: 0 auto; }
   #wrapper #leftCol, #wrapper #rightCol {
-    width: 192px; }
+    width: 192px;
+    padding: 1.5em; }
+    #wrapper #leftCol hr, #wrapper #rightCol hr {
+      margin-bottom: 0.5em; }
+    #wrapper #leftCol .nav, #wrapper #rightCol .nav {
+      padding: 0.5em;
+      background-color: rgba(0, 114, 54, 0.6);
+      color: white;
+      border-radius: 10px;
+      font-size: 1.4em;
+      font-family: "Yanone Kaffeesatz", calibri, sans-serif;
+      -webkit-transition: all 0.2s ease-in;
+      -moz-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in; }
+      #wrapper #leftCol .nav ul, #wrapper #rightCol .nav ul {
+        list-style: none; }
+        #wrapper #leftCol .nav ul a, #wrapper #rightCol .nav ul a {
+          display: block;
+          line-height: 1.2em; }
+        #wrapper #leftCol .nav ul a:hover, #wrapper #rightCol .nav ul a:hover {
+          text-decoration: underline; }
+      #wrapper #leftCol .nav:hover, #wrapper #rightCol .nav:hover {
+        -webkit-transition: all 0.1s ease-in;
+        -moz-transition: all 0.1s ease-in;
+        -o-transition: all 0.1s ease-in;
+        transition: all 0.1s ease-in;
+        background-color: rgba(0, 114, 54, 0.8); }
   #wrapper #contentCol {
     width: 576px; }
     #wrapper #contentCol article {
       background-color: #fbfbfb;
+      box-shadow: 1px 1px 10px #e6e6e6;
       padding: 1.5em;
       margin: 1.5em 0;
-      border: 1px solid #eaeaea;
+      border: 1px solid #e2e2e2;
       -webkit-transition: all 0.3s ease-in;
       -moz-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
@@ -243,10 +271,10 @@ h4 {
       font-size: 1em;
       line-height: 1.5em; }
       #wrapper #contentCol article:hover {
-        -webkit-transition: all 0.1s ease-in;
-        -moz-transition: all 0.1s ease-in;
-        -o-transition: all 0.1s ease-in;
-        transition: all 0.1s ease-in; }
+        -webkit-transition: all 0s ease-in;
+        -moz-transition: all 0s ease-in;
+        -o-transition: all 0s ease-in;
+        transition: all 0s ease-in; }
         #wrapper #contentCol article:hover .leiaMais {
           filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
           opacity: 1; }
@@ -268,10 +296,10 @@ h4 {
   -o-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in; }
   .leiaMais:hover {
-    -webkit-transition: all 0.1s ease-in;
-    -moz-transition: all 0.1s ease-in;
-    -o-transition: all 0.1s ease-in;
-    transition: all 0.1s ease-in;
+    -webkit-transition: all 0 ease-in;
+    -moz-transition: all 0 ease-in;
+    -o-transition: all 0 ease-in;
+    transition: all 0 ease-in;
     background-color: #b1d254;
     box-shadow: 1px 1px 20px #c0db75; }
 

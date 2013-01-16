@@ -111,14 +111,15 @@ function url($echo = true){
 }
 
 // add galery rel
-function custom_gallery_image($html, $id){
+function custom_gallery_image($html, $id, $caption){
 	$rel = "lightbox[gal] ";
 	$customLink = preg_replace("/(rel=\")/", "$1$rel", $html);
 	$url = wp_get_attachment_image_src($id, 'large');
 	$url = $url[0];
 	//(href=\")([\w\:\/\.\-]*)(\")
-	$customLink2 = preg_replace("/(href=\")([\w:\/\?=]*)/", "$1$url", $customLink);
-	return $customLink2;
+	$customLink = preg_replace("/(href=\")([\w:\/\?=]*)/", "$1$url", $customLink);
+	$customLink = preg_replace("/(<a)/", "$1 title=\"$caption\" ", $customLink);
+	return $customLink;
 }
 add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $accepted_args = 10 );
 ?>

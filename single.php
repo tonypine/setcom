@@ -6,16 +6,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <aside id="leftCol">
-            <nav id="nav">
-                <ul>
-                    <li><a href="#">Foundation</a></li>
-                    <li><a href="#">JQuery</a></li>
-                    <li><a href="#">Compass</a></li>
-                    <li><a href="#">Backbone.js</a></li>
-                </ul>
-            </nav>
-        </aside>
+        <?php get_template_part('model-nav'); ?>
 
     <!-- Post Content -->
         
