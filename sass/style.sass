@@ -1,0 +1,157 @@
+/* Normalize ============================================= */
+/* ----------------------------------------------------------- */
+@import "normalize"
+@import "compass/css3/opacity"
+@import "lightbox.css"
+
+/* Google Fonts Import ============================================= 
+/* ----------------------------------------------------------- */
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700)
+
+/* Options ============================================= 
+/* ----------------------------------------------------------- */
+@import "options"
+
+/* Main Style ============================================= 
+/* ----------------------------------------------------------- */
+
+// main type styles
+body 
+	font-size: 75%
+	background: url('../img/bg-pat.png') 0 100px repeat-x
+html >
+	body 
+		font-size: 15px
+
+%mgBottom
+	margin-bottom: 1.5em
+
+%pdBottom
+	padding-bottom: 1.5em
+
+p 
+	line-height: 1.5em
+	@extend %mgBottom
+
+a 
+	line-height: 0
+
+hr 
+	margin: 0 0 1.5em
+
+h1, h2, h3, h4
+	font-family: $yanone
+	line-height: 1.5em
+	text-transform: uppercase
+	margin: 0
+
+ul 
+	list-style-position: inside
+
+.wp-caption-text
+	font-size: 0.8em
+	font-style: italic
+	line-height: 1.85em
+	margin: 0 0 1.85em
+
+%hbweight
+	font-weight: 700
+%hb2weight
+	font-weight: 400
+
+h1 
+	font-size: 3em
+	@extend %hbweight
+h2
+	font-size: 3em
+	@extend %hb2weight
+h3
+	font-size: 2.2em
+	@extend %hb2weight
+	letter-spacing: 0.06em
+h4
+	font-size: 1.7em
+	@extend %hb2weight
+	text-transform: uppercase
+
+#topo
+	background-color: $verdeclaro
+	border-bottom: 20px solid $verdeescuro
+	@extend %clearfix
+	div
+		width: $maxwidth
+		margin: 0 auto
+	h1 
+		margin: 0.5em 0 0.5em 0.5em
+	a
+		color: #fff
+
+%fLeft
+	float: left
+
+%articleActive
+	background-color: #fff
+	border: 1px solid #bbb
+	box-shadow: 1px 1px 10px lighten(#000, 85%)
+
+#wrapper
+	@extend %clearfix
+	width: 960px
+	margin: 0 auto
+	#leftCol
+		@extend %fLeft
+		width: 960px * 0.2
+	#rightCol
+		@extend #leftCol
+	#contentCol
+		@extend %fLeft
+		width: 960px * 0.6
+		article 
+			@extend %clearfix
+			background-color: lighten(#eee,5%)
+			padding: 1.5em
+			margin: 1.5em 0
+			border: 1px solid lighten(#ddd, 5%)
+			+transition($time: 0.3s)
+			font-size: 1em
+			line-height: 1.5em
+			&:hover
+				@extend %articleActive
+				+transition($time: 0.1s)
+				.leiaMais
+					+opacity(1)
+			body.single &
+				@extend %articleActive
+			a[rel*="attachment"]
+				display: block
+
+.leiaMais 
+	background-color: $verdeclaro
+	padding: 5px 10px
+	color: #fff
+	border-radius: 5px
+	line-height: 1.5em
+	float: right
+	margin-top: 1em
+	+opacity(0)
+	+transition($time: 0.2s)
+	&:hover
+		+transition($time: 0.1s)
+		background-color: lighten($verdeclaro, 7%)
+		box-shadow: 1px 1px 20px lighten($verdeclaro, 15%)
+
+.date
+	$bottom: 1.83333em
+	font-size: 0.8em
+	color: #666
+	height: $bottom
+	display: inline-block
+	padding-bottom: $bottom
+	&:before
+		@extend %sprite
+		+sprite-position(0,0)
+		margin: 0 0.5em -7px 0
+		height: 26px
+		width: 25px
+		display: inline-block
+		content: ""

@@ -1,0 +1,290 @@
+@import url(lightbox.css);
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700);
+/* Normalize ============================================= */
+/* ----------------------------------------------------------- */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
+  margin: 0;
+  padding: 0; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
+  display: block; }
+
+audio, canvas, video {
+  display: inline-block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden] {
+  display: none; }
+
+html {
+  font-family: Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+  a:focus {
+    outline: thin dotted; }
+  a:active, a:hover {
+    outline: 0; }
+
+h1 {
+  font-size: 3em; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b, strong {
+  font-weight: bold; }
+
+dfn {
+  font-style: italic; }
+
+mark {
+  background: yellow;
+  color: black; }
+
+code, kbd, pre, samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+small {
+  font-size: 80%; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+img {
+  border: 0; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+figure {
+  margin: 0; }
+
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  border: 0;
+  padding: 0; }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0; }
+
+button, input {
+  line-height: normal; }
+
+button, html input[type='button'], input[type='reset'], input[type='submit'] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+button[disabled], input[disabled] {
+  cursor: default; }
+
+input[type='checkbox'], input[type='radio'] {
+  box-sizing: border-box;
+  padding: 0; }
+input[type='search'] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+  input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none; }
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* Google Fonts Import ============================================= */
+/* ----------------------------------------------------------- */
+/* Options ============================================= */
+/* ----------------------------------------------------------- */
+#topo, #wrapper, #wrapper #contentCol article {
+  *zoom: 1; }
+#topo:before, #wrapper:before, #wrapper #contentCol article:before, #topo:after, #wrapper:after, #wrapper #contentCol article:after {
+  content: "";
+  display: table; }
+#topo:after, #wrapper:after, #wrapper #contentCol article:after {
+  clear: both; }
+
+.date:before {
+  background: url("../img/sprite.png") 0 0 no-repeat; }
+
+/* Main Style ============================================= */
+/* ----------------------------------------------------------- */
+body {
+  font-size: 75%;
+  background: url("../img/bg-pat.png") 0 100px repeat-x; }
+
+html > body {
+  font-size: 15px; }
+
+p {
+  margin-bottom: 1.5em; }
+
+p {
+  line-height: 1.5em; }
+
+a {
+  line-height: 0; }
+
+hr {
+  margin: 0 0 1.5em; }
+
+h1, h2, h3, h4 {
+  font-family: "Yanone Kaffeesatz", calibri, sans-serif;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  margin: 0; }
+
+ul {
+  list-style-position: inside; }
+
+.wp-caption-text {
+  font-size: 0.8em;
+  font-style: italic;
+  line-height: 1.85em;
+  margin: 0 0 1.85em; }
+
+h1 {
+  font-weight: 700; }
+
+h2, h3, h4 {
+  font-weight: 400; }
+
+h1 {
+  font-size: 3em; }
+
+h2 {
+  font-size: 3em; }
+
+h3 {
+  font-size: 2.2em;
+  letter-spacing: 0.06em; }
+
+h4 {
+  font-size: 1.7em;
+  text-transform: uppercase; }
+
+#topo {
+  background-color: #a4cb38;
+  border-bottom: 20px solid #007236; }
+  #topo div {
+    width: 960px;
+    margin: 0 auto; }
+  #topo h1 {
+    margin: 0.5em 0 0.5em 0.5em; }
+  #topo a {
+    color: white; }
+
+#wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
+  float: left; }
+
+#wrapper #contentCol article:hover, body.single #wrapper #contentCol article {
+  background-color: white;
+  border: 1px solid #bbbbbb;
+  box-shadow: 1px 1px 10px #d9d9d9; }
+
+#wrapper {
+  width: 960px;
+  margin: 0 auto; }
+  #wrapper #leftCol, #wrapper #rightCol {
+    width: 192px; }
+  #wrapper #contentCol {
+    width: 576px; }
+    #wrapper #contentCol article {
+      background-color: #fbfbfb;
+      padding: 1.5em;
+      margin: 1.5em 0;
+      border: 1px solid #eaeaea;
+      -webkit-transition: all 0.3s ease-in;
+      -moz-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      font-size: 1em;
+      line-height: 1.5em; }
+      #wrapper #contentCol article:hover {
+        -webkit-transition: all 0.1s ease-in;
+        -moz-transition: all 0.1s ease-in;
+        -o-transition: all 0.1s ease-in;
+        transition: all 0.1s ease-in; }
+        #wrapper #contentCol article:hover .leiaMais {
+          filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+          opacity: 1; }
+      #wrapper #contentCol article a[rel*="attachment"] {
+        display: block; }
+
+.leiaMais {
+  background-color: #a4cb38;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 5px;
+  line-height: 1.5em;
+  float: right;
+  margin-top: 1em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in; }
+  .leiaMais:hover {
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    background-color: #b1d254;
+    box-shadow: 1px 1px 20px #c0db75; }
+
+.date {
+  font-size: 0.8em;
+  color: #666666;
+  height: 1.83333em;
+  display: inline-block;
+  padding-bottom: 1.83333em; }
+  .date:before {
+    background-position: -0px -0px;
+    margin: 0 0.5em -7px 0;
+    height: 26px;
+    width: 25px;
+    display: inline-block;
+    content: ""; }

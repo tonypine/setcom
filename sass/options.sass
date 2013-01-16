@@ -1,0 +1,33 @@
+//
+$maxwidth: 960px
+
+// cores
+$verdeclaro: #A4CB38
+$verdeescuro: #007236
+
+// type
+$bodyfont: 15px Arial, sans-serif
+$yanone: #{"Yanone Kaffeesatz", calibri, sans-serif}
+
+// Mixins & Classes
+%clearfix
+	& 
+		*zoom: 1
+	&:before,
+	&:after
+		content: ""
+		display: table
+	&:after
+		clear: both
+
+@mixin transition($property: all, $time: 1s, $ease: ease-in)
+	-webkit-transition: #{$property $time $ease}
+	-moz-transition: $property $time $ease
+	-o-transition: $property $time $ease 
+	transition: $property $time $ease
+
+%sprite 
+	background: url('../img/sprite.png') 0 0 no-repeat
+
+@mixin sprite-position($x: 0, $y: 0, $unit: 32)
+	background-position: -#{$x*$unit}px -#{$y*$unit}px
