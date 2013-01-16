@@ -77,6 +77,8 @@ h4
 #topo
 	background-color: $verdeclaro
 	border-bottom: 20px solid $verdeescuro
+	position: relative
+	z-index: 2
 	@extend %clearfix
 	div
 		width: $maxwidth
@@ -127,12 +129,12 @@ h4
 	#contentCol
 		@extend %fLeft
 		width: 960px * 0.6
+		background-color: #eee
 		article 
 			@extend %clearfix
 			background-color: lighten(#eee,5%)
-			box-shadow: 1px 1px 10px lighten(#000, 90%)
+			box-shadow: 0px 1px 10px #ddd
 			padding: 1.5em
-			margin: 1.5em 0
 			border: 1px solid lighten(#ddd, 2%)
 			+transition($time: 0.3s)
 			font-size: 1em

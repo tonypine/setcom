@@ -207,7 +207,9 @@ h4 {
 
 #topo {
   background-color: #a4cb38;
-  border-bottom: 20px solid #007236; }
+  border-bottom: 20px solid #007236;
+  position: relative;
+  z-index: 2; }
   #topo div {
     width: 960px;
     margin: 0 auto; }
@@ -257,12 +259,12 @@ h4 {
         transition: all 0.1s ease-in;
         background-color: rgba(0, 114, 54, 0.8); }
   #wrapper #contentCol {
-    width: 576px; }
+    width: 576px;
+    background-color: #eeeeee; }
     #wrapper #contentCol article {
       background-color: #fbfbfb;
-      box-shadow: 1px 1px 10px #e6e6e6;
+      box-shadow: 0px 1px 10px #dddddd;
       padding: 1.5em;
-      margin: 1.5em 0;
       border: 1px solid #e2e2e2;
       -webkit-transition: all 0.3s ease-in;
       -moz-transition: all 0.3s ease-in;
