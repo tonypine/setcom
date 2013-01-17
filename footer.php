@@ -21,7 +21,7 @@
               pOpacity: 0.6,
               center: true,
               gEnabled: false,
-              pEnabled: true,
+              pEnabled: false,
               setupEnabled: true,
               fixFlash: true,
               size: 960

@@ -52,7 +52,7 @@ add_filter('excerpt_more', 'custom_excerpt_more');
 
 // no more jumping for read more link
 function no_more_jumping($post) {
-	return '<span class="leiaMais"><a href="'.get_permalink($post->ID).'" class="read-more">'.'leia +'.'</a></span>';
+	return '<p><a class="leiaMais" href="'.get_permalink($post->ID).'" class="read-more">'.'leia +'.'</a></p>';
 }
 add_filter('excerpt_more', 'no_more_jumping');
 

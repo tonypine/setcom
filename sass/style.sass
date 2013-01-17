@@ -1,12 +1,15 @@
+/* Google Fonts Import ============================================= 
+/* ----------------------------------------------------------- */
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700)
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700)
+
 /* Normalize ============================================= */
 /* ----------------------------------------------------------- */
 @import "normalize"
 @import "compass/css3/opacity"
+@import "compass"
 @import "lightbox.css"
 
-/* Google Fonts Import ============================================= 
-/* ----------------------------------------------------------- */
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700)
 
 /* Options ============================================= 
 /* ----------------------------------------------------------- */
@@ -19,6 +22,10 @@
 body 
 	font-size: 75%
 	background: url('../img/bg-pat.png') 0 100px repeat-x
+	//+background-image(linear-gradient(#fff, #ddd))
+
+body.single
+	background-color: #ddd
 html >
 	body 
 		font-size: 15px
@@ -45,6 +52,10 @@ h1, h2, h3, h4
 
 ul 
 	list-style-position: inside
+
+.z-in2 
+	position: relative
+	z-index: 2
 
 .wp-caption-text
 	font-size: 0.8em
@@ -86,6 +97,8 @@ h4
 .titleLink
 	display: inline-block
 	text-shadow: 3px 3px 0px lighten($verdeclaro, 30%)
+	&:visited
+		color: #609
 	&:hover
 		text-shadow: 2px 2px 0px $verdeclaro
 		background-color: lighten($verdeclaro, 40%)
@@ -112,18 +125,28 @@ h4
 
 %articleActive
 	background-color: #fff
-	border: 1px solid #bbb
+	//border: 1px solid #bbb
 
 .navUl
 	color: #111
-	font-family: calibri, sans-serif
-	font-size: 1em
-	line-height: 1.48em
+	font-family: Open Sans, sans-serif
+	font-size: 0.85em
+	line-height: 1.7254em
 	list-style: none
 	a
 		display: block
 	a:hover
 		text-decoration: underline
+		&:before
+			content: "»"
+			display: inline-block
+			width: 5px
+			margin-right: -5px
+			position: relative
+			left: -10px
+	a:active
+		&:before
+			left: -13px
 
 #wrapper
 	@extend %clearfix
@@ -151,13 +174,15 @@ h4
 		@extend %fLeft
 		width: 64em * 0.5
 		background-color: #eee
+		body.single &
+			width: 64em * 0.8
 		article 
 			@extend %clearfix
 			background-color: lighten(#eee,5%)
 			position: relative
 			padding: 1.48em 1.48em 0
-			margin: -1px 0
-			border: 1px solid lighten(#ddd, 2%)
+			//margin: -1px 0
+			//border: 1px solid lighten(#ddd, 2%)
 			font-size: 1em
 			line-height: 1.48em
 			+transition($time: 0.3s)
@@ -179,14 +204,14 @@ h4
 
 .leiaMais 
 	background-color: $verdeclaro
-	position: absolute
-	bottom: 22px
-	right: 22px
-	padding: 5px 10px
+	padding: 0 0.7em
+	margin: -0.7em 0
 	color: #fff
 	border-radius: 5px
-	line-height: 1.48em
-	+opacity(0)
+	line-height: 1.48em + 0.7em
+	height: 1.48em + 0.7em
+	display: inline-block
+	//+opacity(0)
 	&:hover
 		background-color: lighten($verdeclaro, 7%)
 		box-shadow: 1px 1px 20px lighten($verdeclaro, 15%)

@@ -15,8 +15,6 @@
             <?php while (have_posts()) : the_post(); ?>
             <article>
                 <h3><?php the_title(); ?></h3>
-                <hr />
-
                 <span class="date"><?php echo get_the_date() ?></span>
                 <?php the_content(); ?>
             </article>

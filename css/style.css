@@ -1,5 +1,8 @@
-@import url(lightbox.css);
 @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(lightbox.css);
+/* Google Fonts Import ============================================= */
+/* ----------------------------------------------------------- */
 /* Normalize ============================================= */
 /* ----------------------------------------------------------- */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
@@ -20,7 +23,7 @@ audio:not([controls]) {
   display: none; }
 
 html {
-  font-family: Arial, sans-serif;
+  font-family: Open Sans, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
 
@@ -134,8 +137,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* Google Fonts Import ============================================= */
-/* ----------------------------------------------------------- */
 /* Options ============================================= */
 /* ----------------------------------------------------------- */
 #topo, #wrapper, #wrapper #contentCol article {
@@ -154,6 +155,9 @@ table {
 body {
   font-size: 75%;
   background: url("../img/bg-pat.png") 0 100px repeat-x; }
+
+body.single {
+  background-color: #dddddd; }
 
 html > body {
   font-size: 15px; }
@@ -176,6 +180,10 @@ h1, h2, h3, h4 {
 
 ul {
   list-style-position: inside; }
+
+.z-in2 {
+  position: relative;
+  z-index: 2; }
 
 .wp-caption-text {
   font-size: 0.8em;
@@ -217,6 +225,8 @@ body.single #wrapper #contentCol article h3 {
 .titleLink {
   display: inline-block;
   text-shadow: 3px 3px 0px #dbebb1; }
+  .titleLink:visited {
+    color: #660099; }
   .titleLink:hover {
     text-shadow: 2px 2px 0px #a4cb38;
     background-color: #eef5da; }
@@ -241,19 +251,27 @@ body.single #wrapper #contentCol article h3 {
   float: left; }
 
 #wrapper #contentCol article:hover, body.single #wrapper #contentCol article {
-  background-color: white;
-  border: 1px solid #bbbbbb; }
+  background-color: white; }
 
 .navUl {
   color: #111111;
-  font-family: calibri, sans-serif;
-  font-size: 1em;
-  line-height: 1.48em;
+  font-family: Open Sans, sans-serif;
+  font-size: 0.85em;
+  line-height: 1.7254em;
   list-style: none; }
   .navUl a {
     display: block; }
   .navUl a:hover {
     text-decoration: underline; }
+    .navUl a:hover:before {
+      content: "»";
+      display: inline-block;
+      width: 5px;
+      margin-right: -5px;
+      position: relative;
+      left: -10px; }
+  .navUl a:active:before {
+    left: -13px; }
 
 #wrapper {
   width: 960px;
@@ -277,12 +295,12 @@ body.single #wrapper #contentCol article h3 {
   #wrapper #contentCol {
     width: 32em;
     background-color: #eeeeee; }
+    body.single #wrapper #contentCol {
+      width: 51.2em; }
     #wrapper #contentCol article {
       background-color: #fbfbfb;
       position: relative;
       padding: 1.48em 1.48em 0;
-      margin: -1px 0;
-      border: 1px solid #e2e2e2;
       font-size: 1em;
       line-height: 1.48em;
       -webkit-transition: all 0.3s ease-in;
@@ -309,15 +327,13 @@ body.single #wrapper #contentCol article h3 {
 
 .leiaMais {
   background-color: #a4cb38;
-  position: absolute;
-  bottom: 22px;
-  right: 22px;
-  padding: 5px 10px;
+  padding: 0 0.7em;
+  margin: -0.7em 0;
   color: white;
   border-radius: 5px;
-  line-height: 1.48em;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0; }
+  line-height: 2.18em;
+  height: 2.18em;
+  display: inline-block; }
   .leiaMais:hover {
     background-color: #b1d254;
     box-shadow: 1px 1px 20px #c0db75; }
