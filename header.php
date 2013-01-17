@@ -24,7 +24,7 @@
 
         <?php wp_head() ?>
     </head>
-    <body class="<?php echo $class; ?>">
+    <body class="<?php echo $class; ?>" onload="createGridder()">
 
         <header id="topo">
             <div>

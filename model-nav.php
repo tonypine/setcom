@@ -1,9 +1,9 @@
 
         <aside id="leftCol">
-            <h3>Departamentos</h3>
+            <h4>Departamentos</h4>
             <hr />
-            <nav class="nav">
-                <ul>
+            <nav>
+                <ul class="navUl">
                     <!-- <li><a href="#">Marketing</a></li>
                     <li><a href="#">TI</a></li>
                     <li><a href="#">Administração</a></li>
