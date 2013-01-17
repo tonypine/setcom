@@ -1,6 +1,6 @@
 
             <article>
-                <h3><?php the_title(); ?></h3>
+                <h3><a class="titleLink" href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
                 <hr />
                 <span class="date"><?php echo get_the_date() ?></span>
                 

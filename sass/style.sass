@@ -74,6 +74,12 @@ h4
 	@extend %hb2weight
 	text-transform: uppercase
 
+%singleTittle
+	text-shadow: 3px 3px 0px lighten($verdeclaro, 25%)
+	font-size: 2.7em
+	margin-bottom: 0.55em
+	line-height: 1.1em
+
 #topo
 	background-color: $verdeclaro
 	border-bottom: 20px solid $verdeescuro
@@ -104,16 +110,17 @@ h4
 		@extend %fLeft
 		width: 960px * 0.2
 		padding: 1.5em
+		background-color: $verdeescuro
+		position: relative
+		z-index: 2
+		h3
+			color: #fff
 		hr
 			margin-bottom: 0.5em
 		.nav
-			padding: 0.5em
-			background-color: rgba($verdeescuro, 0.6)
 			color: #fff
-			border-radius: 10px
 			font-size: 1.4em
 			font-family: $yanone
-			+transition($time: 0.2s)
 			ul
 				list-style: none
 				a
@@ -121,9 +128,6 @@ h4
 					line-height: 1.2em
 				a:hover
 					text-decoration: underline
-			&:hover
-				+transition($time: 0.1s)
-				background-color: rgba($verdeescuro, .8)
 	#rightCol
 		@extend #leftCol
 	#contentCol
@@ -146,6 +150,8 @@ h4
 					+opacity(1)
 			body.single &
 				@extend %articleActive
+				h3
+					@extend %singleTittle
 			a[rel*="attachment"]
 				display: block
 
@@ -179,3 +185,11 @@ h4
 		width: 25px
 		display: inline-block
 		content: ""
+
+.titleLink
+	display: inline
+	text-shadow: 3px 3px 0px lighten($verdeclaro, 30%)
+	&:hover
+		text-shadow: 2px 2px 0px $verdeclaro
+		background-color: lighten($verdeclaro, 40%)
+

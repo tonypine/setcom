@@ -6,18 +6,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <aside id="leftCol">
-            <h3>Departamentos</h3>
-            <hr />
-            <nav class="nav">
-                <ul>
-                    <li><a href="#">Marketing</a></li>
-                    <li><a href="#">TI</a></li>
-                    <li><a href="#">Administração</a></li>
-                    <li><a href="#">Recursos Humanos</a></li>
-                </ul>
-            </nav>
-        </aside>
+        <?php get_template_part('model-nav'); ?>
 
     <!-- Post Content -->
         
