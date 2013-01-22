@@ -31,22 +31,23 @@ html >
 		font-size: 15px
 
 %mgBottom
-	margin-bottom: 1.48em
+	margin-bottom: 1.47em
 
 %pdBottom
-	padding-bottom: 1.48em
+	padding-bottom: 1.47em
 
 p 
-	line-height: 1.48em
+	line-height: 1.47em
 	@extend %mgBottom
 
 hr 
 	border-style: solid
 	border-width: 1px 0 0
-	margin: -1px 0 1.48em
+	margin: -1px 0 1.47em
 
 h1, h2, h3, h4
 	font-family: $yanone
+	font-weight: 400
 	text-transform: uppercase
 	margin: 0
 
@@ -65,33 +66,33 @@ ul
 
 %hbweight
 	font-weight: 700
-%hb2weight
-	font-weight: 400
 
 h1 
 	font-size: 3em
 	line-height: 0.98em
-	@extend %hbweight
+
+	& #logo 
+		@extend %hbweight
 h2
-	font-size: 3em
+	font-size: 2.7em
 	line-height: 0.98em
-	@extend %hb2weight
 h3
 	font-size: 2.2em
-	line-height: 1.34em
+	line-height: 1.3335em
 	margin-bottom: 0.66666em
-	@extend %hb2weight
 	letter-spacing: 0.06em
 h4
 	font-size: 1.7em
 	line-height: 1.73em
-	@extend %hb2weight
 	text-transform: uppercase
 
-%singleTittle
+%titleShadow
 	text-shadow: 3px 3px 0px lighten($verdeclaro, 25%)
+
+%singleTittle
+	@extend %titleShadow
 	font-size: 2.7em
-	margin-bottom: 0.55em
+	margin-bottom: 0.5435em
 	line-height: 1.1em
 
 .titleLink
@@ -108,7 +109,7 @@ h4
 
 #topo
 	background-color: $verdeclaro
-	border-bottom: 1.48em solid $verdeescuro
+	border-bottom: 1.47em solid $verdeescuro
 	position: relative
 	z-index: 2
 	@extend %clearfix
@@ -169,7 +170,7 @@ h4
 	#rightCol
 		@extend %fLeft
 		width: 64em * 0.3 - 3em
-		padding: 1.48em
+		padding: 1.47em
 	#contentCol
 		@extend %fLeft
 		width: 64em * 0.5
@@ -180,11 +181,11 @@ h4
 			@extend %clearfix
 			background-color: lighten(#eee,5%)
 			position: relative
-			padding: 1.48em 1.48em 0
+			padding: 1.47em 1.47em 0
 			//margin: -1px 0
 			//border: 1px solid lighten(#ddd, 2%)
 			font-size: 1em
-			line-height: 1.48em
+			line-height: 1.47em
 			+transition($time: 0.3s)
 			&:hover
 				@extend %articleActive
@@ -197,8 +198,15 @@ h4
 				margin-bottom: 0
 			body.single &
 				@extend %articleActive
+				h1
+					@extend %titleShadow
+					margin-bottom: 0.48em
 				h3
 					@extend %singleTittle
+			ul, ol
+				li
+					list-style-position: inside
+					margin-bottom: 1.47em
 			a[rel*="attachment"]
 				display: block
 
@@ -208,8 +216,8 @@ h4
 	margin: -0.7em 0
 	color: #fff
 	border-radius: 5px
-	line-height: 1.48em + 0.7em
-	height: 1.48em + 0.7em
+	line-height: 1.47em + 0.7em
+	height: 1.47em + 0.7em
 	display: inline-block
 	//+opacity(0)
 	&:hover
@@ -226,7 +234,7 @@ h4
 	&:before
 		@extend %sprite
 		+sprite-position(0,0)
-		margin: 0 0.5em -10px 0
+		margin: 0 0.5em -9px 0
 		height: 26px
 		width: 25px
 		display: inline-block

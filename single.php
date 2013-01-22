@@ -13,8 +13,8 @@
     <?php if (have_posts()) : ?> 
         <section id="contentCol">
             <?php while (have_posts()) : the_post(); ?>
-            <article>
-                <h3><?php the_title(); ?></h3>
+            <article class="content">
+                <h1><?php the_title(); ?></h1>
                 <span class="date"><?php echo get_the_date() ?></span>
                 <?php the_content(); ?>
             </article>

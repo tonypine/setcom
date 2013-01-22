@@ -163,18 +163,19 @@ html > body {
   font-size: 15px; }
 
 p {
-  margin-bottom: 1.48em; }
+  margin-bottom: 1.47em; }
 
 p {
-  line-height: 1.48em; }
+  line-height: 1.47em; }
 
 hr {
   border-style: solid;
   border-width: 1px 0 0;
-  margin: -1px 0 1.48em; }
+  margin: -1px 0 1.47em; }
 
 h1, h2, h3, h4 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
+  font-weight: 400;
   text-transform: uppercase;
   margin: 0; }
 
@@ -191,23 +192,20 @@ ul {
   line-height: 1.85em;
   margin: 0 0 1.85em; }
 
-h1 {
+h1 #logo {
   font-weight: 700; }
-
-h2, h3, h4 {
-  font-weight: 400; }
 
 h1 {
   font-size: 3em;
   line-height: 0.98em; }
 
 h2 {
-  font-size: 3em;
+  font-size: 2.7em;
   line-height: 0.98em; }
 
 h3 {
   font-size: 2.2em;
-  line-height: 1.34em;
+  line-height: 1.3335em;
   margin-bottom: 0.66666em;
   letter-spacing: 0.06em; }
 
@@ -216,10 +214,12 @@ h4 {
   line-height: 1.73em;
   text-transform: uppercase; }
 
+body.single #wrapper #contentCol article h3, body.single #wrapper #contentCol article h1 {
+  text-shadow: 3px 3px 0px #d2e59d; }
+
 body.single #wrapper #contentCol article h3 {
-  text-shadow: 3px 3px 0px #d2e59d;
   font-size: 2.7em;
-  margin-bottom: 0.55em;
+  margin-bottom: 0.5435em;
   line-height: 1.1em; }
 
 .titleLink {
@@ -236,7 +236,7 @@ body.single #wrapper #contentCol article h3 {
 
 #topo {
   background-color: #a4cb38;
-  border-bottom: 1.48em solid #007236;
+  border-bottom: 1.47em solid #007236;
   position: relative;
   z-index: 2; }
   #topo div {
@@ -291,7 +291,7 @@ body.single #wrapper #contentCol article h3 {
       color: white; }
   #wrapper #rightCol {
     width: 16.2em;
-    padding: 1.48em; }
+    padding: 1.47em; }
   #wrapper #contentCol {
     width: 32em;
     background-color: #eeeeee; }
@@ -300,9 +300,9 @@ body.single #wrapper #contentCol article h3 {
     #wrapper #contentCol article {
       background-color: #fbfbfb;
       position: relative;
-      padding: 1.48em 1.48em 0;
+      padding: 1.47em 1.47em 0;
       font-size: 1em;
-      line-height: 1.48em;
+      line-height: 1.47em;
       -webkit-transition: all 0.3s ease-in;
       -moz-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
@@ -322,6 +322,11 @@ body.single #wrapper #contentCol article h3 {
           opacity: 1; }
       #wrapper #contentCol article h3 {
         margin-bottom: 0; }
+      body.single #wrapper #contentCol article h1 {
+        margin-bottom: 0.48em; }
+      #wrapper #contentCol article ul li, #wrapper #contentCol article ol li {
+        list-style-position: inside;
+        margin-bottom: 1.47em; }
       #wrapper #contentCol article a[rel*="attachment"] {
         display: block; }
 
@@ -331,8 +336,8 @@ body.single #wrapper #contentCol article h3 {
   margin: -0.7em 0;
   color: white;
   border-radius: 5px;
-  line-height: 2.18em;
-  height: 2.18em;
+  line-height: 2.17em;
+  height: 2.17em;
   display: inline-block; }
   .leiaMais:hover {
     background-color: #b1d254;
@@ -346,7 +351,7 @@ body.single #wrapper #contentCol article h3 {
   padding-bottom: 1.83333em; }
   .date:before {
     background-position: -0px -0px;
-    margin: 0 0.5em -10px 0;
+    margin: 0 0.5em -9px 0;
     height: 26px;
     width: 25px;
     display: inline-block;
