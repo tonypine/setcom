@@ -234,6 +234,19 @@ body.single #wrapper #contentCol article h3 {
     text-shadow: 1px 1px 0px #a4cb38;
     background-color: transparent; }
 
+#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, .leiaMais, button {
+  background-color: #a4cb38;
+  padding: 0 0.7em;
+  margin: -0.36667em 0;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  line-height: 2.16667em;
+  height: 2.16667em;
+  display: inline-block; }
+  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, .leiaMais:hover, button:hover {
+    background-color: #009647; }
+
 #topo {
   background-color: #a4cb38;
   border-bottom: 1.46667em solid #007236;
@@ -243,15 +256,12 @@ body.single #wrapper #contentCol article h3 {
     width: 960px;
     margin: 0 auto; }
   #topo h1 {
-    margin: 0.5em 0 0.5em 0.5em; }
+    margin: 0.5em 0 0.5em 4.75556em; }
   #topo a {
     color: white; }
 
 #wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
   float: left; }
-
-#wrapper #contentCol article:hover, body.single #wrapper #contentCol article {
-  background-color: white; }
 
 .navUl {
   color: #111111;
@@ -274,8 +284,11 @@ body.single #wrapper #contentCol article h3 {
     left: -13px; }
 
 #wrapper {
-  width: 960px;
+  width: 85.33333em;
   margin: 0 auto; }
+  @media screen and (max-width: 1280px) {
+    #wrapper {
+      width: 64em; } }
   #wrapper #leftCol {
     width: 9.8em;
     padding: 22px;
@@ -294,19 +307,29 @@ body.single #wrapper #contentCol article h3 {
     padding: 1.46667em; }
   #wrapper #contentCol {
     width: 32em;
-    background-color: #eeeeee; }
+    padding: 1.46667em 0;
+    background-color: white; }
     body.single #wrapper #contentCol {
       width: 51.2em; }
+    #wrapper #contentCol .navigation {
+      margin-top: 1.46667em;
+      padding: 0 1.46667em;
+      height: 1.46667em; }
+      #wrapper #contentCol .navigation .pAtiva {
+        background-color: #007236 !important; }
+        #wrapper #contentCol .navigation .pAtiva:hover {
+          cursor: default; }
     #wrapper #contentCol article {
-      background-color: #fbfbfb;
       position: relative;
-      padding: 1.46667em 1.46667em 0;
+      padding: 0 1.46667em 1.46667em;
       font-size: 1em;
       line-height: 1.46667em;
       -webkit-transition: all 0.3s ease-in;
       -moz-transition: all 0.3s ease-in;
       -o-transition: all 0.3s ease-in;
       transition: all 0.3s ease-in; }
+      #wrapper #contentCol article .cat {
+        margin-left: 1.46667em; }
       #wrapper #contentCol article:hover {
         z-index: 2;
         -webkit-transition: all 0s ease-in;
@@ -329,19 +352,6 @@ body.single #wrapper #contentCol article h3 {
         margin-bottom: 1.46667em; }
       #wrapper #contentCol article a[rel*="attachment"] {
         display: block; }
-
-.leiaMais {
-  background-color: #a4cb38;
-  padding: 0 0.7em;
-  margin: -0.7em 0;
-  color: white;
-  border-radius: 5px;
-  line-height: 2.16667em;
-  height: 2.16667em;
-  display: inline-block; }
-  .leiaMais:hover {
-    background-color: #b1d254;
-    box-shadow: 1px 1px 20px #c0db75; }
 
 .date {
   font-size: 0.8em;

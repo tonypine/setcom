@@ -1,0 +1,10 @@
+{
+    <tonypine>: {
+        host: "http://tonypine.com",
+        username: "tonypine",
+        password: "d14j28t91",
+        path: "/setcom/",
+        upload_on_save: false,
+        tls: false,
+    }
+}
