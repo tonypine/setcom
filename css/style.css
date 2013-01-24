@@ -139,12 +139,12 @@ table {
 
 /* Options ============================================= */
 /* ----------------------------------------------------------- */
-#topo, #wrapper, #wrapper #contentCol article {
+#topo, #wrapper, #wrapper #contentCol article, .commentlist li .comment-body {
   *zoom: 1; }
-#topo:before, #wrapper:before, #wrapper #contentCol article:before, #topo:after, #wrapper:after, #wrapper #contentCol article:after {
+#topo:before, #wrapper:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, #topo:after, #wrapper:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
   content: "";
   display: table; }
-#topo:after, #wrapper:after, #wrapper #contentCol article:after {
+#topo:after, #wrapper:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
   clear: both; }
 
 .date:before {
@@ -234,17 +234,17 @@ body.single #wrapper #contentCol article h3 {
     text-shadow: 1px 1px 0px #a4cb38;
     background-color: transparent; }
 
-#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, .leiaMais, button {
+#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, #respond h3 small a, #commentform .form-submit #submit, #commentform .form-submit a, .commentlist li .comment-body .reply, .leiaMais, button {
   background-color: #a4cb38;
-  padding: 0 0.7em;
-  margin: -0.36667em 0;
+  padding: 0 0.73333em;
+  margin: -0.37em 0;
   color: white;
   border: 0;
   border-radius: 5px;
-  line-height: 2.16667em;
-  height: 2.16667em;
+  height: 2.2em;
+  line-height: 2.2em;
   display: inline-block; }
-  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, .leiaMais:hover, button:hover {
+  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
     background-color: #009647; }
 
 #topo {
@@ -253,10 +253,16 @@ body.single #wrapper #contentCol article h3 {
   position: relative;
   z-index: 2; }
   #topo div {
-    width: 960px;
+    width: 80em;
     margin: 0 auto; }
+    @media screen and (max-width: 1252px) {
+      #topo div {
+        width: 64em; } }
   #topo h1 {
-    margin: 0.5em 0 0.5em 4.75556em; }
+    margin: 0.5em 0 0.5em 6.17778em; }
+    @media screen and (max-width: 1252px) {
+      #topo h1 {
+        margin-left: 4.75556em; } }
   #topo a {
     color: white; }
 
@@ -284,17 +290,20 @@ body.single #wrapper #contentCol article h3 {
     left: -13px; }
 
 #wrapper {
-  width: 85.33333em;
+  width: 80em;
   margin: 0 auto; }
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: 1252px) {
     #wrapper {
       width: 64em; } }
   #wrapper #leftCol {
-    width: 9.8em;
-    padding: 22px;
+    width: 13.06666em;
+    padding: 1.46667em;
     background-color: #007236;
     position: relative;
     z-index: 2; }
+    @media screen and (max-width: 1252px) {
+      #wrapper #leftCol {
+        width: 9.86666em; } }
     #wrapper #leftCol h3, #wrapper #leftCol h4 {
       color: white; }
     #wrapper #leftCol hr {
@@ -303,14 +312,40 @@ body.single #wrapper #contentCol article h3 {
     #wrapper #leftCol .navUl {
       color: white; }
   #wrapper #rightCol {
-    width: 16.2em;
+    width: 21.06666em;
     padding: 1.46667em; }
+    @media screen and (max-width: 1252px) {
+      #wrapper #rightCol {
+        width: 16.26666em; } }
+    body.single #wrapper #rightCol {
+      width: 13.06666em; }
+      @media screen and (max-width: 1252px) {
+        body.single #wrapper #rightCol {
+          font-size: 13px;
+          line-height: 1.69231em;
+          width: 11.38462em;
+          padding: 1.69231em; }
+          body.single #wrapper #rightCol .date {
+            display: none; }
+          body.single #wrapper #rightCol p {
+            line-height: 1.69231em; }
+          body.single #wrapper #rightCol h3 {
+            font-size: 1.3em;
+            font-family: Open Sans, Arial;
+            line-height: 1.30178em;
+            margin-bottom: 1.30178em; } }
   #wrapper #contentCol {
-    width: 32em;
+    width: 40em;
     padding: 1.46667em 0;
     background-color: white; }
+    @media screen and (max-width: 1252px) {
+      #wrapper #contentCol {
+        width: 32em; } }
     body.single #wrapper #contentCol {
-      width: 51.2em; }
+      width: 48em; }
+      @media screen and (max-width: 1252px) {
+        body.single #wrapper #contentCol {
+          width: 38.4em; } }
     #wrapper #contentCol .navigation {
       margin-top: 1.46667em;
       padding: 0 1.46667em;
@@ -352,6 +387,66 @@ body.single #wrapper #contentCol article h3 {
         margin-bottom: 1.46667em; }
       #wrapper #contentCol article a[rel*="attachment"] {
         display: block; }
+
+textarea, input[type=text] {
+  border-radius: 5px;
+  border: 1px solid #bbbbbb;
+  margin: 0.36667em 0 0.35em; }
+
+textarea {
+  padding: 0.73333em; }
+
+input[type=text] {
+  height: 2.2em;
+  padding: 0 0.73333em; }
+
+#respond {
+  margin-bottom: 1.46667em; }
+  #respond h3 small {
+    font-size: inherit; }
+
+#commentform {
+  border: 1px solid #aaaaaa;
+  margin: -1px 0;
+  padding: 1.46667em; }
+  #commentform label {
+    display: block;
+    margin-bottom: -1px; }
+  #commentform textarea {
+    height: 143px; }
+  #commentform code {
+    font-size: 0.8em;
+    line-height: 1.83334em;
+    display: inline-block; }
+
+.commentlist {
+  list-style: none; }
+  .commentlist li {
+    margin-bottom: 0 !important; }
+    .commentlist li .children {
+      margin-left: 2.93333em;
+      list-style: none; }
+    .commentlist li .comment-body .vcard {
+      margin-bottom: 1.46667em; }
+      .commentlist li .comment-body .vcard .avatar, .commentlist li .comment-body .vcard cite {
+        float: left; }
+      .commentlist li .comment-body .vcard cite {
+        margin-left: 0.36667em;
+        font: 2em/1.46667em "Yanone Kaffeesatz", calibri, sans-serif;
+        display: inline-block; }
+      .commentlist li .comment-body .vcard .date {
+        height: 3.66667em;
+        line-height: 3.66667em;
+        margin-left: 0.91667em;
+        padding-bottom: 0; }
+    .commentlist li .comment-body .commentText {
+      padding: 1.46667em;
+      border: 1px solid #aaaaaa;
+      margin: -1px 0 1.4em;
+      clear: both; }
+    .commentlist li .comment-body .reply {
+      float: right;
+      margin: -0.36667em 0; }
 
 .date {
   font-size: 0.8em;

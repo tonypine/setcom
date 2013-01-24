@@ -16,14 +16,41 @@
             <article class="content">
                 <h1><?php the_title(); ?></h1>
                 <span class="date"><?php echo get_the_date() ?></span>
-                <?php the_content(); ?>
+                <?php 
+                    the_content(); 
+
+                    //get comments
+                    $comments = get_comments(array(
+                        'post_id' => get_the_ID(),
+                        'status' => 'approve' //Change this to the type of comments to be displayed
+                    ));
+
+                    //if has comments
+                    if(sizeof($comments) > 0):
+                        echo "<hr>";
+                        echo "<h3>Comentários</h3>";
+                        echo "<ul class='commentlist'>";
+                        //Display the list of comments
+                        wp_list_comments(array(
+                            'per_page' => 10, //Allow comment pagination
+                            'reverse_top_level' => false, //Show the latest comments at the top of the list
+                            'type' => 'comment',
+                            'callback' => 'mytheme_comment',
+                            'avatar_size' => 44
+                        ), $comments);
+                        echo "</ul>";
+                    endif;
+                    setcom_comment_form();
+                ?>
+                <!--
+                <hr/>
+                <h3>Comentários</h3>
+                <?php //comments_template(); ?>
+                -->
+
             </article>
             <?php endwhile; ?>
         </section>
-    <?php endif; ?>
-
-        <aside id="rightCol">
-            
-        </aside>
-
-<?php get_footer(); ?>
+    <?php endif; 
+    get_template_part( "model-right-nav");
+    get_footer(); ?>

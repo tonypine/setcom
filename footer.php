@@ -42,6 +42,11 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
+        <?php
+          if ( is_singular() && comments_open() && get_option('thread_comments') )
+          wp_enqueue_script( 'comment-reply' );
+              ?>
+
         <?php wp_footer() ?>
     </body>
 </html>

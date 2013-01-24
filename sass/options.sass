@@ -1,5 +1,6 @@
-//
-$maxwidth: 960px
+// widths
+$width1280: 80.4em // 1250px
+$width960: 64em // 960px
 
 // cores
 $verdeclaro: #A4CB38
@@ -31,3 +32,6 @@ $yanone: #{"Yanone Kaffeesatz", calibri, sans-serif}
 
 @mixin sprite-position($x: 0, $y: 0, $unit: 32)
 	background-position: -#{$x*$unit}px -#{$y*$unit}px
+
+=width($width, $ratio, $pad: 0)
+	width: $width * $ratio - $pad

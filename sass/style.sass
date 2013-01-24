@@ -109,19 +109,22 @@ h4
 
 %button
 	background-color: $verdeclaro
-	padding: 0 0.7em
-	margin: -0.36667em 0
+	padding: 0 0.7333333333333333em
+	margin: -0.37em 0
 	color: #fff
 	border: 0
 	border-radius: 5px
-	line-height: 1.46667em + 0.7em
-	height: 1.46667em + 0.7em
+	// line-height: 1.46667em + 0.7em
+	// height: 1.46667em + 0.7em
+	height: 2.2em
+	line-height: 2.2em
 	display: inline-block
 	//+opacity(0)
 	&:hover
 		background-color: lighten($verdeescuro, 7%)
 		//box-shadow: 1px 1px 20px lighten($verdeclaro, 15%)
 
+$maxWidth1280: 1252px
 #topo
 	background-color: $verdeclaro
 	border-bottom: 1.46667em solid $verdeescuro
@@ -129,10 +132,14 @@ h4
 	z-index: 2
 	@extend %clearfix
 	div
-		width: $maxwidth
+		width: $width1280
+		@media screen and (max-width: $maxWidth1280)
+			width: $width960
 		margin: 0 auto
 	h1 
-		margin: 0.5em 0 0.5em (4.26667em + 0.48889em)
+		margin: 0.5em 0 0.5em (5.68889em + 0.48889em)
+		@media screen and (max-width: $maxWidth1280)
+			margin-left: 4.26667em + 0.48889em
 	a
 		color: #fff
 
@@ -160,22 +167,23 @@ h4
 		&:before
 			left: -13px
 
-
 %mainWidth
-	width: 85.33333em
-	@media screen and (max-width: 1280px)
-		width: 64em
+	width: $width1280
+	@media screen and (max-width: $maxWidth1280)
+		width: $width960
 
 #wrapper
 	@extend %clearfix
-	width: 85.33333em
-	@media screen and (max-width: 1280px)
-		width: 64em
+	width: $width1280
+	@media screen and (max-width: $maxWidth1280)
+		width: $width960
 	margin: 0 auto
 	#leftCol
 		@extend %fLeft
-		width: (64em * 0.2) - 3em
-		padding: 22px
+		width: ($width1280 * 0.2) - 2.93334em
+		@media screen and (max-width: $maxWidth1280)
+			width: ($width960 * 0.2) - 2.93334em
+		padding: 1.46667em
 		background-color: $verdeescuro
 		position: relative
 		z-index: 2
@@ -188,15 +196,37 @@ h4
 			color: #fff
 	#rightCol
 		@extend %fLeft
-		width: 64em * 0.3 - 3em
+		width: $width1280 * 0.3 - 2.93334em
+		@media screen and (max-width: $maxWidth1280)
+			width: $width960 * 0.3 - 2.93334em
 		padding: 1.46667em
+		body.single &
+			width: $width1280 * 0.2 - 2.93334em
+			@media screen and (max-width: $maxWidth1280)
+				font-size: 13px
+				line-height: 1.692307692307692em
+				width: 73.84615384615385em * 0.2 - 3.384615384615385em
+				padding: 1.692307692307692em
+				.date
+					display: none
+				p
+					line-height: 1.692307692307692em
+				h3
+					font-size: 1.3em
+					font-family: Open Sans, Arial
+					line-height: 1.301775147928994em
+					margin-bottom: 1.301775147928994em
 	#contentCol
 		@extend %fLeft
-		width: 64em * 0.5
+		width: $width1280 * 0.5
+		@media screen and (max-width: $maxWidth1280)
+			width: $width960 * 0.5
 		padding: 1.46667em 0
 		background-color: #fff
 		body.single &
-			width: 64em * 0.8
+			width: $width1280 * 0.6
+			@media screen and (max-width: $maxWidth1280)
+				width: $width960 * 0.6
 		.navigation
 			margin-top: 1.46667em
 			padding: 0 1.46667em
@@ -239,6 +269,79 @@ h4
 					margin-bottom: 1.46667em
 			a[rel*="attachment"]
 				display: block
+
+// comments
+
+%inptStyle
+	border-radius: 5px
+	border: 1px solid #bbb
+	margin: 0.3666666666666667em 0 0.35em
+
+textarea 
+	@extend %inptStyle
+	padding: 0.7333333333333333em
+
+input[type=text]
+	@extend %inptStyle
+	height: 2.2em
+	padding: 0 0.7333333333333333em
+
+#respond
+	margin-bottom: 1.46667em
+	h3
+		small
+			font-size: inherit
+			a
+				@extend %button
+
+#commentform
+	border: 1px solid #aaa
+	margin: -1px 0
+	padding: 1.46667em
+	label
+		display: block
+		margin-bottom: -1px
+	textarea
+		height: 143px
+	code
+		font-size: 0.8em
+		line-height: 1.83334em
+		display: inline-block
+	.form-submit
+		#submit, a
+			@extend %button
+
+.commentlist
+	list-style: none
+	li 
+		margin-bottom: 0!important
+		.children
+			margin-left: 2.93333em
+			list-style: none
+		.comment-body
+			@extend %clearfix
+			.vcard
+				margin-bottom: 1.46667em
+				.avatar, cite
+					float: left
+				cite
+					margin-left: 0.36667em
+					font: 2em/1.46667em $yanone
+					display: inline-block
+				.date
+					height: 3.66667em
+					line-height: 3.66667em
+					margin-left: 0.91667em
+					padding-bottom: 0
+			.commentText
+				padding: 1.46667em
+				border: 1px solid #aaa
+				margin: -1px 0 1.4em
+				clear: both
+			.reply
+				@extend %button
+				float: right
+				margin: -0.3666666666666667em 0
 
 .leiaMais
 	@extend %button
