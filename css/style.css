@@ -139,12 +139,12 @@ table {
 
 /* Options ============================================= */
 /* ----------------------------------------------------------- */
-#topo, #wrapper, #wrapper #contentCol article, .commentlist li .comment-body {
+#wrapper, #wrapper #leftCol nav #loginform, #wrapper #contentCol article, .commentlist li .comment-body {
   *zoom: 1; }
-#topo:before, #wrapper:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, #topo:after, #wrapper:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
+#wrapper:before, #wrapper #leftCol nav #loginform:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, #wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
   content: "";
   display: table; }
-#topo:after, #wrapper:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
+#wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
   clear: both; }
 
 .date:before {
@@ -154,7 +154,8 @@ table {
 /* ----------------------------------------------------------- */
 body {
   font-size: 75%;
-  background: url("../img/bg-pat.png") 0 100px repeat-x; }
+  background: url("../img/bg-pat.png") 0 2px repeat-x;
+  border-top: 1.46667em solid #007236; }
 
 body.single {
   background-color: #dddddd; }
@@ -169,9 +170,10 @@ p {
   line-height: 1.46667em; }
 
 hr {
-  border-style: solid;
+  border-style: dashed;
+  border-color: #777777;
   border-width: 1px 0 0;
-  margin: -1px 0 1.46667em; }
+  margin: 0 0 1.4em; }
 
 h1, h2, h3, h4 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
@@ -192,16 +194,25 @@ ul {
   line-height: 1.85em;
   margin: 0 0 1.85em; }
 
-h1 #logo {
-  font-weight: 700; }
-
 h1 {
   font-size: 3em;
-  line-height: 0.98em; }
+  line-height: 0.98em;
+  margin-bottom: 0.48889em; }
+  @media screen and (max-width: 1252px) {
+    h1 {
+      font-size: 2.5em;
+      line-height: 1.17334em;
+      margin-bottom: 0.58667em; } }
 
 h2 {
   font-size: 2.7em;
-  line-height: 0.98em; }
+  line-height: 1.08642em;
+  margin-bottom: 0.54321em; }
+  @media screen and (max-width: 1252px) {
+    h2 {
+      font-size: 2em;
+      line-height: 1.46667em;
+      margin-bottom: 0.73334em; } }
 
 h3 {
   font-size: 2.2em;
@@ -213,6 +224,9 @@ h4 {
   font-size: 1.7em;
   line-height: 1.73em;
   text-transform: uppercase; }
+
+.nopad {
+  margin-bottom: 0 !important; }
 
 body.single #wrapper #contentCol article h3, body.single #wrapper #contentCol article h1 {
   text-shadow: 3px 3px 0px #d2e59d; }
@@ -234,7 +248,7 @@ body.single #wrapper #contentCol article h3 {
     text-shadow: 1px 1px 0px #a4cb38;
     background-color: transparent; }
 
-#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, #respond h3 small a, #commentform .form-submit #submit, #commentform .form-submit a, .commentlist li .comment-body .reply, .leiaMais, button {
+#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, input[type=submit], #respond h3 small a, #commentform .form-submit #submit, #commentform .form-submit a, .commentlist li .comment-body .reply, .leiaMais, button {
   background-color: #a4cb38;
   padding: 0 0.73333em;
   margin: -0.37em 0;
@@ -244,27 +258,8 @@ body.single #wrapper #contentCol article h3 {
   height: 2.2em;
   line-height: 2.2em;
   display: inline-block; }
-  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
+  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
     background-color: #009647; }
-
-#topo {
-  background-color: #a4cb38;
-  border-bottom: 1.46667em solid #007236;
-  position: relative;
-  z-index: 2; }
-  #topo div {
-    width: 80em;
-    margin: 0 auto; }
-    @media screen and (max-width: 1252px) {
-      #topo div {
-        width: 64em; } }
-  #topo h1 {
-    margin: 0.5em 0 0.5em 6.17778em; }
-    @media screen and (max-width: 1252px) {
-      #topo h1 {
-        margin-left: 4.75556em; } }
-  #topo a {
-    color: white; }
 
 #wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
   float: left; }
@@ -290,27 +285,44 @@ body.single #wrapper #contentCol article h3 {
     left: -13px; }
 
 #wrapper {
-  width: 80em;
-  margin: 0 auto; }
+  margin: 0 auto;
+  background-color: white;
+  width: 80em; }
   @media screen and (max-width: 1252px) {
     #wrapper {
       width: 64em; } }
   #wrapper #leftCol {
+    color: white;
     width: 13.06666em;
-    padding: 1.46667em;
+    padding: 1.46667em 1.46667em 0;
     background-color: #007236;
     position: relative;
     z-index: 2; }
     @media screen and (max-width: 1252px) {
       #wrapper #leftCol {
         width: 9.86666em; } }
-    #wrapper #leftCol h3, #wrapper #leftCol h4 {
-      color: white; }
-    #wrapper #leftCol hr {
-      margin-bottom: 0.75em;
-      border-color: white; }
-    #wrapper #leftCol .navUl {
-      color: white; }
+    #wrapper #leftCol header h1 {
+      font-weight: 700; }
+    #wrapper #leftCol nav {
+      padding-bottom: 1.46667em; }
+      #wrapper #leftCol nav h3, #wrapper #leftCol nav h4 {
+        color: white; }
+      #wrapper #leftCol nav hr {
+        margin-bottom: 0.75em;
+        border-color: white; }
+      #wrapper #leftCol nav .navUl {
+        color: white; }
+      #wrapper #leftCol nav input {
+        max-width: 11.59999em; }
+      #wrapper #leftCol nav #searchsubmit, #wrapper #leftCol nav #loginform #wp-submit {
+        margin: 0.36667em 0; }
+      #wrapper #leftCol nav #loginform p {
+        margin-bottom: 0; }
+      #wrapper #leftCol nav #loginform p.login-submit, #wrapper #leftCol nav #loginform p.login-remember {
+        float: left; }
+      #wrapper #leftCol nav #loginform p.login-remember label {
+        line-height: 2.93334em;
+        margin-left: 0.73334em; }
   #wrapper #rightCol {
     width: 21.06666em;
     padding: 1.46667em; }
@@ -346,6 +358,8 @@ body.single #wrapper #contentCol article h3 {
       @media screen and (max-width: 1252px) {
         body.single #wrapper #contentCol {
           width: 38.4em; } }
+    #wrapper #contentCol #articleLoop hr {
+      margin: 0 1.46667em 1.4em; }
     #wrapper #contentCol .navigation {
       margin-top: 1.46667em;
       padding: 0 1.46667em;
@@ -356,7 +370,7 @@ body.single #wrapper #contentCol article h3 {
           cursor: default; }
     #wrapper #contentCol article {
       position: relative;
-      padding: 0 1.46667em 1.46667em;
+      padding: 0 1.46667em;
       font-size: 1em;
       line-height: 1.46667em;
       -webkit-transition: all 0.3s ease-in;
@@ -378,25 +392,25 @@ body.single #wrapper #contentCol article h3 {
           transition: all 0s ease-in;
           filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
           opacity: 1; }
-      #wrapper #contentCol article h3 {
-        margin-bottom: 0; }
-      body.single #wrapper #contentCol article h1 {
-        margin-bottom: 0.48em; }
       #wrapper #contentCol article ul li, #wrapper #contentCol article ol li {
         list-style-position: inside;
         margin-bottom: 1.46667em; }
       #wrapper #contentCol article a[rel*="attachment"] {
         display: block; }
 
-textarea, input[type=text] {
+form label {
+  display: block;
+  line-height: 1.46667em; }
+
+textarea, input[type=text], input[type=password] {
   border-radius: 5px;
   border: 1px solid #bbbbbb;
-  margin: 0.36667em 0 0.35em; }
+  margin: 0.33334em 0 0.26667em; }
 
 textarea {
   padding: 0.73333em; }
 
-input[type=text] {
+input[type=text], input[type=password] {
   height: 2.2em;
   padding: 0 0.73333em; }
 
@@ -461,3 +475,16 @@ input[type=text] {
     width: 25px;
     display: inline-block;
     content: ""; }
+
+.list {
+  list-style: none; }
+  .list a {
+    display: block;
+    line-height: 1.46667em;
+    color: #007ed9; }
+    .list a:hover {
+      color: #a4cb38; }
+    .list a:before {
+      content: "+ ";
+      font-weight: 700;
+      color: #a4cb38; }

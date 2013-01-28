@@ -11,6 +11,7 @@
     <!-- Post Content -->
     <section id="contentCol">
 
+        <h2>Resultados da busca:</h2>
         <!-- =================================== -->
         <!-- loop -->
         <?php if (have_posts()) : ?> 

@@ -1,26 +1,43 @@
 
         <aside id="leftCol">
-            <h4>Departamentos</h4>
-            <hr />
+            <header id="topo">
+                <h1><a id="logo" href="<?php echo site_url(); ?>">Intranet MicrocampSP</a></h1>
+            </header>
             <nav>
+                <h4>Departamentos</h4>
                 <ul class="navUl">
-                    <!-- <li><a href="#">Marketing</a></li>
-                    <li><a href="#">TI</a></li>
-                    <li><a href="#">Administração</a></li>
-                    <li><a href="#">Recursos Humanos</a></li> -->
                     <?php 
-                        $catArgs = array(
-                            'type'          =>  'post',
-                            'orderby'       =>  'name',
-                            'order'         =>  'ASC',
-                            'hide_empty'    =>  '0',
-                            'taxonomy'      =>  'category'
+                        $navArgs = array(
+                            'container'     =>  false,
+                            'theme_location'    =>  'departamentos',
+                            'menu'              =>  'departamentos',
+                            'items_wrap'        =>  '%3$s'
                             );
-                        $navCat = get_categories( $catArgs ); 
-                        foreach ($navCat as $cat) {
-                            echo "<li><a href=\"".get_category_link( $cat->term_id )."\">$cat->cat_name</a></li>";
-                        }
+                        wp_nav_menu( $navArgs );
                     ?> 
                 </ul>
             </nav>
+            <nav>
+                <h4>Links Úties</h4>
+                <ul class="navUl">
+                    <?php 
+                        $navArgs = array(
+                            'container'     =>  false,
+                            'theme_location'    =>  'links',
+                            'menu'              =>  'links-uteis',
+                            'items_wrap'        =>  '%3$s'
+                            );
+                        wp_nav_menu( $navArgs );
+                    ?> 
+                </ul>
+            </nav>
+            <nav>
+                <h4>Busca</h4>
+                <?php get_search_form( $echo = true ); ?>
+            </nav>
+            <nav>
+                <h4>Login</h4>
+                <?php setcom_login_form(); ?>
+            </nav>
+
         </aside>

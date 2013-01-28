@@ -1,5 +1,10 @@
 <?php // custom functions.php template @ digwp.com
 
+register_nav_menus( array(
+	'departamentos' => 'Departamentos',
+	'links' => 'Links Úteis'
+) );
+
 // add feed links to header
 if (function_exists('automatic_feed_links')) {
 	automatic_feed_links();
@@ -11,8 +16,8 @@ if (function_exists('automatic_feed_links')) {
 // smart jquery inclusion
 if (!is_admin()) {
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"), false, '1.3.2');
-	wp_enqueue_script('jquery');
+	//wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"), false, '1.3.2');
+	//wp_enqueue_script('jquery');
 }
 
 
@@ -250,4 +255,81 @@ add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $acc
 	                <?php endif; ?>
 	        <?php
 	}
+
+	/**
+	 * Provides a simple login form for use anywhere within WordPress. By default, it echoes
+	 * the HTML immediately. Pass array('echo'=>false) to return the string instead.
+	 *
+	 * @since 3.0.0
+	 * @param array $args Configuration options to modify the form output.
+	 * @return string|null String when retrieving, null when displaying.
+	 */
+	function setcom_login_form( $args = array() ) {
+	        $defaults = array( 'echo' => true,
+	                                                'redirect' => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], // Default redirect is back to the current page
+	                                                'form_id' => 'loginform',
+	                                                'label_username' => __( 'Username' ),
+	                                                'label_password' => __( 'Password' ),
+	                                                'label_remember' => __( 'Remember Me' ),
+	                                                'label_log_in' => __( 'Log In' ),
+	                                                'id_username' => 'user_login',
+	                                                'id_password' => 'user_pass',
+	                                                'id_remember' => 'rememberme',
+	                                                'id_submit' => 'wp-submit',
+	                                                'remember' => true,
+	                                                'value_username' => '',
+	                                                'value_remember' => false, // Set this to true to default the "Remember me" checkbox to checked
+	                                        );
+	        $args = wp_parse_args( $args, apply_filters( 'login_form_defaults', $defaults ) );
+	
+	        $form = '
+	                <form name="' . $args['form_id'] . '" id="' . $args['form_id'] . '" action="' . esc_url( site_url( 'wp-login.php', 'login_post' ) ) . '" method="post">
+	                        ' . apply_filters( 'login_form_top', '', $args ) . '
+	                        <p class="login-username">
+	                                <label for="' . esc_attr( $args['id_username'] ) . '">' . esc_html( $args['label_username'] ) . '</label>
+	                                <input type="text" name="log" id="' . esc_attr( $args['id_username'] ) . '" class="input" value="' . esc_attr( $args['value_username'] ) . '" size="20" />
+	                        </p>
+	                        <p class="login-password">
+	                                <label for="' . esc_attr( $args['id_password'] ) . '">' . esc_html( $args['label_password'] ) . '</label>
+	                                <input type="password" name="pwd" id="' . esc_attr( $args['id_password'] ) . '" class="input" value="" size="20" />
+	                        </p>
+	                        ' . apply_filters( 'login_form_middle', '', $args ) . '
+	                        <p class="login-submit">
+	                                <input type="submit" name="wp-submit" id="' . esc_attr( $args['id_submit'] ) . '" class="button-primary" value="' . esc_attr( $args['label_log_in'] ) . '" />
+	                                <input type="hidden" name="redirect_to" value="' . esc_url( $args['redirect'] ) . '" />
+	                        </p>
+	                        ' . ( $args['remember'] ? '<p class="login-remember"><label><input name="rememberme" type="checkbox" id="' . esc_attr( $args['id_remember'] ) . '" value="forever"' . ( $args['value_remember'] ? ' checked="checked"' : '' ) . ' /> ' . esc_html( $args['label_remember'] ) . '</label></p>' : '' ) . '
+	                        ' . apply_filters( 'login_form_bottom', '', $args ) . '
+	                </form>';
+	
+	        if ( $args['echo'] )
+	                echo $form;
+	        else
+	                return $form;
+	}
+
+	// ======================================
+	// Include private posts in search query
+	function include_private_posts_in_search( $query ) {
+		if ( is_search() )
+			$query->set( 'post_status', array ( 'publish', 'private' ) );
+	}
+	add_action( 'pre_get_posts', 'include_private_posts_in_search' );
+
+	// =============================================
+	// get xml
+	function getFeed($feed_url) {
+		$content = file_get_contents($feed_url);
+		$x = new SimpleXmlElement($content);
+		echo "<ul class='list'>";
+		foreach($x->channel->item as $entry) {
+			// echo "<pre>";
+			// var_dump($entry);
+			// echo "</pre>";
+			echo "<li><a href='$entry->link' title='$entry->title'>" . $entry->title . "</a></li>";
+		}
+		echo "</ul>";
+	}
+
+
 ?>

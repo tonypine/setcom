@@ -22,15 +22,13 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css">
-        <script src="<?php echo $u; ?>/js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
+
+        <!--[if (gte IE 6)&(lte IE 8)]>
+          <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
+        <![endif]-->
 
         <?php wp_head() ?>
     </head>
-    <body class="<?php echo $class; ?>" onload="createGridder()">
-
-        <header id="topo">
-            <div>
-                <h1><a id="logo" href="<?php echo site_url(); ?>">Intranet MicrocampSP</a></h1>
-            </div>
-        </header>
+    <body class="<?php echo $class; ?>">
         <div id="wrapper">

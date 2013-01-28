@@ -21,7 +21,8 @@
 // main type styles
 body 
 	font-size: 75%
-	background: url('../img/bg-pat.png') 0 100px repeat-x
+	background: url('../img/bg-pat.png') 0 2px repeat-x
+	border-top: 1.46667em solid $verdeescuro
 	//+background-image(linear-gradient(#fff, #ddd))
 
 body.single
@@ -41,9 +42,10 @@ p
 	@extend %mgBottom
 
 hr 
-	border-style: solid
+	border-style: dashed
+	border-color: #777
 	border-width: 1px 0 0
-	margin: -1px 0 1.46667em
+	margin: 0 0 1.4em
 
 h1, h2, h3, h4
 	font-family: $yanone
@@ -70,21 +72,35 @@ ul
 h1 
 	font-size: 3em
 	line-height: 0.98em
-
-	& #logo 
-		@extend %hbweight
+	margin-bottom: 0.48889em
+	@media screen and (max-width: $maxWidth1280)
+		font-size: 2.5em
+		line-height: 1.17334em
+		margin-bottom: 0.58667em
 h2
 	font-size: 2.7em
-	line-height: 0.98em
+	line-height: 1.08641975308642em
+	margin-bottom: 0.5432098765432099em
+	@media screen and (max-width: $maxWidth1280)
+		font-size: 2em
+		line-height: 1.46667em
+		margin-bottom: 0.73334em
 h3
 	font-size: 2.2em
 	line-height: 1.3335em
 	margin-bottom: 0.66666em
 	letter-spacing: 0.06em
+	// @media screen and (max-width: $maxWidth1280)
+	// 	font-size: 1.7em
+	// 	line-height: 1.746031746031746em
+	// 	margin-bottom: 0.873015873015873em
 h4
 	font-size: 1.7em
 	line-height: 1.73em
 	text-transform: uppercase
+
+.nopad
+	margin-bottom: 0!important
 
 %titleShadow
 	text-shadow: 3px 3px 0px lighten($verdeclaro, 25%)
@@ -124,25 +140,6 @@ h4
 		background-color: lighten($verdeescuro, 7%)
 		//box-shadow: 1px 1px 20px lighten($verdeclaro, 15%)
 
-$maxWidth1280: 1252px
-#topo
-	background-color: $verdeclaro
-	border-bottom: 1.46667em solid $verdeescuro
-	position: relative
-	z-index: 2
-	@extend %clearfix
-	div
-		width: $width1280
-		@media screen and (max-width: $maxWidth1280)
-			width: $width960
-		margin: 0 auto
-	h1 
-		margin: 0.5em 0 0.5em (5.68889em + 0.48889em)
-		@media screen and (max-width: $maxWidth1280)
-			margin-left: 4.26667em + 0.48889em
-	a
-		color: #fff
-
 %fLeft
 	float: left
 
@@ -174,26 +171,47 @@ $maxWidth1280: 1252px
 
 #wrapper
 	@extend %clearfix
+	margin: 0 auto
+	background-color: #fff
 	width: $width1280
 	@media screen and (max-width: $maxWidth1280)
 		width: $width960
-	margin: 0 auto
 	#leftCol
 		@extend %fLeft
+		color: #fff
 		width: ($width1280 * 0.2) - 2.93334em
 		@media screen and (max-width: $maxWidth1280)
 			width: ($width960 * 0.2) - 2.93334em
-		padding: 1.46667em
+		padding: 1.46667em 1.46667em 0
 		background-color: $verdeescuro
 		position: relative
 		z-index: 2
-		h3, h4
-			color: #fff
-		hr
-			margin-bottom: 0.75em
-			border-color: #fff
-		.navUl
-			color: #fff
+		header
+			h1
+				font-weight: 700
+		nav
+			padding-bottom: 1.46667em
+			h3, h4
+				color: #fff
+			hr
+				margin-bottom: 0.75em
+				border-color: #fff
+			.navUl
+				color: #fff
+			input
+				max-width: 11.59999em
+			#searchsubmit, #loginform #wp-submit
+				margin: 0.36667em 0
+			#loginform
+				@extend %clearfix
+				p
+					margin-bottom: 0
+				p.login-submit, p.login-remember
+					float: left
+				p.login-remember label
+					line-height: 2.93334em
+					margin-left: 0.73334em
+
 	#rightCol
 		@extend %fLeft
 		width: $width1280 * 0.3 - 2.93334em
@@ -219,14 +237,18 @@ $maxWidth1280: 1252px
 	#contentCol
 		@extend %fLeft
 		width: $width1280 * 0.5
-		@media screen and (max-width: $maxWidth1280)
-			width: $width960 * 0.5
 		padding: 1.46667em 0
 		background-color: #fff
+		@media screen and (max-width: $maxWidth1280)
+			width: $width960 * 0.5
 		body.single &
 			width: $width1280 * 0.6
 			@media screen and (max-width: $maxWidth1280)
 				width: $width960 * 0.6
+		#articleLoop
+			hr
+				margin: 0 1.46667em 1.4em
+				&
 		.navigation
 			margin-top: 1.46667em
 			padding: 0 1.46667em
@@ -240,9 +262,7 @@ $maxWidth1280: 1252px
 		article 
 			@extend %clearfix
 			position: relative
-			padding: 0 1.46667em 1.46667em
-			//margin: -1px 0
-			//border: 1px solid lighten(#ddd, 2%)
+			padding: 0 1.46667em
 			font-size: 1em
 			line-height: 1.46667em
 			+transition($time: 0.3s)
@@ -255,12 +275,9 @@ $maxWidth1280: 1252px
 				.leiaMais
 					+transition($time: 0s)
 					+opacity(1)
-			h3
-				margin-bottom: 0
 			body.single &
 				h1
 					@extend %titleShadow
-					margin-bottom: 0.48em
 				h3
 					@extend %singleTittle
 			ul, ol
@@ -270,22 +287,32 @@ $maxWidth1280: 1252px
 			a[rel*="attachment"]
 				display: block
 
-// comments
+// ================================================
+// Form
+
+form
+	label
+		display: block
+		line-height: 1.46667em
 
 %inptStyle
 	border-radius: 5px
 	border: 1px solid #bbb
-	margin: 0.3666666666666667em 0 0.35em
+	margin: 0.33334em 0 0.26667em
 
 textarea 
 	@extend %inptStyle
 	padding: 0.7333333333333333em
 
-input[type=text]
+input[type=text], input[type=password]
 	@extend %inptStyle
 	height: 2.2em
 	padding: 0 0.7333333333333333em
 
+input[type=submit]
+	@extend %button
+
+// comments
 #respond
 	margin-bottom: 1.46667em
 	h3
@@ -364,5 +391,15 @@ button
 		display: inline-block
 		content: ""
 
-
-
+.list
+	list-style: none
+	a
+		display: block
+		line-height: 1.46667em
+		color: $ablue
+		&:hover
+			color: $verdeclaro
+		&:before
+			content: "+ "
+			font-weight: 700
+			color: $verdeclaro
