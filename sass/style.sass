@@ -172,7 +172,7 @@ h4
 #wrapper
 	@extend %clearfix
 	margin: 0 auto
-	background-color: #fff
+	background-color: #f9f9f9
 	width: $width1280
 	@media screen and (max-width: $maxWidth1280)
 		width: $width960
@@ -217,9 +217,11 @@ h4
 	#rightCol
 		@extend %fLeft
 		width: $width1280 * 0.3 - 2.93334em
+		padding: 1.46667em 1.4em
+		border-left: 1px solid #fff
+		margin-left: 1px
 		@media screen and (max-width: $maxWidth1280)
 			width: $width960 * 0.3 - 2.93334em
-		padding: 1.46667em
 		body.single &
 			width: $width1280 * 0.2 - 2.93334em
 			@media screen and (max-width: $maxWidth1280)
@@ -241,6 +243,8 @@ h4
 		width: $width1280 * 0.5
 		padding: 1.46667em 0
 		background-color: #fff
+		border-right: 1px solid #e0e0e0
+		margin-right: -1px
 		@media screen and (max-width: $maxWidth1280)
 			width: $width960 * 0.5
 		body.single &

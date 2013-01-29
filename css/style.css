@@ -286,7 +286,7 @@ body.single #wrapper #contentCol article h3 {
 
 #wrapper {
   margin: 0 auto;
-  background-color: white;
+  background-color: #f9f9f9;
   width: 80em; }
   @media screen and (max-width: 1252px) {
     #wrapper {
@@ -328,7 +328,9 @@ body.single #wrapper #contentCol article h3 {
         margin-left: 0.73334em; }
   #wrapper #rightCol {
     width: 21.06666em;
-    padding: 1.46667em; }
+    padding: 1.46667em 1.4em;
+    border-left: 1px solid white;
+    margin-left: 1px; }
     @media screen and (max-width: 1252px) {
       #wrapper #rightCol {
         width: 16.26666em; } }
@@ -352,7 +354,9 @@ body.single #wrapper #contentCol article h3 {
   #wrapper #contentCol {
     width: 40em;
     padding: 1.46667em 0;
-    background-color: white; }
+    background-color: white;
+    border-right: 1px solid #e0e0e0;
+    margin-right: -1px; }
     @media screen and (max-width: 1252px) {
       #wrapper #contentCol {
         width: 32em; } }
