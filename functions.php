@@ -311,7 +311,7 @@ add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $acc
 	// ======================================
 	// Include private posts in search query
 	function include_private_posts_in_search( $query ) {
-		if ( is_search() )
+		if ( is_search() && is_user_logged_in() )
 			$query->set( 'post_status', array ( 'publish', 'private' ) );
 	}
 	add_action( 'pre_get_posts', 'include_private_posts_in_search' );
