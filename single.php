@@ -40,7 +40,10 @@
                         ), $comments);
                         echo "</ul>";
                     endif;
-                    setcom_comment_form();
+                    setcom_comment_form(array(
+                            'title_reply' => 'Deixe um comentário',
+                            'title_reply_to' => 'Deixe uma resposta'
+                        ));
                 ?>
                 <!--
                 <hr/>
