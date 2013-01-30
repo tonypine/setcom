@@ -1,1 +1,1 @@
-<?php `git reset --hard`; ?>
+<?php `git pull origin master`; ?>
