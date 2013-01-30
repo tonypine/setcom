@@ -4,7 +4,7 @@
             var url = "<?php url() ?>";
         </script>
 
-        <!-- All js -->
+        <!-- All jss -->
         <script src="<?php url(); ?>/script.combined.js?v=1.1"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
