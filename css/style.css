@@ -155,7 +155,7 @@ table {
 body {
   font-size: 75%;
   background: url("../img/bg-pat.png") 0 2px repeat-x;
-  border-top: 1.46667em solid #007236; }
+  border-top: 1.46667em solid #222222; }
 
 body.single {
   background-color: #dddddd; }
@@ -259,7 +259,7 @@ body.single #wrapper #contentCol article h3 {
   line-height: 2.2em;
   display: inline-block; }
   #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
-    background-color: #009647; }
+    background-color: #343434; }
 
 #wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
   float: left; }
@@ -287,20 +287,20 @@ body.single #wrapper #contentCol article h3 {
 #wrapper {
   margin: 0 auto;
   background-color: #f9f9f9;
-  width: 80em; }
+  width: 80.4em; }
   @media screen and (max-width: 1252px) {
     #wrapper {
       width: 64em; } }
   #wrapper #leftCol {
     color: white;
-    width: 13.06666em;
+    width: -2em;
     padding: 1.46667em 1.46667em 0;
-    background-color: #007236;
+    background-color: #222222;
     position: relative;
     z-index: 2; }
     @media screen and (max-width: 1252px) {
       #wrapper #leftCol {
-        width: 9.86666em; } }
+        width: -2em; } }
     #wrapper #leftCol header h1 {
       font-weight: 700; }
     #wrapper #leftCol nav {
@@ -327,20 +327,20 @@ body.single #wrapper #contentCol article h3 {
         line-height: 2.93334em;
         margin-left: 0.73334em; }
   #wrapper #rightCol {
-    width: 21.06666em;
+    width: -2em;
     padding: 1.46667em 1.4em;
     border-left: 1px solid white;
     margin-left: 1px; }
     @media screen and (max-width: 1252px) {
       #wrapper #rightCol {
-        width: 16.26666em; } }
+        width: -2em; } }
     body.single #wrapper #rightCol {
-      width: 13.06666em; }
+      width: -2em; }
       @media screen and (max-width: 1252px) {
         body.single #wrapper #rightCol {
           font-size: 13px;
           line-height: 1.69231em;
-          width: 11.38462em;
+          width: -3em;
           padding: 1.69231em; }
           body.single #wrapper #rightCol .date {
             display: none; }
@@ -352,19 +352,19 @@ body.single #wrapper #contentCol article h3 {
             line-height: 1.30178em;
             margin-bottom: 1.30178em; } }
   #wrapper #contentCol {
-    width: 40em;
+    width: 0em;
     padding: 1.46667em 0;
     background-color: white;
     border-right: 1px solid #e0e0e0;
     margin-right: -1px; }
     @media screen and (max-width: 1252px) {
       #wrapper #contentCol {
-        width: 32em; } }
+        width: 0em; } }
     body.single #wrapper #contentCol {
-      width: 48em; }
+      width: 0em; }
       @media screen and (max-width: 1252px) {
         body.single #wrapper #contentCol {
-          width: 38.4em; } }
+          width: 0em; } }
     #wrapper #contentCol #articleLoop hr {
       margin: 0 1.46667em 1.4em; }
     #wrapper #contentCol .navigation {
@@ -372,7 +372,7 @@ body.single #wrapper #contentCol article h3 {
       padding: 0 1.46667em;
       height: 1.46667em; }
       #wrapper #contentCol .navigation .pAtiva {
-        background-color: #007236 !important; }
+        background-color: #222222 !important; }
         #wrapper #contentCol .navigation .pAtiva:hover {
           cursor: default; }
     #wrapper #contentCol article {
@@ -380,10 +380,10 @@ body.single #wrapper #contentCol article h3 {
       padding: 0 1.46667em;
       font-size: 1em;
       line-height: 1.46667em;
-      -webkit-transition: all 0.3s ease-in;
-      -moz-transition: all 0.3s ease-in;
-      -o-transition: all 0.3s ease-in;
-      transition: all 0.3s ease-in; }
+      -webkit-transition: all 0s ease-in;
+      -moz-transition: all 0s ease-in;
+      -o-transition: all 0s ease-in;
+      transition: all 0s ease-in; }
       #wrapper #contentCol article .cat {
         margin-left: 1.46667em; }
       #wrapper #contentCol article:hover {
@@ -472,9 +472,9 @@ input[type=text], input[type=password] {
 .date {
   font-size: 0.8em;
   color: #666666;
-  height: 1.834em;
+  height: 1em;
   display: inline-block;
-  padding-bottom: 1.834em; }
+  padding-bottom: 1em; }
   .date:before {
     background-position: -0px -0px;
     margin: 0 0.5em -9px 0;
