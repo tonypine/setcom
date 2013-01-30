@@ -155,7 +155,7 @@ table {
 body {
   font-size: 75%;
   background: url("../img/bg-pat.png") 0 2px repeat-x;
-  border-top: 1.46667em solid #222222; }
+  border-top: 1.46667em solid #007236; }
 
 body.single {
   background-color: #dddddd; }
@@ -259,7 +259,7 @@ body.single #wrapper #contentCol article h3 {
   line-height: 2.2em;
   display: inline-block; }
   #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
-    background-color: #343434; }
+    background-color: #009647; }
 
 #wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
   float: left; }
@@ -295,7 +295,7 @@ body.single #wrapper #contentCol article h3 {
     color: white;
     width: 13.06666em;
     padding: 1.46667em 1.46667em 0;
-    background-color: #222222;
+    background-color: #007236;
     position: relative;
     z-index: 2; }
     @media screen and (max-width: 1252px) {
@@ -372,7 +372,7 @@ body.single #wrapper #contentCol article h3 {
       padding: 0 1.46667em;
       height: 1.46667em; }
       #wrapper #contentCol .navigation .pAtiva {
-        background-color: #222222 !important; }
+        background-color: #007236 !important; }
         #wrapper #contentCol .navigation .pAtiva:hover {
           cursor: default; }
     #wrapper #contentCol article {
