@@ -24,6 +24,14 @@
         <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css">
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
 
+        <!--[if lt IE 8]>
+        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
         <!--[if (gte IE 6)&(lte IE 8)]>
           <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
         <![endif]-->

@@ -1,5 +1,7 @@
 <?php // custom functions.php template @ digwp.com
 
+show_admin_bar(false);
+
 register_nav_menus( array(
 	'departamentos' => 'Departamentos',
 	'links' => 'Links Úteis'
@@ -126,7 +128,19 @@ function custom_gallery_image($html, $id, $caption){
 	$customLink = preg_replace("/(<a)/", "$1 title=\"$caption\" ", $customLink);
 	return $customLink;
 }
-add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $accepted_args = 10 );
+//add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $accepted_args = 10 );
+
+// ====================================================
+// add rel lightbox
+
+add_filter('the_content', 'my_addlightboxrel');
+function my_addlightboxrel($content) {
+       global $post;
+       $pattern ="/<a(.*?)href=('|\")(.*?).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>/i";
+       $replacement = '<a$1href=$2$3.$4$5 rel="lightbox[gal]" title="'.$post->post_title.'"$6>';
+       $content = preg_replace($pattern, $replacement, $content);
+       return $content;
+}
 
 	// comment template
 	function mytheme_comment($comment, $args, $depth) {
