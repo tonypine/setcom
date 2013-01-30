@@ -19,7 +19,7 @@
                 <?php 
                     the_content(); 
 
-                    //get comments
+                    //get commentss
                     $comments = get_comments(array(
                         'post_id' => get_the_ID(),
                         'status' => 'approve' //Change this to the type of comments to be displayed
