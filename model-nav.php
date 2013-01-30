@@ -18,7 +18,7 @@
                 </ul>
             </nav>
             <nav>
-                <h4>Links Úties yeah i'm realy hooked this shit</h4>
+                <h4>Links Úties</h4>
                 <ul class="navUl">
                     <?php 
                         $navArgs = array(
