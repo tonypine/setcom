@@ -32,7 +32,7 @@
                 </ul>
             </nav>
             <nav>
-                <h4>Busca</h4>
+                <h4>Buscar</h4>
                 <?php get_search_form( $echo = true ); ?>
             </nav>
             <nav>
