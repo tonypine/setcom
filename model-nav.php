@@ -1,7 +1,7 @@
 
         <aside id="leftCol">
             <header id="topo">
-                <h1><a id="logo" href="<?php echo site_url(); ?>">Intranet MicrocampSP</a></h1>
+                <h1><a id="logo" href="<?php echo site_url(); ?>">Intranet MicrocampSP ha</a></h1>
             </header>
             <nav>
                 <h4>Departamentos</h4>
