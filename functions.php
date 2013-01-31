@@ -202,7 +202,8 @@ function my_addlightboxrel($content) {
 			<div class="date"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
 				<?php
 				/* translators: 1: date, 2: time */
-				printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
+				$date = preg_replace("/^([0-9]+)/", "<strong>$1</strong>", get_comment_date());
+				printf( __('%1$s at %2$s'), $date,  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
 				?>
 			</div>
 		</div>

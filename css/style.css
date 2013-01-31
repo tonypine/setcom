@@ -139,12 +139,12 @@ table {
 
 /* Options ============================================= */
 /* ----------------------------------------------------------- */
-#wrapper, #wrapper #leftCol nav #loginform, #wrapper #contentCol article, .commentlist li .comment-body {
+#wrapper, #wrapper #leftCol nav #loginform, #wrapper #contentCol article, .commentlist li .comment-body, .commentlist li .comment-body .vcard {
   *zoom: 1; }
-#wrapper:before, #wrapper #leftCol nav #loginform:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, #wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
+#wrapper:before, #wrapper #leftCol nav #loginform:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, .commentlist li .comment-body .vcard:before, #wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
   content: "";
   display: table; }
-#wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after {
+#wrapper:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
   clear: both; }
 
 .date:before {
@@ -268,7 +268,7 @@ body.single #wrapper #contentCol article h3 {
     text-shadow: 1px 1px 0px #a4cb38;
     background-color: transparent; }
 
-#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, input[type=submit], #respond h3 small a, #commentform .form-submit #submit, #commentform .form-submit a, .commentlist li .comment-body .reply, .leiaMais, button {
+#wrapper #contentCol .navigation a, #wrapper #contentCol article .cat, input[type=submit], #respond h3 small a, #commentform .form-submit #submit, #commentform .form-submit a, .commentlist li .comment-body .reply a, .leiaMais, button {
   background-color: #a4cb38;
   padding: 0 0.73333em;
   margin: -0.37em 0;
@@ -278,7 +278,7 @@ body.single #wrapper #contentCol article h3 {
   height: 2.2em;
   line-height: 2.2em;
   display: inline-block; }
-  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
+  #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply a:hover, .leiaMais:hover, button:hover {
     background-color: #009647;
     text-decoration: underline; }
 
@@ -494,14 +494,16 @@ input[type=text], input[type=password] {
       .commentlist li .comment-body .vcard .date {
         height: 3.66667em;
         line-height: 3.66667em;
-        margin-left: 0.91667em;
+        margin: 5px 0 -25px 0.91667em;
         padding-bottom: 0; }
+        .commentlist li .comment-body .vcard .date strong {
+          color: inherit; }
     .commentlist li .comment-body .commentText {
       padding: 1.46667em;
       border: 1px solid #aaaaaa;
       margin: -1px 0 1.4em;
       clear: both; }
-    .commentlist li .comment-body .reply {
+    .commentlist li .comment-body .reply a {
       float: right;
       margin: -0.36667em 0; }
 
@@ -512,6 +514,8 @@ input[type=text], input[type=password] {
   display: inline-block;
   margin: -4px 0 4px;
   padding-bottom: 1.834em; }
+  .date a {
+    display: inline-block; }
   .lt-ie8 .date {
     float: left; }
   .date strong {

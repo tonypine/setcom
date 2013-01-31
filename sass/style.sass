@@ -389,6 +389,7 @@ input[type=submit]
 		.comment-body
 			@extend %clearfix
 			.vcard
+				@extend %clearfix
 				margin-bottom: 1.46667em
 				.avatar, cite
 					float: left
@@ -399,17 +400,20 @@ input[type=submit]
 				.date
 					height: 3.66667em
 					line-height: 3.66667em
-					margin-left: 0.91667em
+					margin: 5px 0 -25px 0.91667em
 					padding-bottom: 0
+					strong
+						color: inherit
 			.commentText
 				padding: 1.46667em
 				border: 1px solid #aaa
 				margin: -1px 0 1.4em
 				clear: both
 			.reply
-				@extend %button
-				float: right
-				margin: -0.3666666666666667em 0
+				a
+					@extend %button
+					float: right
+					margin: -0.3666666666666667em 0
 
 .leiaMais
 	@extend %button
@@ -424,6 +428,8 @@ button
 	display: inline-block
 	margin: -4px 0 4px
 	padding-bottom: $bottom
+	a
+		display: inline-block
 	.lt-ie8 &
 		float: left
 	strong
