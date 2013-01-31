@@ -303,6 +303,9 @@ body.single #wrapper #contentCol article h3 {
         width: 9.86666em; } }
     #wrapper #leftCol header h1 {
       font-weight: 700; }
+      @media screen and (max-width: 1252px) {
+        #wrapper #leftCol header h1 {
+          font-size: 2em; } }
     #wrapper #leftCol nav {
       padding-bottom: 1.46667em; }
       #wrapper #leftCol nav h3, #wrapper #leftCol nav h4 {
