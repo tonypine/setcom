@@ -22,7 +22,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css?v=1.1">
+        <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css?v=1.2">
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
 
         <!--[if lt IE 8]>
@@ -40,5 +40,5 @@
 
         <?php wp_head() ?>
     </head>
-    <body class="<?php echo $class; ?>">
+    <body class="<?php echo $class; ?>" onload="createGridder()">
         <div id="wrapper">

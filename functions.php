@@ -345,5 +345,12 @@ function my_addlightboxrel($content) {
 		echo "</ul>";
 	}
 
+	// =====================================================
+	// custom format get_the_date()
+	function setcom_get_the_date($the_date) {
+		$date = preg_replace("/^([0-9]+)/", "<strong>$1</strong>", $the_date);
+		return $date;
+	}
+	add_filter( "get_the_date", "setcom_get_the_date", $priority = 10, $accepted_args = 2 );
 
 ?>

@@ -262,6 +262,8 @@ h4
 			height: 1.46667em
 			a
 				@extend %button
+				float: left
+				margin-right: 5px
 			.pAtiva
 				background-color: $verdeescuro!important
 				&:hover
@@ -317,7 +319,9 @@ textarea
 
 input[type=text], input[type=password]
 	@extend %inptStyle
+	color: #111
 	height: 2.2em
+	line-height: 2.2em
 	padding: 0 0.7333333333333333em
 
 input[type=submit]
@@ -392,13 +396,22 @@ button
 	color: #666
 	height: $bottom
 	display: inline-block
+	margin: -4px 0 4px
+	padding-bottom: $bottom
 	.lt-ie8 &
 		float: left
-	padding-bottom: $bottom
+	strong
+		color: black
+		margin-right: 1px
+		text-align: center
+		font-size: 0.9em
+		line-height: 1.62963em
+		width: 25px
+		display: inline-block
 	&:before
 		@extend %sprite
 		+sprite-position(0,0)
-		margin: 0 0.5em -9px 0
+		margin: 0 -25px -5px 0
 		height: 26px
 		width: 25px
 		display: inline-block

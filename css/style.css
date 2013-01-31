@@ -374,6 +374,9 @@ body.single #wrapper #contentCol article h3 {
       margin-top: 1.46667em;
       padding: 0 1.46667em;
       height: 1.46667em; }
+      #wrapper #contentCol .navigation a {
+        float: left;
+        margin-right: 5px; }
       #wrapper #contentCol .navigation .pAtiva {
         background-color: #007236 !important; }
         #wrapper #contentCol .navigation .pAtiva:hover {
@@ -425,7 +428,9 @@ textarea {
   padding: 0.73333em; }
 
 input[type=text], input[type=password] {
+  color: #111111;
   height: 2.2em;
+  line-height: 2.2em;
   padding: 0 0.73333em; }
 
 #respond {
@@ -481,12 +486,21 @@ input[type=text], input[type=password] {
   color: #666666;
   height: 1.834em;
   display: inline-block;
+  margin: -4px 0 4px;
   padding-bottom: 1.834em; }
   .lt-ie8 .date {
     float: left; }
+  .date strong {
+    color: black;
+    margin-right: 1px;
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 1.62963em;
+    width: 25px;
+    display: inline-block; }
   .date:before {
     background-position: -0px -0px;
-    margin: 0 0.5em -9px 0;
+    margin: 0 -25px -5px 0;
     height: 26px;
     width: 25px;
     display: inline-block;
