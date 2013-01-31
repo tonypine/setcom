@@ -7,6 +7,31 @@
         <!-- All js -->
         <script src="<?php url(); ?>/script.combined.js?v=1.1"></script>
 
+        <script type="text/javascript">
+            var gOverride = {
+              urlBase: 'http://gridder.andreehansson.se/releases/latest/',
+              gColor: '#EEEEEE',
+              gColumns: 12,
+              gOpacity: 0.35,
+              gWidth: 10,
+              pColor: '#C0C0C0',
+              pHeight: 22,
+              pOffset: 0,
+              pOpacity: 0.55,
+              center: true,
+              gEnabled: false,
+              pEnabled: true,
+              setupEnabled: true,
+              fixFlash: true,
+              size: 960
+            };
+            createGridder = function() {
+              document.body.appendChild(
+                document.createElement('script'))
+                .src='http://gridder.andreehansson.se/releases/latest/960.gridder.js';
+            }
+        </script>
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             /*

@@ -170,9 +170,8 @@ p {
   line-height: 1.46667em; }
 
 hr {
-  border-style: dashed;
-  border-color: #777777;
-  border-width: 1px 0 0;
+  border: 0;
+  border-top: 1px dashed #777777;
   margin: 0 0 1.4em; }
 
 h1, h2, h3, h4 {
@@ -269,7 +268,8 @@ body.single #wrapper #contentCol article h3 {
   font-family: Open Sans, sans-serif;
   font-size: 0.85em;
   line-height: 1.7255em;
-  list-style: none; }
+  list-style: none;
+  list-style-position: outside; }
   .navUl a {
     display: block; }
   .navUl a:hover {
@@ -378,6 +378,8 @@ body.single #wrapper #contentCol article h3 {
         background-color: #007236 !important; }
         #wrapper #contentCol .navigation .pAtiva:hover {
           cursor: default; }
+    #wrapper #contentCol > header {
+      padding: 0 1.46667em; }
     #wrapper #contentCol article {
       position: relative;
       padding: 0 1.46667em;
@@ -407,6 +409,8 @@ body.single #wrapper #contentCol article h3 {
         margin-bottom: 1.46667em; }
       #wrapper #contentCol article a[rel*="attachment"] {
         display: block; }
+      .lt-ie8 #wrapper #contentCol article p {
+        clear: left; }
 
 form label {
   display: block;
@@ -478,6 +482,8 @@ input[type=text], input[type=password] {
   height: 1.834em;
   display: inline-block;
   padding-bottom: 1.834em; }
+  .lt-ie8 .date {
+    float: left; }
   .date:before {
     background-position: -0px -0px;
     margin: 0 0.5em -9px 0;

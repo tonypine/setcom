@@ -42,9 +42,8 @@ p
 	@extend %mgBottom
 
 hr 
-	border-style: dashed
-	border-color: #777
-	border-width: 1px 0 0
+	border: 0
+	border-top: 1px dashed #777
 	margin: 0 0 1.4em
 
 h1, h2, h3, h4
@@ -149,6 +148,7 @@ h4
 	font-size: 0.85em
 	line-height: 1.7255em
 	list-style: none
+	list-style-position: outside
 	a
 		display: block
 	a:hover
@@ -160,7 +160,6 @@ h4
 			margin-right: -5px
 			position: relative
 			left: -10px
-			background-color: yellow
 	a:active
 		&:before
 			left: -13px
@@ -257,7 +256,6 @@ h4
 		#articleLoop
 			hr
 				margin: 0 1.46667em 1.4em
-				&
 		.navigation
 			margin-top: 1.46667em
 			padding: 0 1.46667em
@@ -268,6 +266,8 @@ h4
 				background-color: $verdeescuro!important
 				&:hover
 					cursor: default
+		> header 
+			padding: 0 1.46667em
 		article 
 			@extend %clearfix
 			position: relative
@@ -295,6 +295,8 @@ h4
 					margin-bottom: 1.46667em
 			a[rel*="attachment"]
 				display: block
+			.lt-ie8 & p
+				clear: left
 
 // ================================================
 // Form
@@ -390,6 +392,8 @@ button
 	color: #666
 	height: $bottom
 	display: inline-block
+	.lt-ie8 &
+		float: left
 	padding-bottom: $bottom
 	&:before
 		@extend %sprite

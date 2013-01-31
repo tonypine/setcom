@@ -10,8 +10,23 @@
 
     <!-- Post Content -->
     <section id="contentCol">
-
-        <h2>Resultados da busca:</h2>
+        <header>
+            <h1>Resultados da busca:</h1>
+            <p>
+                <?php
+                    $s = get_query_var( 's' );
+                    $fp = $wp_query->found_posts;
+                    if($fp > 5):
+                    echo "Exibindo <strong class='destaque'>5</strong> de <strong class='destaque'>$fp</strong> resultados para o termo: <strong class='destaque'>$s</strong>";
+                    else:
+                    echo "Exibindo <strong class='destaque'>$fp</strong> resultados para o termo: <strong class='destaque'>$s</strong>";
+                    endif;
+                    echo "<pre>";
+                    //var_dump($wp_query);
+                    echo "</pre>";
+                ?>
+            </p>
+        </header>
         <!-- =================================== -->
         <!-- loop -->
         <?php if (have_posts()) : ?> 
@@ -32,8 +47,8 @@
             ?>
                 <nav class="navigation">
                     <?php if($page > 1): ?>
-                        <a href="?paged=1">Primeira</a>
-                        <a href="?paged=<?php echo $page -1; ?>">◄</a>
+                        <a href="?paged=1&s=<?php echo $s; ?>">Primeira</a>
+                        <a href="?paged=<?php echo ($page -1) . "&s=$s"; ?>">◄</a>
                     <?php endif; ?>
                     <?php 
 
@@ -48,7 +63,7 @@
                                 if($page == $i || is_null($page) && $i == 1):
                                     echo "class='pAtiva' href='#'"; 
                                 else: 
-                                    echo "href='?paged=$i'";
+                                    echo "href='?paged=$i&s=$s'";
                                 endif; ?>><?php echo $i; ?>
                             </a>
                         <?php 
@@ -56,8 +71,8 @@
                         endfor;
                     ?>
                     <?php if($page < $maxPages): ?>
-                        <a href="?paged=<?php echo $page +1; ?>">►</a>
-                        <a href="?paged=<?php echo $maxPages ?>">Última</a>
+                        <a href="?paged=<?php echo ($page +1) . "&s=$s"; ?>">►</a>
+                        <a href="?paged=<?php echo $maxPages."&s=$s"; ?>">Última</a>
                     <?php endif ?>
                 </nav>
             <?php endif; // if maxPages > 1
