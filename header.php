@@ -40,5 +40,5 @@
 
         <?php wp_head() ?>
     </head>
-    <body class="<?php echo $class; ?>" onload="createGridder()">
+    <body class="<?php echo $class; ?>">
         <div id="wrapper">
