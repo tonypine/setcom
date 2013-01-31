@@ -5,7 +5,7 @@
         </script>
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.1"></script>
+        <script src="<?php url(); ?>/script.combined.js?v=1.2"></script>
 
         <script type="text/javascript">
             var gOverride = {
