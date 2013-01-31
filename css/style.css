@@ -315,10 +315,10 @@ body.single #wrapper #contentCol article h3 {
         border-color: white; }
       #wrapper #leftCol nav .navUl {
         color: white; }
-      #wrapper #leftCol nav input {
+      #wrapper #leftCol nav input[type=text], #wrapper #leftCol nav input[type=password] {
         max-width: 11.59999em; }
         @media screen and (max-width: 1252px) {
-          #wrapper #leftCol nav input {
+          #wrapper #leftCol nav input[type=text], #wrapper #leftCol nav input[type=password] {
             max-width: 8.26669em; } }
       #wrapper #leftCol nav #searchsubmit, #wrapper #leftCol nav #loginform #wp-submit {
         margin: 0.36667em 0; }
