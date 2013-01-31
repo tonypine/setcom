@@ -178,10 +178,29 @@ h1, h2, h3, h4 {
   font-family: "Yanone Kaffeesatz", calibri, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  margin: 0; }
+  margin: 0;
+  color: black; }
 
 ul {
   list-style-position: inside; }
+
+a {
+  color: #007ed9; }
+  a:hover {
+    text-decoration: underline;
+    color: #0060a6; }
+
+.list {
+  list-style: none; }
+  .list a {
+    display: block;
+    line-height: 1.46667em; }
+    .list a:hover {
+      color: #a4cb38; }
+    .list a:before {
+      content: "+ ";
+      font-weight: 700;
+      color: #a4cb38; }
 
 .z-in2 {
   position: relative;
@@ -236,11 +255,13 @@ body.single #wrapper #contentCol article h3 {
   line-height: 1.1em; }
 
 .titleLink {
+  color: black;
   display: inline-block;
   text-shadow: 3px 3px 0px #dbebb1; }
   .titleLink:visited {
     color: #660099; }
   .titleLink:hover {
+    color: black;
     text-shadow: 2px 2px 0px #a4cb38;
     background-color: #eef5da; }
   .titleLink:active {
@@ -251,26 +272,27 @@ body.single #wrapper #contentCol article h3 {
   background-color: #a4cb38;
   padding: 0 0.73333em;
   margin: -0.37em 0;
-  color: white;
+  color: white !important;
   border: 0;
   border-radius: 5px;
   height: 2.2em;
   line-height: 2.2em;
   display: inline-block; }
   #wrapper #contentCol .navigation a:hover, #wrapper #contentCol article .cat:hover, input[type=submit]:hover, #respond h3 small a:hover, #commentform .form-submit #submit:hover, #commentform .form-submit a:hover, .commentlist li .comment-body .reply:hover, .leiaMais:hover, button:hover {
-    background-color: #009647; }
+    background-color: #009647;
+    text-decoration: underline; }
 
 #wrapper #leftCol, #wrapper #rightCol, #wrapper #contentCol {
   float: left; }
 
 .navUl {
-  color: #111111;
   font-family: Open Sans, sans-serif;
   font-size: 0.85em;
   line-height: 1.7255em;
   list-style: none;
   list-style-position: outside; }
   .navUl a {
+    color: #111111;
     display: block; }
   .navUl a:hover {
     text-decoration: underline; }
@@ -306,6 +328,8 @@ body.single #wrapper #contentCol article h3 {
       @media screen and (max-width: 1252px) {
         #wrapper #leftCol header h1 {
           font-size: 2em; } }
+      #wrapper #leftCol header h1 a {
+        color: white; }
     #wrapper #leftCol nav {
       padding-bottom: 1.46667em; }
       #wrapper #leftCol nav h3, #wrapper #leftCol nav h4 {
@@ -313,7 +337,7 @@ body.single #wrapper #contentCol article h3 {
       #wrapper #leftCol nav hr {
         margin-bottom: 0.75em;
         border-color: white; }
-      #wrapper #leftCol nav .navUl {
+      #wrapper #leftCol nav .navUl a {
         color: white; }
       #wrapper #leftCol nav input[type=text], #wrapper #leftCol nav input[type=password] {
         max-width: 11.59999em; }
@@ -505,16 +529,3 @@ input[type=text], input[type=password] {
     width: 25px;
     display: inline-block;
     content: ""; }
-
-.list {
-  list-style: none; }
-  .list a {
-    display: block;
-    line-height: 1.46667em;
-    color: #007ed9; }
-    .list a:hover {
-      color: #a4cb38; }
-    .list a:before {
-      content: "+ ";
-      font-weight: 700;
-      color: #a4cb38; }

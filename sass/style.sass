@@ -51,9 +51,33 @@ h1, h2, h3, h4
 	font-weight: 400
 	text-transform: uppercase
 	margin: 0
+	color: #000
 
 ul 
 	list-style-position: inside
+
+a
+	color: $ablue
+	&:hover
+		text-decoration: underline
+		color: darken($ablue, 10%)
+	
+
+// ======================================
+// Link list
+
+.list
+	list-style: none
+	a
+		display: block
+		line-height: 1.46667em
+		&:hover
+			color: $verdeclaro
+		&:before
+			content: "+ "
+			font-weight: 700
+			color: $verdeclaro
+
 
 .z-in2 
 	position: relative
@@ -111,11 +135,13 @@ h4
 	line-height: 1.1em
 
 .titleLink
+	color: #000
 	display: inline-block
 	text-shadow: 3px 3px 0px lighten($verdeclaro, 30%)
 	&:visited
 		color: #609
 	&:hover
+		color: #000
 		text-shadow: 2px 2px 0px $verdeclaro
 		background-color: lighten($verdeclaro, 40%)
 	&:active
@@ -126,7 +152,7 @@ h4
 	background-color: $verdeclaro
 	padding: 0 0.7333333333333333em
 	margin: -0.37em 0
-	color: #fff
+	color: #fff!important
 	border: 0
 	border-radius: 5px
 	height: 2.2em
@@ -134,18 +160,19 @@ h4
 	display: inline-block
 	&:hover
 		background-color: lighten($verdeescuro, 7%)
+		text-decoration: underline
 
 %fLeft
 	float: left
 
 .navUl
-	color: #111
 	font-family: Open Sans, sans-serif
 	font-size: 0.85em
 	line-height: 1.7255em
 	list-style: none
 	list-style-position: outside
 	a
+		color: #111
 		display: block
 	a:hover
 		text-decoration: underline
@@ -187,6 +214,8 @@ h4
 				font-weight: 700
 				@media screen and (max-width: $maxWidth1280)
 					font-size: 2em
+				a
+					color: #fff
 		nav
 			padding-bottom: 1.46667em
 			h3, h4
@@ -195,7 +224,8 @@ h4
 				margin-bottom: 0.75em
 				border-color: #fff
 			.navUl
-				color: #fff
+				a
+					color: #fff
 			input[type=text], input[type=password]
 				max-width: 11.59999em
 				@media screen and (max-width: $maxWidth1280)
@@ -412,16 +442,3 @@ button
 		width: 25px
 		display: inline-block
 		content: ""
-
-.list
-	list-style: none
-	a
-		display: block
-		line-height: 1.46667em
-		color: $ablue
-		&:hover
-			color: $verdeclaro
-		&:before
-			content: "+ "
-			font-weight: 700
-			color: $verdeclaro

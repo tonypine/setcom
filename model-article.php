@@ -6,10 +6,10 @@
                     $cat = $c[0]->cat_name;
                     $slug = $c[0]->slug;
                 ?>
-                <span class="date"><?php echo get_the_date() ?></span><span class="cat"><a href="<?php echo $slug; ?>"><?php echo $cat; ?></a></span>
+                <span class="date"><?php echo get_the_date() ?></span><a class="cat" href="<?php echo $slug; ?>"><?php echo $cat; ?></a>
                 
                 <?php 
                     //custom_excerpt_length(50);
-                    the_excerpt(); ?>
+                    echo get_the_excerpt(); ?>
             </article>
             <hr>
