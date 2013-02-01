@@ -35,6 +35,15 @@
                 <hr>
             {{# }); }}
 
+        </script>       
+        <script type="text/html" id="menuItem">
+
+            {{# _.each(menuItens, function(li) { }}
+                <li id="" class="">
+                    <a href="{{ li.link }}">{{ li.title }}</a>
+                </li>
+            {{# }); }}
+
         </script>
 
         <!-- Underscore from cdnjs CDN -->

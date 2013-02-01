@@ -34,7 +34,6 @@ $(document).ready(function(){
 				$(this.data).bind('change', this.getPosts, this);
 			},
 			getPosts: function () {
-				alert('oi');
 				this.$el.html('<article><h1>loading...</h2><article>');
 				$.ajax({
 					type: 'POST',
@@ -58,7 +57,48 @@ $(document).ready(function(){
 			el: $("#articleLoop"),
 			page: page
 		});
-		//section.render();
+
+
+		// Nav Menu
+		navMenuItem = Backbone.Model.extend({
+			idAttribute: '_id',
+			el: 0,
+			url: '#',
+			template: $("#menuItem"),
+			initialize: function () {
+				// body...
+			}
+		});
+
+		navMenu = Backbone.Collection.extend({
+			model: navMenuItem,
+			data: '',
+			initialize: function() {
+				this.getNav();
+			},
+			getNav: function () {
+				$.ajax({
+					type: 'POST',
+					url: baseUrl+"get_navMenuItens.php",
+					context: this,
+					//dataType: 'json',
+					data: { menuName: "Departamentos" }
+				}).done(function ( response ) {
+					alert(response);
+					this.data = response;
+					this.render();
+				});
+			},
+			render: function() {
+				var template = _.template( $("#menuItem").html() );
+				this.$el.html( template( { menuItens: this.data } ) );
+			}
+		});
+
+		var nav = new navMenu({
+			el: $("#dpMenu")
+		})
+
 
 		model_excerpt = Backbone.Model.extend({
 			initialize: function() {

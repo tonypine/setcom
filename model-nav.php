@@ -5,7 +5,7 @@
             </header>
             <nav>
                 <h4>Departamentos</h4>
-                <ul class="navUl">
+                <ul id="dpMenu" class="navUl">
                     <?php 
                         $navArgs = array(
                             'container'     =>  false,
