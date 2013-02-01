@@ -10,12 +10,11 @@
 
     <!-- Post Content -->
     <section id="contentCol">
-
-        <?php 
-            echo '<pre>';
-            //var_dump($wp_query);
-            echo '</pre>';
-        ?>
+		<?php 
+			echo '<pre>';
+			//var_dump($wp_query);
+			echo '</pre>';
+		?>
         <!-- =================================== -->
         <!-- loop -->
         <?php if (have_posts()) : ?> 

@@ -65,7 +65,7 @@ function setcom_wp_trim_excerpt($text) {
 	    $text = apply_filters('the_content', $text);
 	    $text = str_replace(']]>', ']]&gt;', $text);
 	     
-	    $allowed_tags = '<a>,<p>'; /*** MODIFY THIS. Add the allowed HTML tags separated by a comma.***/
+	    $allowed_tags = '<a>,<p>,<em>,<strong>'; /*** MODIFY THIS. Add the allowed HTML tags separated by a comma.***/
 	    $text = strip_tags($text, $allowed_tags);
 	     
 	    $excerpt_word_count = 55; /*** MODIFY THIS. change the excerpt word count to any integer you like.***/
@@ -390,5 +390,16 @@ function my_addlightboxrel($content) {
 		return $date;
 	}
 	add_filter( "get_the_date", "setcom_get_the_date", $priority = 10, $accepted_args = 2 );
+
+	// ======================================================
+	// playing with main query
+	function remove_main_query($query){
+		if($query->is_home() && $query->is_main_query()):
+			echo '<pre>';
+			var_dump($query);
+			echo '</pre>';
+		endif;
+	}
+	//add_action( 'pre_get_posts', 'remove_main_query', $priority = 10, $accepted_args = 5 )
 
 ?>
