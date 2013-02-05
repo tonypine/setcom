@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 		//dump(page);
 
-		var baseUrl = "//localhost/menusetcom/wp-content/themes/setcom/";
+		var baseUrl = url+"/";
 
 		// Change underscore syntax to feel like Mustache templating syntax
 		_.templateSettings = {
