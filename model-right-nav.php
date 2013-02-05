@@ -6,4 +6,5 @@
             <h3 class="nopad">Notícias</h3>
             <?php //getFeed("http://chocoladesign.com/feed"); ?>
             -->
+            <div class="bg"></di>
         </aside>

@@ -16,8 +16,18 @@
 			'orderby'		=>	"menu_order",
 		);
 	$menu_itens = wp_get_nav_menu_items($menu->term_id, $args);
-	
-	echo json_encode($menu_itens);
-		
+	$json = array();
+	$i = 0;
+	foreach ( (array) $menu_itens as $menu_item ) {
+		$i = $i + 1;
+		$item = array(
+				'title'		=>	$menu_item->title,
+				'url'		=>	basename($menu_item->url),
+				'id'		=>	'navItem'.$i
+			);
+	    $json[] = $item;
+	}
+	//$json = (object) $json;
+	echo json_encode($json);
 
 ?>

@@ -18,33 +18,42 @@ $(document).ready(function(){
 		_.templateSettings = {
 		  evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
 		  interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
-		  escape:      /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
-		}
+		  escape:      /\{\{\{([\s\S]+?)\}\}\}/g          // {{{ title }}}
+		};
 
 		// VIEW ---------------
-		postList = Backbone.View.extend({
+		window._postList = Backbone.View.extend({
 			data: {
 				type: 'index',
 				slug: ''
 			},
 			html: '',
 			initialize: function( op ) {
+				$postList = this;
 				$.extend( this.data, op.page );
 				this.getPosts();
-				$(this.data).bind('change', this.getPosts, this);
 			},
 			getPosts: function () {
-				this.$el.html('<article><h1>loading...</h2><article>');
+				//$postList.$el.html('<article><h1>loading...</h2><article>');
+				$postList.$el.stop().animate({
+					opacity: 0.2
+				}, 0);
+				$('body').addClass('wait');
+				//alert($postList.data);
 				$.ajax({
 					type: 'POST',
 					url: baseUrl+"ajax-posts.php",
-					context: this,
+					context: $postList,
 					dataType: 'json',
-					data: { page: this.data }
-				}).done(function ( response ) {
-					//alert(response);
-					this.html = response;
-					this.render();
+					data: { page: $postList.data },
+					success: function ( response ) {
+						$postList.html = response;
+						$postList.render();
+						$('body').removeClass('wait');
+						$postList.$el.stop().animate({
+							opacity: 1
+						});
+					}
 				});
 			},
 			render: function() {
@@ -53,60 +62,83 @@ $(document).ready(function(){
 			}
 		});
 
-		section = new postList({
+		var postList = new _postList({
 			el: $("#articleLoop"),
 			page: page
 		});
 
 
+		// ====================================================
 		// Nav Menu
-		navMenuItem = Backbone.Model.extend({
-			idAttribute: '_id',
-			el: 0,
-			url: '#',
-			template: $("#menuItem"),
-			initialize: function () {
+		// ====================================================
+
+		window._navModel = Backbone.Model.extend({
+			el: undefined,
+			initialize: function ( settings ) {
 				// body...
 			}
 		});
 
-		navMenu = Backbone.Collection.extend({
-			model: navMenuItem,
-			data: '',
+		window._navCollection = Backbone.Collection.extend({
+			model: _navModel,
 			initialize: function() {
-				this.getNav();
+				$navCollection = this;
 			},
 			getNav: function () {
 				$.ajax({
 					type: 'POST',
 					url: baseUrl+"get_navMenuItens.php",
 					context: this,
-					//dataType: 'json',
+					dataType: 'json',
 					data: { menuName: "Departamentos" }
 				}).done(function ( response ) {
-					alert(response);
-					this.data = response;
-					this.render();
+					$navCollection.add( response );
 				});
 			},
+			setModelEl: function() {
+				$.each( $navCollection.models, function(index, m) {
+					m.el = $("#"+m.attributes.id);
+				});
+			}
+		});
+
+		window._navView = Backbone.View.extend({
+			template: $("#menuItem").html(),
+			initialize: function(){
+				$navView = this;
+				$navView.$el.html("loading...").css({
+					display: 'block'
+				});
+				this.collection = new _navCollection;
+				this.collection.bind('add', function(){ 
+					$navView.render();
+					$navCollection.setModelEl();
+				});
+				this.collection.getNav();
+			},
+			events: {
+				"click a": "click"//$postList.getPosts()
+			},
+			click: function(e) {
+				var link = $(e.target);
+				$postList.data = {
+					type: 'archive',
+					slug: link.attr('href')
+				};
+				$postList.getPosts();
+				return false;
+			},
 			render: function() {
-				var template = _.template( $("#menuItem").html() );
-				this.$el.html( template( { menuItens: this.data } ) );
+				var template = _.template( this.template );
+				this.$el.html( template( { 
+					menuItens: this.collection.models 
+				} ) );
+				this.$el.stop().css("display","none").slideDown(800);
+				return this;
 			}
 		});
 
-		var nav = new navMenu({
-			el: $("#dpMenu")
-		})
-
-
-		model_excerpt = Backbone.Model.extend({
-			initialize: function() {
-				alert('suck')
-				// body...
-			}
-		});
-
-		//excerpt = new model_excerpt;
+		navView = new _navView({ el: $("#dpMenu") }); 	// view
+		//window.navCollection = new _navCollection; 		// collection
 
 });

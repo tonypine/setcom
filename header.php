@@ -26,7 +26,6 @@
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
 
         <!--[if lt IE 8]>
-        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
         <![endif]-->
 
         <!--[if lt IE 9]>
@@ -41,4 +40,5 @@
         <?php wp_head() ?>
     </head>
     <body class="<?php echo $class; ?>">
+        <div id="hrtopo"></div>
         <div id="wrapper">

@@ -3,19 +3,7 @@
             <header id="topo">
                 <h1><a id="logo" href="<?php echo site_url(); ?>">Intranet MicrocampSP</a></h1>
             </header>
-            <nav>
-                <h4>Departamentos</h4>
-                <ul id="dpMenu" class="navUl">
-                    <?php 
-                        $navArgs = array(
-                            'container'     =>  false,
-                            'theme_location'    =>  'departamentos',
-                            'menu'              =>  'departamentos',
-                            'items_wrap'        =>  '%3$s'
-                            );
-                        wp_nav_menu( $navArgs );
-                    ?> 
-                </ul>
+            <nav id="dpMenu">
             </nav>
             <nav>
                 <h4>Links Úteis</h4>
@@ -39,5 +27,5 @@
                 <h4>Login</h4>
                 <?php setcom_login_form(); ?>
             </nav>
-
+            <div class="bg"></div>
         </aside>

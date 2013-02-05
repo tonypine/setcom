@@ -37,13 +37,14 @@
 
         </script>       
         <script type="text/html" id="menuItem">
-
-            {{# _.each(menuItens, function(li) { }}
-                <li id="" class="">
-                    <a href="{{ li.link }}">{{ li.title }}</a>
-                </li>
-            {{# }); }}
-
+            <h4>Departamentos</h4>
+            <ul class="navUl">
+                {{# _.each(menuItens, function(li) { }}
+                    <li>
+                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}">{{ li.attributes.title }}</a>
+                    </li>
+                {{# }); }}
+            </ul>
         </script>
 
         <!-- Underscore from cdnjs CDN -->
@@ -54,7 +55,7 @@
         
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.2.1"></script>
+        <script src="<?php url(); ?>/script.combined.js?v=1.2.1.7"></script>
 
         <script type="text/javascript">
             var gOverride = {

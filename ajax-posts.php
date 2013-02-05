@@ -8,6 +8,8 @@
 	$page = (object) $page;
 	//var_dump($page->type);
 	//exit;
+	// var_dump($_POST['page']);
+	// exit;
 	switch ($page->type) {
 		case 'index':
 			$args = array(

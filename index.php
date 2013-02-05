@@ -63,7 +63,7 @@
                 </nav>
             <?php endif; // if maxPages > 1
             endif; // if have_posts() ?>
-
+            <div class="bg"></div>
     </section>
     <?php 
     get_template_part( "model-right-nav");
