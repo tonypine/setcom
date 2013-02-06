@@ -41,7 +41,7 @@
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
-                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}">{{ li.attributes.title }}</a>
+                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}/">{{ li.attributes.title }}</a>
                     </li>
                 {{# }); }}
             </ul>
