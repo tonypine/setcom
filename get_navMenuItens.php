@@ -4,7 +4,7 @@
 	if (file_exists($loadFile))
 	    require_once($loadFile);
 
-	import_request_variables('p');
+	import_request_variables('gp');
 
 	// set menu name
 	$menu_name = $menuName;
@@ -27,7 +27,11 @@
 			);
 	    $json[] = $item;
 	}
-	//$json = (object) $json;
+	//$json = (object) $json;	
+
+	header("Cache-Control: max-age=".strtotime('-1 hours'));
+    header("Expires: " . gmdate('D, d M Y H:i:s', strtotime('-1 hours')));
+	header('Content-type: application/json');
 	echo json_encode($json);
 
 ?>

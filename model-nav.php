@@ -24,8 +24,13 @@
                 <?php get_search_form( $echo = true ); ?>
             </nav>
             <nav>
-                <h4>Login</h4>
-                <?php setcom_login_form(); ?>
+                <?php if(is_user_logged_in()): ?>
+                    <h4>Logado</h4>
+                    <a class="button" href="<?php echo wp_logout_url(get_permalink()); ?>">Sair</a>
+                <?php else: ?>
+                    <h4>Login</h4>
+                    <?php setcom_login_form(); ?>
+                <?php endif; ?>
             </nav>
             <div class="bg"></div>
         </aside>

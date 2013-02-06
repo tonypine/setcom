@@ -21,6 +21,18 @@ $(document).ready(function(){
 		  escape:      /\{\{\{([\s\S]+?)\}\}\}/g          // {{{ title }}}
 		};
 
+		// TIMESTAMP COOKIE ========================
+
+		// var timestamp = getCookie('timestamp');
+		// if(timestamp != null && timestamp != "") {
+		// 	setCookie( 'timestamp', 'cached2', 100 );
+		// } else {
+		// 	var date = new Date();
+		// }
+		//setCookie( 'timestamp', 'cached', 160 );
+
+
+
 		// VIEW ---------------
 		window._postList = Backbone.View.extend({
 			data: {
@@ -34,18 +46,23 @@ $(document).ready(function(){
 				this.getPosts();
 			},
 			getPosts: function () {
-				//$postList.$el.html('<article><h1>loading...</h2><article>');
 				$postList.$el.stop().animate({
 					opacity: 0.2
 				}, 0);
 				$('body').addClass('wait');
-				//alert($postList.data);
+
+				var data = {
+					page: $postList.data
+				};
+				if(logged) data.logged = 1;
+
+				// ajax
 				$.ajax({
-					type: 'POST',
+					type: 'GET',
 					url: baseUrl+"ajax-posts.php",
 					context: $postList,
 					dataType: 'json',
-					data: { page: $postList.data },
+					data: data,
 					success: function ( response ) {
 						$postList.html = response;
 						$postList.render();
@@ -85,12 +102,17 @@ $(document).ready(function(){
 				$navCollection = this;
 			},
 			getNav: function () {
+				var data = {
+					menuName: "Departamentos"
+				};
+				if(logged) data.logged = 1;
+
 				$.ajax({
-					type: 'POST',
+					type: 'GET',
 					url: baseUrl+"get_navMenuItens.php",
 					context: this,
 					dataType: 'json',
-					data: { menuName: "Departamentos" }
+					data: data
 				}).done(function ( response ) {
 					$navCollection.add( response );
 				});

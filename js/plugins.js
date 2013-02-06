@@ -33,6 +33,33 @@ function dump(obj) {
     alert(out);
 }
 
+// ===============================================
+// My cookie functions
+// ==============================================
+
+function setCookie(c_name, value, expire) {
+    //expire in minutes
+    var _d = new Date();
+    var offset = _d.getTimezoneOffset();
+    _d.setMinutes( _d.getMinutes() - offset + expire);
+    expireDate = _d.toUTCString();
+    var c_value = escape(value) + ((expire == null) ? "" : "; expires=" + expireDate +';path=/');
+    document.cookie = c_name + "=" + c_value;
+    console.log(expireDate);
+}
+
+function getCookie(c_name) {
+    var i,x,y,ARRcookies = document.cookie.split(";");
+    for (i=0;i<ARRcookies.length;i++) {
+        x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+        y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+        x=x.replace(/^\s+|\s+$/g,"");
+        if (x==c_name) {
+            return unescape(y);
+        }
+    }
+}
+
 // Place any jQuery/helper plugins in here.
 
 /*

@@ -13,11 +13,16 @@
                     );
             endif;
 
+            $logged = "false";
+            if ( is_user_logged_in() ) $logged = "true";
+
+
         ?>
 
         <script type="text/javascript">
             var url = "<?php url() ?>";
             var page = <?php echo json_encode($page); ?>;
+            var logged = <?php echo $logged ?>;
         </script>
 
         <!-- Jquery from Google CDN -->
@@ -28,7 +33,7 @@
             {{# _.each(posts, function(p) { }}
                 <article>
                     <h3><a class="titleLink" href="{{ p.link }}">{{ p.title }}</a></h3>
-                    <span class="date">{{ p.date }}</span><a class="cat" href="{{ p.catLink }}">{{ p.cat }}</a>
+                    <span class="date">{{ p.date }}</span><a class="cat" href="{{ p.catLink }}/">{{ p.cat }}</a>
                     {{ p.excerpt }}
 
                 </article>
@@ -55,7 +60,7 @@
         
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.2.1.7"></script>
+        <script src="<?php url(); ?>/script.combined.js?v=1.2.2.5"></script>
 
         <script type="text/javascript">
             var gOverride = {

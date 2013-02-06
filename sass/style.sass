@@ -196,7 +196,7 @@ h4
 		text-shadow: 1px 1px 0px $verdeclaro
 		background-color: transparent
 
-%button
+.button
 	background-color: $verdeclaro
 	padding: 0 0.7333333333333333em
 	margin: -0.37em 0
@@ -208,7 +208,7 @@ h4
 	display: inline-block
 	&:hover
 		background-color: lighten($verdeescuro, 7%)
-		text-decoration: underline
+		text-decoration: none
 
 %fLeft
 	float: left
@@ -382,7 +382,7 @@ h4
 			padding: 0 1.46667em
 			height: 1.46667em
 			a
-				@extend %button
+				@extend .button
 				float: left
 				margin-right: 5px
 			.pAtiva
@@ -399,7 +399,7 @@ h4
 			line-height: 1.46667em
 			+transition($time: 0.3s)
 			.cat
-				@extend %button
+				@extend .button
 				margin-left: 1.46667em
 			&:hover
 				z-index: 2
@@ -446,7 +446,7 @@ input[type=text], input[type=password]
 	padding: 0 0.7333333333333333em
 
 input[type=submit]
-	@extend %button
+	@extend .button
 
 // comments
 #respond
@@ -455,7 +455,7 @@ input[type=submit]
 		small
 			font-size: inherit
 			a
-				@extend %button
+				@extend .button
 
 #commentform
 	border: 1px solid #aaa
@@ -472,7 +472,7 @@ input[type=submit]
 		display: inline-block
 	.form-submit
 		#submit, a
-			@extend %button
+			@extend .button
 
 .commentlist
 	list-style: none
@@ -508,14 +508,14 @@ input[type=submit]
 				clear: both
 			.reply
 				a
-					@extend %button
+					@extend .button
 					float: right
 					margin: -0.3666666666666667em 0
 
 .leiaMais
-	@extend %button
+	@extend .button
 button
-	@extend %button
+	@extend .button
 
 .date
 	$bottom: 1.834em
