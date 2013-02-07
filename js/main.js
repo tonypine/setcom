@@ -34,56 +34,131 @@ $(document).ready(function(){
 
 
 		// VIEW ---------------
+		// ====================================================
+		// Post List
+		// ====================================================
 		window._postList = Backbone.View.extend({
 			data: {
 				type: 'index',
-				slug: ''
+				slug: '',
+				page: 1
 			},
 			html: '',
 			initialize: function( op ) {
 				$postList = this;
+				$postList.navigation = new _navigation;
 				$.extend( this.data, op.page );
 				this.getPosts();
 			},
 			getPosts: function () {
-				$postList.$el.stop().animate({
-					opacity: 0.2
-				}, 0);
 				$('body').addClass('wait');
+				$('html, body').animate({scrollTop:0}, 300, function() {
+					// body...
+					$postList.$el.stop().animate({
+						opacity: 0.2
+					}, 0);
 
-				var data = {
-					page: $postList.data
-				};
-				if(logged) data.logged = 1;
+					var data = {
+						page: $postList.data
+					};
 
-				// ajax
-				$.ajax({
-					type: 'GET',
-					url: baseUrl+"ajax-posts.php",
-					context: $postList,
-					dataType: 'json',
-					data: data,
-					success: function ( response ) {
-						$postList.html = response;
-						$postList.render();
-						$('body').removeClass('wait');
-						$postList.$el.stop().animate({
-							opacity: 1
-						});
-					}
+					if(logged) 	data.logged = 1;
+					else 		data.logged = 0;
+
+					// ajax
+					$.ajax({
+						type: 'GET',
+						url: baseUrl+"ajax-posts.php",
+						context: $postList,
+						cache: false,
+						dataType: 'json',
+						data: data,
+						success: function ( response ) {
+							
+							$postList.attr = response;
+
+							$postList.navigation.render();
+							$postList.render();
+							
+							// wait status off
+							$postList.$el.stop().animate({
+								opacity: 1
+							}, function() {
+								$('body').removeClass('wait');
+							});
+						}
+					});
 				});
 			},
 			render: function() {
 				var template = _.template( $("#postList").html() );
-				this.$el.html( template( { posts: this.html } ) );
+				this.$el.html( template( { posts: $postList.attr.posts } ) );
 			}
 		});
 
-		var postList = new _postList({
-			el: $("#articleLoop"),
-			page: page
-		});
+		// ====================================================
+		// Navigation
+		// ====================================================
 
+		window._navigation = Backbone.View.extend({
+			el: $("#postNav"),
+			template: $("#navegacao"),
+			initialize: function() {
+				$n = this;
+			},
+			events: {
+				"click a#btnFirst"	: "firstPage",
+				"click a#btnPrev"	: "prevPage",
+				"click a.btnNav"	: "goToPage",
+				"click a#btnNext"	: "nextPage",
+				"click a#btnLast"	: "lastPage"
+			},
+			firstPage: function(evt) {
+				$postList.data = {
+					page: 1
+				};
+				$postList.getPosts();
+				return false;
+			},
+			prevPage: function(evt) {
+				$postList.data = {
+					page: parseInt($postList.data.page -1)
+				};
+				$postList.getPosts();
+				return false;
+			},
+			goToPage: function(evt) {
+				var p = $(evt.target).attr('href');
+				$postList.data = {
+					page: parseInt(p)
+				};
+				$postList.getPosts();
+				return false;
+			},
+			nextPage: function(evt) {
+				$postList.data = {
+					page: parseInt($postList.data.page +1)
+				};
+				$postList.getPosts();
+				return false;
+			},
+			lastPage: function(evt) {
+				$postList.data = {
+					page: parseInt($postList.attr.numPages)
+				};
+				$postList.getPosts();
+				return false;
+			},
+			render: function() {
+				var data = {
+					numPages: $postList.attr.numPages,
+					page: $postList.data.page
+				};
+				var template = _.template( $n.template.html() );
+				$n.$el.html( template( { data: data } ) );
+				return $n;
+			}
+		});
 
 		// ====================================================
 		// Nav Menu
@@ -105,7 +180,8 @@ $(document).ready(function(){
 				var data = {
 					menuName: "Departamentos"
 				};
-				if(logged) data.logged = 1;
+				if(logged) 	data.logged = 1;
+				else 		data.logged = 0;
 
 				$.ajax({
 					type: 'GET',
@@ -160,7 +236,13 @@ $(document).ready(function(){
 			}
 		});
 
-		navView = new _navView({ el: $("#dpMenu") }); 	// view
+
+		var postList = new _postList({
+			el: $("#articleLoop"),
+			page: page
+		});
+
+		navView = new _navView({ el: $("#dpMenu") }); 		// view
 		//window.navCollection = new _navCollection; 		// collection
 
 });

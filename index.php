@@ -13,6 +13,7 @@
 
         <?php 
             echo '<pre>';
+            echo get_query_var( 'paged' );
             //var_dump($wp_query);
             echo '</pre>';
         ?>
@@ -31,7 +32,7 @@
 
                 if($maxPages > 1):
             ?>
-                <nav class="navigation">
+                <nav id="postNav" class="navigation">
                     <?php if($page > 1): ?>
                         <a href="?paged=1">Primeira</a>
                         <a href="?paged=<?php echo $page -1; ?>">◄</a>

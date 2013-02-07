@@ -13,6 +13,10 @@
                     );
             endif;
 
+            $paged = get_query_var( 'paged' );
+            if($paged <= 1)         $page['page'] = 1;
+            elseif ($paged > 1 )    $page['page'] = $paged;
+
             $logged = "false";
             if ( is_user_logged_in() ) $logged = "true";
 
@@ -51,6 +55,32 @@
                 {{# }); }}
             </ul>
         </script>
+        <script type="text/html" id="navegacao">
+
+            {{# if(data.page > 1){ }}
+                <a id="btnFirst" href="1">Primeira</a>
+                <a id="btnPrev" href="{{ data.page - 1 }}">◄</a>
+            {{# } }}
+
+            {{# if(data.page <= 3 || data.numPages < 6)	{	var pageInit = 1; 	} 
+            	else { 					            		var pageInit = data.page - 2; } 		
+
+            	for(var i = pageInit; i <= 5; i++) {					}}
+
+            		<a {{# if(data.page == i) { }} class='btnNav pAtiva' href='#'
+            			{{# } else { }}class="btnNav" href='{{ i }}' {{# } }}
+            			>{{ i }}</a>
+
+            {{#		if(i >= data.numPages) break;
+            	} }}
+
+
+            {{# if(data.page < data.numPages){ }}
+                <a id="btnNext" href="{{ data.page + 1 }}">►</a>
+                <a id="btnLast" href="{{ data.numPages }}">Última</a>
+            {{# } }}
+
+        </script>
 
         <!-- Underscore from cdnjs CDN -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -60,7 +90,7 @@
         
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.2.2.5"></script>
+        <script src="<?php url(); ?>/script.combined.js?v=1.4.1.4"></script>
 
         <script type="text/javascript">
             var gOverride = {
