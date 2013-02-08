@@ -53,6 +53,8 @@
 
             </article>
             <?php endwhile; ?>
+
+            <div class="bg"></div>
         </section>
     <?php endif; 
     get_template_part( "model-right-nav");

@@ -50,7 +50,7 @@
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
-                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}/">{{ li.attributes.title }}</a>
+                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}">{{ li.attributes.title }}</a>
                     </li>
                 {{# }); }}
             </ul>
@@ -90,7 +90,7 @@
         
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.4.1.4"></script>
+        <script src="<?php url(); ?>/script.combined.js?v=1.4.1.6"></script>
 
         <script type="text/javascript">
             var gOverride = {

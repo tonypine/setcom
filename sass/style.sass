@@ -20,7 +20,7 @@
 // widths
 $maxWidth1280: 1252px
 $width1280: 80.4em // 1250px
-$width960: 66.46667em // 960px
+$width960: 66.46667em // 997px
 
 // cores
 $verdeclaro: #A4CB38
@@ -209,6 +209,8 @@ h4
 	&:hover
 		background-color: lighten($verdeescuro, 7%)
 		text-decoration: none
+	&:active
+		background-color: darken($verdeescuro, 5%)
 
 %fLeft
 	float: left
@@ -234,6 +236,8 @@ h4
 	a:active
 		&:before
 			left: -13px
+	a.ativo
+		color: lighten($verdeclaro, 7%) !important
 
 %mainWidth
 	width: $width1280
@@ -261,10 +265,18 @@ h4
 	width: $width1280 * 0.5
 	@media screen and (max-width: $maxWidth1280)
 		width: $width960 * 0.5
+%centerWidthSingle
+	width: $width1280 * 0.6
+	@media screen and (max-width: $maxWidth1280)
+		width: $width960 * 0.6
 %rightColWidth
 	width: $width1280 * 0.3 - 2.93334em
 	@media screen and (max-width: $maxWidth1280)
 		width: $width960 * 0.3 - 2.93334em
+%rightColWidthSingle
+	width: $width1280 * 0.2 - 2.93334em
+	@media screen and (max-width: $maxWidth1280)
+		width: 76.6923em * 0.2 - 3.384615384615385em
 
 #wrapper
 	@extend %clearfix
@@ -330,7 +342,7 @@ h4
 	#rightCol
 		@extend %fLeft
 		@extend %rightColWidth
-		padding: 1.46667em 1.4em 1.46667em 1.33334em
+		padding: 1.46667em 1.46667em 1.46667em 1.4em
 		margin-left: 1px
 		.bg
 			@extend %rightColWidth
@@ -341,12 +353,13 @@ h4
 			border-left: 1px solid #fff
 			border-right: 1px solid #bbb
 		body.single &
-			width: $width1280 * 0.2 - 2.93334em
+			@extend %rightColWidthSingle
+			.bg
+				@extend %rightColWidthSingle
 			@media screen and (max-width: $maxWidth1280)
 				font-size: 13px
 				line-height: 1.692307692307692em
-				width: 73.84615384615385em * 0.2 - 3.384615384615385em
-				padding: 1.692307692307692em
+				padding: 1.692307692307692em 1.692307692307692em 1.692307692307692em 1.61539em
 				.date
 					display: none
 				p
@@ -356,6 +369,9 @@ h4
 					font-family: Open Sans, Arial
 					line-height: 1.301775147928994em
 					margin-bottom: 1.301775147928994em
+				.bg
+					padding: 1.692307692307692em 1.61539em 1.692307692307692em 1.5385em
+					font-size: 13px
 	#contentCol
 		@extend %fLeft
 		@extend %centerWidth
@@ -369,9 +385,9 @@ h4
 			border-right: 1px solid #e0e0e0
 			margin-right: -1px
 		body.single &
-			width: $width1280 * 0.6
-			@media screen and (max-width: $maxWidth1280)
-				width: $width960 * 0.6
+			@extend %centerWidthSingle
+			.bg
+				@extend %centerWidthSingle
 		#articleLoop, article.content
 			padding-top: 1.46667em
 		#articleLoop

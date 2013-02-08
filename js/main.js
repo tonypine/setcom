@@ -52,45 +52,44 @@ $(document).ready(function(){
 			},
 			getPosts: function () {
 				$('body').addClass('wait');
-				$('html, body').animate({scrollTop:0}, 300, function() {
-					// body...
-					$postList.$el.stop().animate({
-						opacity: 0.2
-					}, 0);
+				$('html, body').animate({scrollTop:0}, 300);
 
-					var data = {
-						page: $postList.data
-					};
+				$postList.$el.stop().animate({
+					opacity: 0.2
+				}, 0);
 
-					if(logged) 	data.logged = 1;
-					else 		data.logged = 0;
+				var data = {
+					page: $postList.data
+				};
 
-					// ajax
-					$.ajax({
-						type: 'GET',
-						url: baseUrl+"ajax-posts.php",
-						context: $postList,
-						cache: false,
-						dataType: 'json',
-						data: data,
-						success: function ( response ) {
-							
-							$postList.attr = response;
+				if(logged) 	data.logged = 1;
+				else 		data.logged = 0;
 
-							$postList.navigation.render();
-							$postList.render();
-							
-							// wait status off
-							$postList.$el.stop().animate({
-								opacity: 1
-							}, function() {
-								$('body').removeClass('wait');
-							});
-						}
-					});
+				// ajax
+				$.ajax({
+					type: 'GET',
+					url: baseUrl+"ajax-posts.php",
+					context: $postList,
+					//cache: false,
+					dataType: 'json',
+					data: data,
+					success: function ( response ) {
+						$postList.attr = response;
+
+						$postList.navigation.render();
+						$postList.render();
+						
+						// wait status off
+						$postList.$el.stop().animate({
+							opacity: 1
+						}, function() {
+							$('body').removeClass('wait');
+						});
+					}
 				});
 			},
 			render: function() {
+
 				var template = _.template( $("#postList").html() );
 				this.$el.html( template( { posts: $postList.attr.posts } ) );
 			}
@@ -150,12 +149,18 @@ $(document).ready(function(){
 				return false;
 			},
 			render: function() {
+				if($postList.attr.numPages <= 1) {
+					$n.$el.html( '' );
+					return $n;
+				}
+
 				var data = {
 					numPages: $postList.attr.numPages,
 					page: $postList.data.page
 				};
 				var template = _.template( $n.template.html() );
 				$n.$el.html( template( { data: data } ) );
+
 				return $n;
 			}
 		});
@@ -218,10 +223,17 @@ $(document).ready(function(){
 				"click a": "click"//$postList.getPosts()
 			},
 			click: function(e) {
+				$.each($navCollection.models, function(index, model) {
+					this.el.removeClass('ativo');
+				});
 				var link = $(e.target);
+				link.addClass('ativo');
+
+				var href = link.attr('href'); 
+				window.location = "#"+href;
 				$postList.data = {
 					type: 'archive',
-					slug: link.attr('href')
+					slug: href
 				};
 				$postList.getPosts();
 				return false;
@@ -231,7 +243,9 @@ $(document).ready(function(){
 				this.$el.html( template( { 
 					menuItens: this.collection.models 
 				} ) );
-				this.$el.stop().css("display","none").slideDown(800);
+				this.$el.stop().css("display","none").slideDown(800, function(){
+					$(this).css('overflow','initial');
+				});
 				return this;
 			}
 		});
