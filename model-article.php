@@ -7,7 +7,7 @@
                     $slug = $c[0]->slug;
                 ?>
                 <div class="excerpt-info">
-                    <span class="date"><?php echo get_the_date() ?></span><a class="cat" href="<?php echo $slug; ?>"><?php echo $cat; ?></a>
+                    <span class="date"><?php echo get_the_date() ?></span><span class="cat">DP: <a href="<?php echo $slug; ?>"><?php echo $cat; ?></a></span>
                 </div>
                 
                 <?php 
