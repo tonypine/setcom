@@ -2,6 +2,9 @@
 
 show_admin_bar(false);
 
+add_theme_support( 'post-thumbnails' );
+add_image_size( 'excerpt-thumb', 559, 330);
+
 register_nav_menus( array(
 	'departamentos' => 'Departamentos',
 	'links' => 'Links Úteis'
@@ -65,10 +68,10 @@ function setcom_wp_trim_excerpt($text) {
 	    $text = apply_filters('the_content', $text);
 	    $text = str_replace(']]>', ']]&gt;', $text);
 	     
-	    $allowed_tags = '<a>,<p>'; /*** MODIFY THIS. Add the allowed HTML tags separated by a comma.***/
+	    $allowed_tags = '<a>'; /*** MODIFY THIS. Add the allowed HTML tags separated by a comma.***/
 	    $text = strip_tags($text, $allowed_tags);
 	     
-	    $excerpt_word_count = 55; /*** MODIFY THIS. change the excerpt word count to any integer you like.***/
+	    $excerpt_word_count = 50; /*** MODIFY THIS. change the excerpt word count to any integer you like.***/
 	    $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count); 
 	     
 	    $excerpt_end = '[...]'; /*** MODIFY THIS. change the excerpt endind to something else.***/
@@ -96,7 +99,7 @@ add_filter('excerpt_length', 'custom_excerpt_length');
 
 // no more jumping for read more link
 function no_more_jumping($post) {
-	return ' [...]<p><a class="leiaMais" href="'.get_permalink($post->ID).'" class="read-more">'.'leia +'.'</a></p>';
+	return ' </a><span>[...]</span>';
 }
 add_filter('excerpt_more', 'no_more_jumping');
 

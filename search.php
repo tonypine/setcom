@@ -16,11 +16,7 @@
                 <?php
                     $s = get_query_var( 's' );
                     $fp = $wp_query->found_posts;
-                    if($fp > 5):
-                    echo "Exibindo <strong class='destaque'>5</strong> de <strong class='destaque'>$fp</strong> resultados para o termo: <strong class='destaque'>$s</strong>";
-                    else:
-                    echo "Exibindo <strong class='destaque'>$fp</strong> resultados para o termo: <strong class='destaque'>$s</strong>";
-                    endif;
+                    echo "<strong class='destaque'>$fp</strong> resultados encontrados para: <strong class='destaque'>$s</strong>";
                     echo "<pre>";
                     //var_dump($wp_query);
                     echo "</pre>";
