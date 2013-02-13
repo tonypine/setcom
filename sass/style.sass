@@ -407,22 +407,25 @@ h4
 					cursor: default
 		> header 
 			padding: 0 1.46667em
+		.excerpt-article
+			.excerpt-text
+			.excerpt-info
+				margin-bottom: 1.46667em
+				width: 100%
+				.date
+					padding-bottom: 0
+			.excerpt-thumb
+				display: block
+				line-height: 0
+				margin-bottom: 1.46667em
 		article 
 			@extend %clearfix
 			position: relative
-			padding: 0 1.46667em
+			padding: 0 1.46667em 1.46667em
 			font-size: 1em
 			line-height: 1.46667em
-			+transition($time: 0.3s)
 			.cat
-				@extend .button
 				margin-left: 1.46667em
-			&:hover
-				z-index: 2
-				+transition($time: 0s)
-				.leiaMais
-					+transition($time: 0s)
-					+opacity(1)
 			body.single &
 				h1
 					@extend %titleShadow
@@ -529,7 +532,16 @@ input[type=submit]
 					margin: -0.3666666666666667em 0
 
 .leiaMais
-	@extend .button
+	background-color: $ablue
+	border-radius: 5px
+	padding: 0 7px
+	color: #fff
+	line-height: 1.46667em
+	display: inline-block
+	float: left
+	clear: left
+	height: auto
+
 button
 	@extend .button
 

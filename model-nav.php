@@ -4,6 +4,20 @@
                 <h1><a id="logo" href="<?php echo site_url(); ?>/">Intranet MicrocampSP</a></h1>
             </header>
             <nav id="dpMenu">
+                <!--
+                <h4>Categorias</h4>
+                <ul class="navUl">
+                    <?php 
+                        $navArgs = array(
+                            'container'     =>  false,
+                            'theme_location'    =>  'departamentos',
+                            'menu'              =>  'departamentos',
+                            'items_wrap'        =>  '%3$s'
+                            );
+                        wp_nav_menu( $navArgs );
+                    ?> 
+                </ul>
+                -->
             </nav>
             <nav>
                 <h4>Links Úteis</h4>
