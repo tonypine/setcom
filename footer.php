@@ -128,7 +128,7 @@
 
         <!-- All js -->
         <script src="<?php url(); ?>/js/plugins.js?v=1"></script>
-        <script src="<?php url(); ?>/js/main.js?v=2"></script>
+        <script src="<?php url(); ?>/js/main.js?v=3.1"></script>
 
         <script type="text/javascript">
             var gOverride = {

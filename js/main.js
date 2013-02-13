@@ -21,21 +21,31 @@ $(document).ready(function(){
 		  escape:      /\{\{\{([\s\S]+?)\}\}\}/g          // {{{ title }}}
 		};
 
-		// TIMESTAMP COOKIE ========================
+		var ie = false;
 
-		// var timestamp = getCookie('timestamp');
-		// if(timestamp != null && timestamp != "") {
-		// 	setCookie( 'timestamp', 'cached2', 100 );
-		// } else {
-		// 	var date = new Date();
-		// }
-		//setCookie( 'timestamp', 'cached', 160 );
+		if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
+		 var ieversion=new Number(RegExp.$1)
+		 if (ieversion<=8)
+		 	ie = true;
+		}
 
 		// VIEW ---------------
 		// ====================================================
 
-		$("#searchsubmit").bind('click',function ( evt ) {
-			app_router.navigate("#/busca/" + $("#s").val());
+		$("#searchform").bind('submit',function ( evt ) {
+			var val = $("#s").val();
+			if(val != '')
+				app_router.navigate("#/busca/" + val);
+			else
+				app_router.navigate("#/");
+			return false;
+		});
+		$("#s").bind('keyup',function ( evt ) {
+			var val = $(this).val();
+			if(val != '')
+				app_router.navigate("#/busca/" + val);
+			else
+				app_router.navigate("#/");
 			return false;
 		});
 
@@ -58,9 +68,13 @@ $(document).ready(function(){
 				$('body').addClass('wait');
 				$('html, body').animate({scrollTop:0}, 300);
 
-				$postList.$el.stop().animate({
-					opacity: 0.2
-				}, 0);
+				if(!ie) {
+					$postList.$el.stop().animate({
+						opacity: 0.2
+					}, 0);
+				} else {
+					$postList.$el.css('opacity', 0.2);
+				}
 
 				var data = {
 					page: $postList.data
@@ -69,12 +83,17 @@ $(document).ready(function(){
 				if(logged) 	data.logged = 1;
 				else 		data.logged = 0;
 
+				// if search not cache
+				var cache = true;
+				if($postList.data.type === 'busca')
+					cache = false;
+
 				// ajax
 				$.ajax({
 					type: 'GET',
 					url: baseUrl+"ajax-posts.php",
 					context: $postList,
-					//cache: false,
+					cache: cache,
 					dataType: 'json',
 					data: data,
 					success: function ( response ) {
@@ -84,11 +103,8 @@ $(document).ready(function(){
 						$postList.render();
 						
 						// wait status off
-						$postList.$el.stop().animate({
-							opacity: 1
-						}, function() {
-							$('body').removeClass('wait');
-						});
+						$postList.$el.stop().css('opacity', 1);
+						$('body').removeClass('wait');
 					}
 				});
 			},
@@ -198,16 +214,8 @@ $(document).ready(function(){
 				var link = $(e.target);
 				link.addClass('ativo');
 				var href = link.attr('href'); 
-				app_router.navigate(href);
-				return false;
-				
-				window.location = "#"+href;
-				$postList.data = {
-					type: 'archive',
-					slug: href
-				};
-				$postList.getPosts();
-				return false;
+				//app_router.navigate(href);
+				//return false;
 			},
 			render: function() {
 				var template = _.template( this.template );
@@ -234,23 +242,13 @@ $(document).ready(function(){
 			initialize: function(op) {
 			},
 	        routes: {
-	            //"busca/:s(/:page)": "buscar",
-	            "(:type)(/:slug)(/:page)": "default",
-	            //"(/:page)": "defaultRoute" // Backbone will try match the route above first
+	            "(:type)(/:slug)(/:page)": "default"
+	            //"*": "defaultRoute" // Backbone will try match the route above first
 	        }
 	    });
 	    // Instantiate the router
 	    var app_router = new AppRouter;
 
-	    app_router.on('route:buscar', function (s, page) {
-	    	alert('busca');
-	        // Note the variable in the route definition being passed in here
-	        if(page != undefined)
-		        $postList.data['page'] = page;
-	        $postList.data['type'] = busca;
-	        $postList.data['slug'] = s;
-	        $postList.getPosts();
-	    });
 	    app_router.on('route:default', function (type, slug, page) {
 	    	//alert(type + '-' + slug + "-" + page);
 	        // Note the variable in the route definition being passed in here
@@ -266,7 +264,6 @@ $(document).ready(function(){
 	        $postList.getPosts();
 	    });
 	    app_router.on('route:defaultRoute', function (actions, page) {
-	    	alert('index');
 	        if(page != undefined)
 		        $postList.data['page'] = page;
 	        $postList.data['type'] = 'index';
