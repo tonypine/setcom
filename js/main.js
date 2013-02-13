@@ -93,7 +93,7 @@ $(document).ready(function(){
 					type: 'GET',
 					url: baseUrl+"ajax-posts.php",
 					context: $postList,
-					cache: cache,
+					cache: false, // for while cache is always disabled
 					dataType: 'json',
 					data: data,
 					success: function ( response ) {

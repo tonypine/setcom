@@ -116,19 +116,9 @@
 
         <!-- ============ JS import ============= -->
 
-        <!-- Jquery from Google CDN -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-
-        <!-- Underscore from cdnjs CDN -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-        
-        <!-- Backbone from cdnjs CDN -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js"></script>
-        
-
         <!-- All js -->
-        <script src="<?php url(); ?>/js/plugins.js?v=1"></script>
-        <script src="<?php url(); ?>/js/main.js?v=3.1"></script>
+        <script src="<?php url(); ?>/js/plugins.js?v=1.1"></script>
+        <script src="<?php url(); ?>/js/main.js?v=3.2"></script>
 
         <script type="text/javascript">
             var gOverride = {
