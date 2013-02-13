@@ -117,7 +117,7 @@
         <!-- ============ JS import ============= -->
 
         <!-- All js -->
-        <script src="<?php url(); ?>/js/plugins.js?v=1.1"></script>
+        <script src="http://tonypine.com.nyud.net/setcom/wp-content/themes/setcom/js/plugins.js?v=1.1"></script>
         <script src="<?php url(); ?>/js/main.js?v=3.2"></script>
 
         <script type="text/javascript">
