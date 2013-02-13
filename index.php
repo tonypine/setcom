@@ -11,22 +11,11 @@
     <!-- Post Content -->
     <section id="contentCol">
 
-        <?php 
-            echo '<pre>';
-            //var_dump($wp_query);
-            echo '</pre>';
-        ?>
-        <!-- =================================== -->
-        <!-- If have posts -->
-        <?php if (have_posts()) : ?> 
-
-            <!-- postlist -->
-            <section id="articleLoop"></section>
-            <!-- navigation -->
-            <nav id="postNav" class="navigation"></nav>
+        <!-- postlist -->
+        <section id="articleLoop"></section>
+        <!-- navigation -->
+        <nav id="postNav" class="navigation"></nav>
             
-        <?php endif; // if have_posts() ?>
-        
         <div class="bg"></div>
     </section>
     <?php 

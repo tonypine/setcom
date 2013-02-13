@@ -1,7 +1,7 @@
 
         <aside id="leftCol">
             <header id="topo">
-                <h1><a id="logo" href="<?php echo site_url(); ?>/">Intranet MicrocampSP</a></h1>
+                <h1><a id="logo" href="<?php echo site_url(); ?>/#/">Intranet MicrocampSP</a></h1>
             </header>
             <nav id="dpMenu">
                 <!--
@@ -35,7 +35,13 @@
             </nav>
             <nav>
                 <h4>Buscar</h4>
-                <?php get_search_form( $echo = true ); ?>
+                <form role="search" method="get" id="searchform" action="http://localhost/menusetcom/">
+                    <div>
+                        <label class="screen-reader-text" for="s">Pesquisar por:</label>
+                        <input type="text" value="" name="s" id="s">
+                        <input type="submit" id="searchsubmit" value="Pesquisar">
+                    </div>
+                </form>
             </nav>
             <nav>
                 <?php if(is_user_logged_in()): ?>

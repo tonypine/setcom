@@ -10,16 +10,13 @@
 
     <!-- Post Content -->
     <section id="contentCol">
-        <header>
+        <header id="search-info">
             <h1>Resultados da busca:</h1>
             <p>
                 <?php
                     $s = get_query_var( 's' );
                     $fp = $wp_query->found_posts;
                     echo "<strong class='destaque'>$fp</strong> resultados encontrados para: <strong class='destaque'>$s</strong>";
-                    echo "<pre>";
-                    //var_dump($wp_query);
-                    echo "</pre>";
                 ?>
             </p>
         </header>

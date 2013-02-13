@@ -31,10 +31,14 @@ $(document).ready(function(){
 		// }
 		//setCookie( 'timestamp', 'cached', 160 );
 
-
-
 		// VIEW ---------------
 		// ====================================================
+
+		$("#searchsubmit").bind('click',function ( evt ) {
+			app_router.navigate("#/busca/" + $("#s").val());
+			return false;
+		});
+
 		// Post List
 		// ====================================================
 		window._postList = Backbone.View.extend({
@@ -48,7 +52,7 @@ $(document).ready(function(){
 				$postList = this;
 				$postList.navigation = new _navigation;
 				$.extend( this.data, op.page );
-				this.getPosts();
+				//this.getPosts();
 			},
 			getPosts: function () {
 				$('body').addClass('wait');
@@ -91,61 +95,26 @@ $(document).ready(function(){
 			render: function() {
 
 				var template = _.template( $("#postList").html() );
-				this.$el.html( template( { posts: $postList.attr.posts } ) );
+				this.$el.html( template( { data: $postList.attr, type: $postList.data.type } ) );
 			}
 		});
 
 		// ====================================================
-		// Navigation
+		// Pagination
 		// ====================================================
 
 		window._navigation = Backbone.View.extend({
-			el: $("#postNav"),
+			el: $(".postNav"),
 			template: $("#navegacao"),
 			initialize: function() {
 				$n = this;
 			},
 			events: {
-				"click a#btnFirst"	: "firstPage",
-				"click a#btnPrev"	: "prevPage",
-				"click a.btnNav"	: "goToPage",
-				"click a#btnNext"	: "nextPage",
-				"click a#btnLast"	: "lastPage"
+				"click a"	: "goPage"
 			},
-			firstPage: function(evt) {
-				$postList.data = {
-					page: 1
-				};
-				$postList.getPosts();
-				return false;
-			},
-			prevPage: function(evt) {
-				$postList.data = {
-					page: parseInt($postList.data.page -1)
-				};
-				$postList.getPosts();
-				return false;
-			},
-			goToPage: function(evt) {
+			goPage: function ( evt ) {
 				var p = $(evt.target).attr('href');
-				$postList.data = {
-					page: parseInt(p)
-				};
-				$postList.getPosts();
-				return false;
-			},
-			nextPage: function(evt) {
-				$postList.data = {
-					page: parseInt($postList.data.page +1)
-				};
-				$postList.getPosts();
-				return false;
-			},
-			lastPage: function(evt) {
-				$postList.data = {
-					page: parseInt($postList.attr.numPages)
-				};
-				$postList.getPosts();
+				app_router.navigate("#/" + $postList.data.type + "/" + $postList.data.slug + "/" + p);
 				return false;
 			},
 			render: function() {
@@ -155,8 +124,8 @@ $(document).ready(function(){
 				}
 
 				var data = {
-					numPages: $postList.attr.numPages,
-					page: $postList.data.page
+					numPages: parseInt($postList.attr.numPages),
+					page: parseInt($postList.data.page)
 				};
 				var template = _.template( $n.template.html() );
 				$n.$el.html( template( { data: data } ) );
@@ -228,8 +197,10 @@ $(document).ready(function(){
 				});
 				var link = $(e.target);
 				link.addClass('ativo');
-
 				var href = link.attr('href'); 
+				app_router.navigate(href);
+				return false;
+				
 				window.location = "#"+href;
 				$postList.data = {
 					type: 'archive',
@@ -250,11 +221,62 @@ $(document).ready(function(){
 			}
 		});
 
-
 		var postList = new _postList({
 			el: $("#articleLoop"),
 			page: page
 		});
+
+
+		// ====================================================
+		// Router
+		// ====================================================
+		var AppRouter = Backbone.Router.extend({
+			initialize: function(op) {
+			},
+	        routes: {
+	            //"busca/:s(/:page)": "buscar",
+	            "(:type)(/:slug)(/:page)": "default",
+	            //"(/:page)": "defaultRoute" // Backbone will try match the route above first
+	        }
+	    });
+	    // Instantiate the router
+	    var app_router = new AppRouter;
+
+	    app_router.on('route:buscar', function (s, page) {
+	    	alert('busca');
+	        // Note the variable in the route definition being passed in here
+	        if(page != undefined)
+		        $postList.data['page'] = page;
+	        $postList.data['type'] = busca;
+	        $postList.data['slug'] = s;
+	        $postList.getPosts();
+	    });
+	    app_router.on('route:default', function (type, slug, page) {
+	    	//alert(type + '-' + slug + "-" + page);
+	        // Note the variable in the route definition being passed in here
+	        if(type == undefined)
+	        	type = 'index';
+	        
+	        if(page == undefined)
+	        	page = 1;
+
+		    $postList.data['page'] = page;
+	        $postList.data['type'] = type;
+	        $postList.data['slug'] = slug;
+	        $postList.getPosts();
+	    });
+	    app_router.on('route:defaultRoute', function (actions, page) {
+	    	alert('index');
+	        if(page != undefined)
+		        $postList.data['page'] = page;
+	        $postList.data['type'] = 'index';
+	        $postList.data['slug'] = '';
+	        $postList.getPosts();
+	    });
+
+
+	    // Start Backbone history a necessary step for bookmarkable URL's
+	    Backbone.history.start();	
 
 		navView = new _navView({ el: $("#dpMenu") }); 		// view
 		//window.navCollection = new _navCollection; 		// collection

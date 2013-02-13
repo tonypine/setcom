@@ -11,6 +11,11 @@
                     "type"  =>  "archive",
                     "slug"  =>  get_query_var( 'category_name' )
                     );
+            elseif (is_search()):
+                $page = array(
+                    "type"  =>  "search",
+                    "slug"  =>  get_query_var( 's' )
+                    );
             endif;
 
             $paged = get_query_var( 'paged' );
@@ -29,37 +34,64 @@
             var logged = <?php echo $logged ?>;
         </script>
 
-        <!-- Jquery from Google CDN -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <!-- ============ TEMPLATES ============= -->
 
+        <!-- Post List TEMPLATE -->
         <script type="text/html" id="postList">
 
-            {{# _.each(posts, function(p) { }}
-                <article>
-                    <h3><a class="titleLink" href="{{ p.link }}">{{ p.title }}</a></h3>
-                    <span class="date">{{ p.date }}</span><a class="cat" href="{{ p.catLink }}/">{{ p.cat }}</a>
-                    {{ p.excerpt }}
+            {{# if(type == 'busca') { }}
+                <header id="search-info">
+                    <h1>Resultados da busca:</h1>
+                    <p>
+                        <strong class='destaque'>
+                            {{ data.foundPosts }}
+                        </strong> resultados encontrados para: <strong class='destaque'>{{ data.s }}</strong>
+                    </p>
+                </header>
+            {{# } }}
 
+            {{# _.each(data.posts, function(p) { }}
+                <article class="excerpt-article">
+                    <h3><a class="titleLink" href="{{ p.link }}">{{ p.title }}</a></h3>
+                    <div class="excerpt-info">
+                        <span class="date">{{ p.date }}</span>
+                        <span class="cat">Categoria: 
+                            <a href="#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
+                        </span>
+                    </div>
+                    <div class="excerpt-text">
+                        {{ p.excerpt }}
+                    </div>
+                    {{# if(p.thumbnail != 0) { }}
+                        <a class="excerpt-thumb" href="{{ p.link }}" title="{{ p.title }}">
+                            {{ p.thumbnail }}
+                        </a>
+                    {{# } }}
+                    <a class="leiaMais" href="{{ p.link }}">continuar lendo →</a>
                 </article>
                 <hr>
             {{# }); }}
 
         </script>       
+
+        <!-- Menu Item TEMPLATE -->
         <script type="text/html" id="menuItem">
             <h4>Departamentos</h4>
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
-                        <a id="{{ li.attributes.id }}" href="{{ li.attributes.url }}">{{ li.attributes.title }}</a>
+                        <a id="{{ li.attributes.id }}" href="#/categoria/{{ li.attributes.url }}">{{ li.attributes.title }}</a>
                     </li>
                 {{# }); }}
             </ul>
         </script>
+
+        <!-- Navegação TEMPLATE -->
         <script type="text/html" id="navegacao">
 
             {{# if(data.page > 1){ }}
-                <a id="btnFirst" href="1">Primeira</a>
-                <a id="btnPrev" href="{{ data.page - 1 }}">◄</a>
+                <a class="btnFirst" href="1">Primeira</a>
+                <a class="btnPrev" href="{{ data.page - 1 }}">◄</a>
             {{# } }}
 
             {{# if(data.page <= 3 || data.numPages < 6)	{	var pageInit = 1; 	} 
@@ -67,7 +99,7 @@
 
             	for(var i = pageInit; i <= 5; i++) {					}}
 
-            		<a {{# if(data.page == i) { }} class='btnNav pAtiva' href='#'
+            		<a {{# if(data.page == i) { }} class='btnNav pAtiva' href=''
             			{{# } else { }}class="btnNav" href='{{ i }}' {{# } }}
             			>{{ i }}</a>
 
@@ -76,11 +108,16 @@
 
 
             {{# if(data.page < data.numPages){ }}
-                <a id="btnNext" href="{{ data.page + 1 }}">►</a>
-                <a id="btnLast" href="{{ data.numPages }}">Última</a>
+                <a class="btnNext" href="{{ data.page + 1 }}">►</a>
+                <a class="btnLast" href="{{ data.numPages }}">Última</a>
             {{# } }}
 
         </script>
+
+        <!-- ============ JS import ============= -->
+
+        <!-- Jquery from Google CDN -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
         <!-- Underscore from cdnjs CDN -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -90,7 +127,8 @@
         
 
         <!-- All js -->
-        <script src="<?php url(); ?>/script.combined.js?v=1.4.1.6"></script>
+        <script src="<?php url(); ?>/js/plugins.js?v=1"></script>
+        <script src="<?php url(); ?>/js/main.js?v=2"></script>
 
         <script type="text/javascript">
             var gOverride = {
