@@ -29,25 +29,43 @@ $(document).ready(function(){
 		 	ie = true;
 		}
 
-		// VIEW ---------------
+
+		// Search ---------------
 		// ====================================================
 
-		$("#searchform").bind('submit',function ( evt ) {
-			var val = $("#s").val();
-			if(val != '')
-				app_router.navigate("#/busca/" + val);
-			else
-				app_router.navigate("#/");
+		// vars
+		var searchTimeout = null;
+		var valSearch = '';
+		var lastSearch = '';
+		var searchInput = $("#s");
+
+		// binding
+		$("#searchform").bind('submit', search);
+		$("#s").bind('keyup', search);
+
+		// do search
+		function search (val) {
+
+			if(valSearch == searchInput.val())
+				return false;
+
+			$postList.loadState();
+			valSearch = searchInput.val();
+			clearTimeout(searchTimeout);
+
+			searchTimeout = setTimeout(function() {
+				if(lastSearch == valSearch)
+					$postList.undoLoadState();
+				else if(valSearch != '') {
+					lastSearch = valSearch;
+					app_router.navigate("#/busca/" + valSearch);
+				} else
+					app_router.navigate("#/");
+				return false;
+			}, 250);
+
 			return false;
-		});
-		$("#s").bind('keyup',function ( evt ) {
-			var val = $(this).val();
-			if(val != '')
-				app_router.navigate("#/busca/" + val);
-			else
-				app_router.navigate("#/");
-			return false;
-		});
+		}
 
 		// Post List
 		// ====================================================
@@ -64,17 +82,20 @@ $(document).ready(function(){
 				$.extend( this.data, op.page );
 				//this.getPosts();
 			},
-			getPosts: function () {
+			loadState: function () {
+				// please wait
 				$('body').addClass('wait');
+				$postList.$el.css('opacity', 0.2);
+			},
+			undoLoadState: function () {
+				// wait status off
+				$postList.$el.stop().css('opacity', 1);
+				$('body').removeClass('wait');
+			},
+			getPosts: function () {
 				$('html, body').animate({scrollTop:0}, 300);
 
-				if(!ie) {
-					$postList.$el.stop().animate({
-						opacity: 0.2
-					}, 0);
-				} else {
-					$postList.$el.css('opacity', 0.2);
-				}
+				$postList.loadState();
 
 				var data = {
 					page: $postList.data
@@ -97,14 +118,14 @@ $(document).ready(function(){
 					dataType: 'json',
 					data: data,
 					success: function ( response ) {
+
 						$postList.attr = response;
 
-						$postList.navigation.render();
 						$postList.render();
-						
-						// wait status off
-						$postList.$el.stop().css('opacity', 1);
-						$('body').removeClass('wait');
+						$postList.navigation.render();
+
+						$postList.undoLoadState();
+
 					}
 				});
 			},
@@ -120,8 +141,8 @@ $(document).ready(function(){
 		// ====================================================
 
 		window._navigation = Backbone.View.extend({
-			el: $(".postNav"),
-			template: $("#navegacao"),
+			el: $("#postNav"),
+			template: $("#paginationTemplate"),
 			initialize: function() {
 				$n = this;
 			},
@@ -252,11 +273,16 @@ $(document).ready(function(){
 	    app_router.on('route:default', function (type, slug, page) {
 	    	//alert(type + '-' + slug + "-" + page);
 	        // Note the variable in the route definition being passed in here
-	        if(type == undefined)
-	        	type = 'index';
-	        
-	        if(page == undefined)
-	        	page = 1;
+	        console.log(type);
+	        if(type != 'busca') {  	
+	        	lastSearch = ''; 	
+	        	valSearch = ''; 	
+	        } else {
+	        	searchInput.val(slug);
+	        }
+
+	        if(type == undefined)  	type = 'index';
+	        if(page == undefined)  	page = 1;
 
 		    $postList.data['page'] = page;
 	        $postList.data['type'] = type;

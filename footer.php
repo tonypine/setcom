@@ -76,7 +76,7 @@
 
         <!-- Menu Item TEMPLATE -->
         <script type="text/html" id="menuItem">
-            <h4>Departamentos</h4>
+            <h4>Categorias</h4>
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
@@ -86,39 +86,37 @@
             </ul>
         </script>
 
-        <!-- Navegação TEMPLATE -->
-        <script type="text/html" id="navegacao">
-
+        <!-- Paginação TEMPLATE -->
+        <script type="text/html" id="paginationTemplate">
             {{# if(data.page > 1){ }}
                 <a class="btnFirst" href="1">Primeira</a>
                 <a class="btnPrev" href="{{ data.page - 1 }}">◄</a>
             {{# } }}
 
-            {{# if(data.page <= 3 || data.numPages < 6)	{	var pageInit = 1; 	} 
-            	else { 					            		var pageInit = data.page - 2; } 		
+            {{# if(data.page <= 3 || data.numPages < 6) {   var pageInit = 1;   } 
+                else {                                      var pageInit = data.page - 2; }         
 
-            	for(var i = pageInit; i <= 5; i++) {					}}
+                for(var i = pageInit; i <= 5; i++) {                    }}
 
-            		<a {{# if(data.page == i) { }} class='btnNav pAtiva' href=''
-            			{{# } else { }}class="btnNav" href='{{ i }}' {{# } }}
-            			>{{ i }}</a>
+                    <a {{# if(data.page == i) { }} class='btnNav pAtiva' href=''
+                        {{# } else { }}class="btnNav" href='{{ i }}' {{# } }}
+                        >{{ i }}</a>
 
-            {{#		if(i >= data.numPages) break;
-            	} }}
+            {{#     if(i >= data.numPages) break;
+                } }}
 
 
             {{# if(data.page < data.numPages){ }}
                 <a class="btnNext" href="{{ data.page + 1 }}">►</a>
                 <a class="btnLast" href="{{ data.numPages }}">Última</a>
             {{# } }}
-
         </script>
 
         <!-- ============ JS import ============= -->
 
         <!-- All js -->
         <script src="<?php url(); ?>/js/plugins.js?v=1.1"></script>
-        <script src="<?php url(); ?>/js/main.js?v=3.2"></script>
+        <script src="<?php url(); ?>/js/main.js?v=3.7"></script>
 
         <script type="text/javascript">
             var gOverride = {
