@@ -22,7 +22,10 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css?v=1.5">
+        <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css?v=1.5" type="text/css">
+        <!-- fonts from google 
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700|Open+Sans:400,700" type="text/css">
+    	-->
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
 
         <!--[if lt IE 8]>

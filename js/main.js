@@ -1,18 +1,142 @@
 $(document).ready(function(){
 	$('a').click(function(){
-		var href = $(this).attr('href');
+		var anchor = $(this);
+		var href = anchor.attr('href');
 		var patt = /#/g;
-		if(patt.test(href)){
+		if(patt.test(href))
 			return
-		}
+
+		var rel = /lightbox/g;
+		if(rel.test(anchor.attr('rel')))
+			return
+
 		$('body').addClass('wait');
 	});
+
+	var baseUrl = url+"/";
+
+	var h = 246;
+
+	/* =====================================================
+	Adjust vertical rhythm of images 
+	======================================================= */
+
+	(function ($) {
+
+
+		var methods = {
+			init: function (options) {
+				return this.each(function() {
+					var s = $.extend({
+						'vHeight': 22
+					}, options);
+					methods.adjust.apply(this);
+					$(window).bind('resize', $.proxy( methods.adjust, this ));
+				});
+			},
+			reset: function() {
+				var _this = $( this );
+				_this.css({
+					height: 'auto',
+					width: 'auto'
+				});
+			},
+			adjust: function() {
+				methods.reset.apply( this );
+				var _this = $( this );
+				var oldH = _this.height();
+				var ratio = _this.width() / oldH;
+				var newH = ( (_this.height()/22) >> 0 ) * 22;
+				var newW = Math.round( newH * ratio );
+				console.log( newH + "/" + newW );
+				_this.height( newH );
+				_this.width( newW );
+			}
+		};
+
+		$.fn.adjustVRhythm = function(method) {
+			if ( methods[method] ) {
+				return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+			} else if ( typeof method === 'object' || ! method ) {
+				return methods.init.apply( this, arguments );
+			} else {
+				$.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+			}    
+		};
+
+	})(jQuery);
+
+	$(".imgAnchor img").adjustVRhythm();
+
+	/* ===============================
+	Ajax Login ======================= */
+
+	(function() {
+
+		// variables
+		var section = $("#login");
+		var form = section.find("#loginform");
+		var loginUrl = baseUrl+"ajax-login.php";
+
+		var methods = {
+			wait: function(){
+				$('body').addClass('wait');
+				section.css('opacity',0.2);
+			},
+			done: function() {
+				$('body').removeClass('wait');
+				section.css('opacity',1);
+			},
+			login: function() {
+				methods.wait();
+				$.ajax({
+					type: 'POST',
+					url: loginUrl,
+					cache: false, // for while cache is always disabled
+					dataType: 'html',
+					data: form.serialize(),
+					success: function ( response ) {
+						methods.done();
+						$("#notLogged").addClass('hidden');
+						$("#logged").removeClass('hidden');
+						$postList.data.logged = 1;
+						$postList.getPosts();
+						$("#loginMsg").html( response );
+
+					}
+				});
+				return false;
+			},
+			logout: function() {
+				methods.wait();
+				$.ajax({
+					type: 'POST',
+					url: loginUrl,
+					dataType: 'html',
+					success: function( response ) {
+						methods.done();
+						$("#logged").addClass('hidden');
+						$("#notLogged").removeClass('hidden');
+						$postList.data.logged = 0;
+						$postList.getPosts();
+						$("#loginMsg").html( response );
+					}
+				});
+				return false;
+			}
+		};
+
+		// bindings
+		form.bind('submit', methods.login );
+		$("#btnLogout").bind('click', methods.logout );
+
+	})();
+
 
 	/* load main post list */
 
 		//dump(page);
 
-		var baseUrl = url+"/";
 
 		// Change underscore syntax to feel like Mustache templating syntax
 		_.templateSettings = {
@@ -26,7 +150,7 @@ $(document).ready(function(){
 		if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
 		 var ieversion=new Number(RegExp.$1)
 		 if (ieversion<=8)
-		 	ie = true;
+			ie = true;
 		}
 
 
@@ -53,16 +177,13 @@ $(document).ready(function(){
 			valSearch = searchInput.val();
 			clearTimeout(searchTimeout);
 
-			searchTimeout = setTimeout(function() {
-				if(lastSearch == valSearch)
-					$postList.undoLoadState();
-				else if(valSearch != '') {
-					lastSearch = valSearch;
-					app_router.navigate("#/busca/" + valSearch);
-				} else
-					app_router.navigate("#/");
-				return false;
-			}, 250);
+			if(lastSearch == valSearch)
+				$postList.undoLoadState();
+			else if(valSearch != '') {
+				lastSearch = valSearch;
+				app_router.navigate("#/busca/" + valSearch);
+			} else
+				app_router.navigate("#/");
 
 			return false;
 		}
@@ -101,9 +222,6 @@ $(document).ready(function(){
 					page: $postList.data
 				};
 
-				if(logged) 	data.logged = 1;
-				else 		data.logged = 0;
-
 				// if search not cache
 				var cache = true;
 				if($postList.data.type === 'busca')
@@ -123,7 +241,7 @@ $(document).ready(function(){
 
 						$postList.render();
 						$postList.navigation.render();
-
+						$(".attachment-excerpt-thumb").adjustVRhythm();
 						$postList.undoLoadState();
 
 					}
@@ -262,44 +380,44 @@ $(document).ready(function(){
 		var AppRouter = Backbone.Router.extend({
 			initialize: function(op) {
 			},
-	        routes: {
-	            "(:type)(/:slug)(/:page)": "default"
-	            //"*": "defaultRoute" // Backbone will try match the route above first
-	        }
-	    });
-	    // Instantiate the router
-	    var app_router = new AppRouter;
+			routes: {
+				"(:type)(/:slug)(/:page)": "default"
+				//"*": "defaultRoute" // Backbone will try match the route above first
+			}
+		});
+		// Instantiate the router
+		var app_router = new AppRouter;
 
-	    app_router.on('route:default', function (type, slug, page) {
-	    	//alert(type + '-' + slug + "-" + page);
-	        // Note the variable in the route definition being passed in here
-	        console.log(type);
-	        if(type != 'busca') {  	
-	        	lastSearch = ''; 	
-	        	valSearch = ''; 	
-	        } else {
-	        	searchInput.val(slug);
-	        }
+		app_router.on('route:default', function (type, slug, page) {
+			//alert(type + '-' + slug + "-" + page);
+			// Note the variable in the route definition being passed in here
 
-	        if(type == undefined)  	type = 'index';
-	        if(page == undefined)  	page = 1;
+			if(type != 'busca') {  	
+				lastSearch = ''; 	
+				valSearch = ''; 	
+			} else {
+				searchInput.val(slug);
+			}
 
-		    $postList.data['page'] = page;
-	        $postList.data['type'] = type;
-	        $postList.data['slug'] = slug;
-	        $postList.getPosts();
-	    });
-	    app_router.on('route:defaultRoute', function (actions, page) {
-	        if(page != undefined)
-		        $postList.data['page'] = page;
-	        $postList.data['type'] = 'index';
-	        $postList.data['slug'] = '';
-	        $postList.getPosts();
-	    });
+			if(type == undefined)  	type = 'index';
+			if(page == undefined)  	page = 1;
+
+			$postList.data['page'] = page;
+			$postList.data['type'] = type;
+			$postList.data['slug'] = slug;
+			$postList.getPosts();
+		});
+		app_router.on('route:defaultRoute', function (actions, page) {
+			if(page != undefined)
+				$postList.data['page'] = page;
+			$postList.data['type'] = 'index';
+			$postList.data['slug'] = '';
+			$postList.getPosts();
+		});
 
 
-	    // Start Backbone history a necessary step for bookmarkable URL's
-	    Backbone.history.start();	
+		// Start Backbone history a necessary step for bookmarkable URL's
+		Backbone.history.start();	
 
 		navView = new _navView({ el: $("#dpMenu") }); 		// view
 		//window.navCollection = new _navCollection; 		// collection

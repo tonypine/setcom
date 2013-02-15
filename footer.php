@@ -2,28 +2,24 @@
         </div> <!-- #wrapper -->
 
         <?php 
+            $page = array();
             if(is_home()):
-                $page = array(
-                    "type"  =>  "index"
-                    );
+                $page['type'] = "index";
             elseif (is_archive()):
-                $page = array(
-                    "type"  =>  "archive",
-                    "slug"  =>  get_query_var( 'category_name' )
-                    );
+                $page['type'] = "archive";
+                $page['slug'] = get_query_var( 'category_name' );
             elseif (is_search()):
-                $page = array(
-                    "type"  =>  "search",
-                    "slug"  =>  get_query_var( 's' )
-                    );
+                $page['type'] = "search";
+                $page['slug'] = get_query_var( 's' );
             endif;
+
 
             $paged = get_query_var( 'paged' );
             if($paged <= 1)         $page['page'] = 1;
             elseif ($paged > 1 )    $page['page'] = $paged;
 
-            $logged = "false";
-            if ( is_user_logged_in() ) $logged = "true";
+            $page['logged'] = 0;
+            if ( is_user_logged_in() ) $page['logged'] = 1;
 
 
         ?>
@@ -31,7 +27,6 @@
         <script type="text/javascript">
             var url = "<?php url() ?>";
             var page = <?php echo json_encode($page); ?>;
-            var logged = <?php echo $logged ?>;
         </script>
 
         <!-- ============ TEMPLATES ============= -->
@@ -116,7 +111,37 @@
 
         <!-- All js -->
         <script src="<?php url(); ?>/js/plugins.js?v=1.1"></script>
+        <script type="text/javascript">
+        
+            // JavaScript
+            function loadScript(src, callback) {
+                var head = document.getElementsByTagName('head')[0],
+                    script = document.createElement('script');
+                done = false;
+                script.setAttribute('src', src);
+                script.setAttribute('type', 'text/javascript');
+                script.setAttribute('charset', 'utf-8');
+                script.onload = script.onreadstatechange = function() {
+                    if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                        done = true;
+                        script.onload = script.onreadystatechange = null;
+                            if (callback) {
+                                callback();
+                            }
+                        }
+                }
+                head.insertBefore(script, head.firstChild);
+            }
+
+            // load the my-script-file.js and display an alert dialog once the script has been loaded
+            //loadScript('<?php url(); ?>/js/plugins.js?v=1.2', function() { console.log('loaded plugins'); });
+            loadScript('<?php url(); ?>/js/main.js?v=3.7');
+            loadScript('<?php url(); ?>/js/lightbox-min.js?v=1');
+
+        </script>
+        <!--
         <script src="<?php url(); ?>/js/main.js?v=3.7"></script>
+        -->
 
         <script type="text/javascript">
             var gOverride = {
