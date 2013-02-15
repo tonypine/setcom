@@ -25,6 +25,7 @@
         ?>
 
         <script type="text/javascript">
+            var siteUrl = "<?php echo site_url(); ?>";
             var url = "<?php url() ?>";
             var page = <?php echo json_encode($page); ?>;
         </script>
@@ -51,7 +52,7 @@
                     <div class="excerpt-info">
                         <span class="date">{{ p.date }}</span>
                         <span class="cat">Categoria: 
-                            <a href="#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
+                            <a href="{{ siteUrl }}/#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
                         </span>
                     </div>
                     <div class="excerpt-text">
@@ -75,7 +76,7 @@
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
-                        <a id="{{ li.attributes.id }}" href="#/categoria/{{ li.attributes.url }}">{{ li.attributes.title }}</a>
+                        <a id="{{ li.attributes.id }}" href="{{ siteUrl }}/#/categoria/{{ li.attributes.url }}">{{ li.attributes.title }}</a>
                     </li>
                 {{# }); }}
             </ul>
@@ -140,7 +141,7 @@
 
         </script>
         <!--
-        <script src="<?php url(); ?>/js/main.js?v=3.7"></script>
+        <script src="<?php url(); ?>/js/main.js?v=4"></script>
         -->
 
         <script type="text/javascript">

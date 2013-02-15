@@ -18,18 +18,17 @@ $(document).ready(function(){
 	var h = 246;
 
 	/* =====================================================
-	Adjust vertical rhythm of images 
+		Adjust vertical rhythm of images 
 	======================================================= */
 
 	(function ($) {
 
-
 		var methods = {
 			init: function (options) {
 				return this.each(function() {
-					var s = $.extend({
+					$(this).data( $.extend({
 						'vHeight': 22
-					}, options);
+					}, options) );
 					methods.adjust.apply(this);
 					$(window).bind('resize', $.proxy( methods.adjust, this ));
 				});
@@ -44,11 +43,11 @@ $(document).ready(function(){
 			adjust: function() {
 				methods.reset.apply( this );
 				var _this = $( this );
+				var s = _this.data();
 				var oldH = _this.height();
 				var ratio = _this.width() / oldH;
-				var newH = ( (_this.height()/22) >> 0 ) * 22;
+				var newH = ( (_this.height()/s.vHeight) >> 0 ) * s.vHeight;
 				var newW = Math.round( newH * ratio );
-				console.log( newH + "/" + newW );
 				_this.height( newH );
 				_this.width( newW );
 			}
@@ -69,7 +68,8 @@ $(document).ready(function(){
 	$(".imgAnchor img").adjustVRhythm();
 
 	/* ===============================
-	Ajax Login ======================= */
+		Ajax Login 
+	===================================== */
 
 	(function() {
 
@@ -132,6 +132,75 @@ $(document).ready(function(){
 
 	})();
 
+	/* ====================================================
+		Search
+	==================================================== */
+
+	(function () {
+
+		var methods = {
+
+			init: function( options ){
+
+				return this.each( function() {
+					var _this = $(this);
+					_this.data( $.extend({
+						_input: $("#s"),
+						sVal: '',
+						lastSearch: '',
+						searchTimeout: null
+					}, options) );
+
+					var s = _this.data();
+					
+					s._input.bind('keyup', $.proxy( methods.doSearch, this ));
+					_this.bind('submit', $.proxy( methods.doSearch, this ) );
+				});
+
+			},
+			doSearch: function() {
+
+				var _this = $(this);
+				var s = _this.data();
+
+				$navView.desativeAll();
+
+				if(s.sVal == s._input.val())
+					return false;
+
+				$postList.loadState();
+				s.sVal = s._input.val();
+
+				clearTimeout(s.searchTimeout);
+
+				if(s.lastSearch == s.sVal) {
+					$postList.undoLoadState();
+				} else if(s.sVal != '') {
+					s.lastSearch = s.sVal;
+					app_router.navigate("#/busca/" + s.sVal);
+				} else
+					app_router.navigate("#/");
+
+				return false;
+
+			}
+		};
+
+		// do search
+		window.search = function (method) {
+			if ( methods[method] ) {
+				return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+			} else if ( typeof method === 'object' || ! method ) {
+				return methods.init.apply( this, arguments );
+			} else {
+				$.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+			}    
+		};
+
+	})();
+
+	// init search engine
+	window.s = search.apply( $("#searchform"), { _input: $("#s") } );
 
 	/* load main post list */
 
@@ -151,41 +220,6 @@ $(document).ready(function(){
 		 var ieversion=new Number(RegExp.$1)
 		 if (ieversion<=8)
 			ie = true;
-		}
-
-
-		// Search ---------------
-		// ====================================================
-
-		// vars
-		var searchTimeout = null;
-		var valSearch = '';
-		var lastSearch = '';
-		var searchInput = $("#s");
-
-		// binding
-		$("#searchform").bind('submit', search);
-		$("#s").bind('keyup', search);
-
-		// do search
-		function search (val) {
-
-			if(valSearch == searchInput.val())
-				return false;
-
-			$postList.loadState();
-			valSearch = searchInput.val();
-			clearTimeout(searchTimeout);
-
-			if(lastSearch == valSearch)
-				$postList.undoLoadState();
-			else if(valSearch != '') {
-				lastSearch = valSearch;
-				app_router.navigate("#/busca/" + valSearch);
-			} else
-				app_router.navigate("#/");
-
-			return false;
 		}
 
 		// Post List
@@ -346,15 +380,15 @@ $(document).ready(function(){
 			events: {
 				"click a": "click"//$postList.getPosts()
 			},
-			click: function(e) {
+			desativeAll: function() {
 				$.each($navCollection.models, function(index, model) {
 					this.el.removeClass('ativo');
 				});
+			},
+			click: function(e) {
+				$navView.desativeAll();
 				var link = $(e.target);
 				link.addClass('ativo');
-				var href = link.attr('href'); 
-				//app_router.navigate(href);
-				//return false;
 			},
 			render: function() {
 				var template = _.template( this.template );
@@ -391,12 +425,12 @@ $(document).ready(function(){
 		app_router.on('route:default', function (type, slug, page) {
 			//alert(type + '-' + slug + "-" + page);
 			// Note the variable in the route definition being passed in here
-
+			var s = $(window.s).data();
 			if(type != 'busca') {  	
-				lastSearch = ''; 	
-				valSearch = ''; 	
+				s.lastSearch = ''; 	
+				s.sVal = '';
 			} else {
-				searchInput.val(slug);
+				s._input.val(slug);
 			}
 
 			if(type == undefined)  	type = 'index';

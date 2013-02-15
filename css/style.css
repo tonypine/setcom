@@ -597,6 +597,8 @@ body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
       display: none; }
     #wrapper #leftCol nav, #wrapper #leftCol section {
       margin-bottom: 1.46667em; }
+    body.single #wrapper #leftCol nav#searchNav {
+      display: none; }
     #wrapper #leftCol #login #loginform p {
       margin-bottom: 0; }
     #wrapper #leftCol #login #loginform p.login-submit, #wrapper #leftCol #login #loginform p.login-remember {

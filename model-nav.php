@@ -18,7 +18,7 @@
                     ?> 
                 </ul>
             </nav>
-            <nav>
+            <nav id="searchNav">
                 <h4>Buscar</h4>
                 <form role="search" method="get" id="searchform" action="http://localhost/menusetcom/">
                     <div>
