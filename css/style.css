@@ -1,7 +1,29 @@
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 /* Google Fonts Import ============================================= */
 /* ----------------------------------------------------------- */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format("woff"); }
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Open Sans Bold"), local("OpenSans-Bold"), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format("woff"); }
+
+@font-face {
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Yanone Kaffeesatz Light"), local("YanoneKaffeesatz-Light"), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRVMR8FhBa8rkfAKaPBwAU3s.woff) format("woff"); }
+
+@font-face {
+  font-family: "Yanone Kaffeesatz";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Yanone Kaffeesatz Bold"), local("YanoneKaffeesatz-Bold"), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRWwXwFHHZlCwprwJOQ-Se7k.woff) format("woff"); }
+
 /* Normalize ============================================= */
 /* ----------------------------------------------------------- */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
@@ -307,13 +329,18 @@ table {
 
 /* Options ============================================= */
 /* ----------------------------------------------------------- */
-#wrapper, #wrapper #leftCol nav, #wrapper #leftCol nav #loginform, #wrapper #contentCol article, .commentlist li .comment-body, .commentlist li .comment-body .vcard {
+#wrapper, #wrapper #leftCol nav, #wrapper #leftCol section, #wrapper #leftCol #login #loginform, #wrapper #contentCol article, .commentlist li .comment-body, .commentlist li .comment-body .vcard {
   *zoom: 1; }
-#wrapper:before, #wrapper #leftCol nav:before, #wrapper #leftCol nav #loginform:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, .commentlist li .comment-body .vcard:before, #wrapper:after, #wrapper #leftCol nav:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
+#wrapper:before, #wrapper #leftCol nav:before, #wrapper #leftCol section:before, #wrapper #leftCol #login #loginform:before, #wrapper #contentCol article:before, .commentlist li .comment-body:before, .commentlist li .comment-body .vcard:before, #wrapper:after, #wrapper #leftCol nav:after, #wrapper #leftCol section:after, #wrapper #leftCol #login #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
   content: "";
   display: table; }
-#wrapper:after, #wrapper #leftCol nav:after, #wrapper #leftCol nav #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
+#wrapper:after, #wrapper #leftCol nav:after, #wrapper #leftCol section:after, #wrapper #leftCol #login #loginform:after, #wrapper #contentCol article:after, .commentlist li .comment-body:after, .commentlist li .comment-body .vcard:after {
   clear: both; }
+
+.hidden {
+  visibility: hidden;
+  position: absolute;
+  z-index: -1; }
 
 .date strong {
   background: url("../img/sprite.png?v=1.1") 0 0 no-repeat; }
@@ -362,6 +389,9 @@ a {
   a:hover {
     text-decoration: underline;
     color: #0060a6; }
+
+img {
+  max-width: 100%; }
 
 .list {
   list-style: none; }
@@ -497,53 +527,61 @@ body.single #wrapper #contentCol article h3 {
   z-index: 2; }
 
 #wrapper #leftCol, #wrapper #leftCol .bg {
-  width: 13.14666em; }
+  width: -2em; }
   @media screen and (max-width: 1252px) {
     #wrapper #leftCol, #wrapper #leftCol .bg {
-      width: 10.35999em; } }
+      width: -2em; } }
 
 #wrapper #contentCol, #wrapper #contentCol .bg {
-  width: 40.2em; }
+  width: 0em; }
   @media screen and (max-width: 1252px) {
     #wrapper #contentCol, #wrapper #contentCol .bg {
-      width: 33.23333em; } }
+      width: 0em; } }
 
 body.single #wrapper #contentCol, body.single #wrapper #contentCol .bg {
-  width: 48.24em; }
+  width: 0em; }
   @media screen and (max-width: 1252px) {
     body.single #wrapper #contentCol, body.single #wrapper #contentCol .bg {
-      width: 39.88em; } }
+      width: 0em; } }
 
 #wrapper #rightCol, #wrapper #rightCol .bg {
-  width: 21.18666em; }
+  width: -2em; }
   @media screen and (max-width: 1252px) {
     #wrapper #rightCol, #wrapper #rightCol .bg {
-      width: 17.00666em; } }
+      width: -2em; } }
 
 body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
-  width: 13.14666em; }
+  width: -2em; }
   @media screen and (max-width: 1252px) {
     body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
-      width: 11.95384em; } }
+      width: -3em; } }
 
 #wrapper {
   min-height: 100%;
   margin: 0 auto;
   background-color: white;
   position: relative;
-  width: 80.4em; }
+  width: 80em; }
   @media screen and (max-width: 1252px) {
     #wrapper {
-      width: 66.46667em; } }
+      width: 66em; } }
   #wrapper #leftCol {
     color: white;
     padding: 1.46667em 1.46667em 0;
     z-index: 2; }
-    #wrapper #leftCol .bg {
-      left: 0;
-      background-color: #007236;
-      padding: 0 1.46667em; }
-    #wrapper #leftCol #topo, #wrapper #leftCol nav {
+    #wrapper #leftCol h3, #wrapper #leftCol h4 {
+      color: white; }
+    #wrapper #leftCol input[type=text], #wrapper #leftCol input[type=password] {
+      max-width: 11.59999em; }
+      @media screen and (max-width: 1252px) {
+        #wrapper #leftCol input[type=text], #wrapper #leftCol input[type=password] {
+          max-width: 8.26669em; } }
+    #wrapper #leftCol #searchsubmit, #wrapper #leftCol #loginform #wp-submit {
+      margin: 0.36667em 0; }
+    #wrapper #leftCol hr {
+      margin-bottom: 0.75em;
+      border-color: white; }
+    #wrapper #leftCol #topo, #wrapper #leftCol nav, #wrapper #leftCol section {
       position: relative;
       z-index: 1; }
     #wrapper #leftCol #topo {
@@ -557,32 +595,31 @@ body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
           color: white; }
     #wrapper #leftCol nav#dpMenu {
       display: none; }
-    #wrapper #leftCol nav {
+    #wrapper #leftCol nav, #wrapper #leftCol section {
       margin-bottom: 1.46667em; }
-      #wrapper #leftCol nav h3, #wrapper #leftCol nav h4 {
-        color: white; }
-      #wrapper #leftCol nav hr {
-        margin-bottom: 0.75em;
-        border-color: white; }
-      #wrapper #leftCol nav .navUl a {
-        color: white; }
-      #wrapper #leftCol nav input[type=text], #wrapper #leftCol nav input[type=password] {
-        max-width: 11.59999em; }
-        @media screen and (max-width: 1252px) {
-          #wrapper #leftCol nav input[type=text], #wrapper #leftCol nav input[type=password] {
-            max-width: 8.26669em; } }
-      #wrapper #leftCol nav #searchsubmit, #wrapper #leftCol nav #loginform #wp-submit {
-        margin: 0.36667em 0; }
-      #wrapper #leftCol nav #loginform p {
-        margin-bottom: 0; }
-      #wrapper #leftCol nav #loginform p.login-submit, #wrapper #leftCol nav #loginform p.login-remember {
-        float: left; }
-      #wrapper #leftCol nav #loginform p.login-remember label {
-        line-height: 2.93334em;
-        margin-left: 0.73334em; }
+    body.single #wrapper #leftCol nav#searchNav {
+      display: none; }
+    #wrapper #leftCol #login #loginform p {
+      margin-bottom: 0; }
+    #wrapper #leftCol #login #loginform p.login-submit, #wrapper #leftCol #login #loginform p.login-remember {
+      float: left; }
+    #wrapper #leftCol #login #loginform p.login-remember label {
+      line-height: 2.93334em;
+      margin-left: 0.73334em; }
+    #wrapper #leftCol nav .navUl a {
+      color: white; }
+    #wrapper #leftCol .bg {
+      left: 0;
+      background-color: #007236;
+      padding: 0 1.46667em; }
   #wrapper #rightCol {
     padding: 1.46667em 1.46667em 1.46667em 1.4em;
     margin-left: 1px; }
+    #wrapper #rightCol section {
+      position: relative;
+      z-index: 1; }
+    #wrapper #rightCol section.feed {
+      padding-top: 1.46667em; }
     #wrapper #rightCol .bg {
       padding: 0 1.4em 0 1.33334em;
       right: 0;
@@ -644,6 +681,7 @@ body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
       margin-bottom: 1.46667em; }
     #wrapper #contentCol article {
       position: relative;
+      z-index: 1;
       padding: 0 1.46667em 1.46667em;
       font-size: 1em;
       line-height: 1.46667em; }
@@ -652,8 +690,9 @@ body.single #wrapper #rightCol, body.single #wrapper #rightCol .bg {
       #wrapper #contentCol article ul li, #wrapper #contentCol article ol li {
         list-style-position: inside;
         margin-bottom: 1.46667em; }
-      #wrapper #contentCol article a[rel*="attachment"] {
-        display: block; }
+      #wrapper #contentCol article a.imgAnchor, #wrapper #contentCol article a[rel*="attachment"] {
+        display: block;
+        line-height: 0; }
       .lt-ie8 #wrapper #contentCol article p {
         clear: left; }
 
@@ -741,10 +780,10 @@ input[type=text], input[type=password] {
 .date {
   font-size: 0.8em;
   color: #666666;
-  height: 1.834em;
+  height: 1em;
   display: inline-block;
   margin: -3px 0 3px;
-  padding-bottom: 1.834em; }
+  padding-bottom: 1em; }
   .date a {
     display: inline-block; }
   .lt-ie8 .date {

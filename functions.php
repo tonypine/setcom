@@ -165,7 +165,7 @@ function custom_gallery_image($html, $id, $caption){
 	$url = $url[0];
 	//(href=\")([\w\:\/\.\-]*)(\")
 	$customLink = preg_replace("/(href=\")([\w:\/\?=]*)/", "$1$url", $customLink);
-	$customLink = preg_replace("/(<a)/", "$1 title=\"$caption\" ", $customLink);
+	$customLink = preg_replace("/(<a)/", "$1 class='imgAnchor' title=\"$caption\" ", $customLink);
 	return $customLink;
 }
 //add_filter( "image_send_to_editor", "custom_gallery_image", $priority = 10, $accepted_args = 10 );
@@ -177,7 +177,7 @@ add_filter('the_content', 'my_addlightboxrel');
 function my_addlightboxrel($content) {
        global $post;
        $pattern ="/<a(.*?)href=('|\")(.*?).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>/i";
-       $replacement = '<a$1href=$2$3.$4$5 rel="lightbox[gal]" title="'.$post->post_title.'"$6>';
+       $replacement = '<a$1href=$2$3.$4$5 rel="lightbox[gal]" class="imgAnchor" title="'.$post->post_title.'"$6>';
        $content = preg_replace($pattern, $replacement, $content);
        return $content;
 }

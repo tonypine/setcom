@@ -1,7 +1,32 @@
 /* Google Fonts Import ============================================= 
 /* ----------------------------------------------------------- */
-@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700)
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700)
+//@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700)
+//@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700)
+
+@font-face
+	font-family: 'Open Sans'
+	font-style: normal
+	font-weight: 400
+	src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff')
+
+@font-face 
+	font-family: 'Open Sans'
+	font-style: normal
+	font-weight: 700
+	src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff')
+
+@font-face 
+	font-family: 'Yanone Kaffeesatz'
+	font-style: normal
+	font-weight: 300
+	src: local('Yanone Kaffeesatz Light'), local('YanoneKaffeesatz-Light'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRVMR8FhBa8rkfAKaPBwAU3s.woff) format('woff')
+
+@font-face 
+	font-family: 'Yanone Kaffeesatz'
+	font-style: normal
+	font-weight: 700
+	src: local('Yanone Kaffeesatz Bold'), local('YanoneKaffeesatz-Bold'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRWwXwFHHZlCwprwJOQ-Se7k.woff) format('woff')
+
 
 /* Normalize ============================================= */
 /* ----------------------------------------------------------- */
@@ -42,6 +67,11 @@ $open: #{"Open Sans", calibri, sans-serif}
 		display: table
 	&:after
 		clear: both
+
+.hidden
+	visibility: hidden
+	position: absolute
+	z-index: -1
 
 @mixin transition($property: all, $time: 1s, $ease: ease-in)
 	-webkit-transition: #{$property $time $ease}
@@ -110,7 +140,8 @@ a
 		text-decoration: underline
 		color: darken($ablue, 10%)
 	
-
+img 
+	max-width: 100%
 // ======================================
 // Link list
 
@@ -294,13 +325,18 @@ h4
 		color: #fff
 		padding: 1.46667em 1.46667em 0
 		z-index: 2
-		.bg
-			@extend %leftColWidth
-			@extend .stretchHeight
-			left: 0
-			background-color: $verdeescuro
-			padding: 0 1.46667em
-		#topo, nav
+		h3, h4
+			color: #fff
+		input[type=text], input[type=password]
+			max-width: 11.59999em
+			@media screen and (max-width: $maxWidth1280)
+				max-width: 8.26669em
+		#searchsubmit, #loginform #wp-submit
+			margin: 0.36667em 0
+		hr
+			margin-bottom: 0.75em
+			border-color: #fff
+		#topo, nav, section
 			position: relative
 			z-index: 1
 		#topo
@@ -313,23 +349,13 @@ h4
 					color: #fff
 		nav#dpMenu
 			display: none
-		nav
+		nav, section
 			@extend %clearfix
 			margin-bottom: 1.46667em
-			h3, h4
-				color: #fff
-			hr
-				margin-bottom: 0.75em
-				border-color: #fff
-			.navUl
-				a
-					color: #fff
-			input[type=text], input[type=password]
-				max-width: 11.59999em
-				@media screen and (max-width: $maxWidth1280)
-					max-width: 8.26669em
-			#searchsubmit, #loginform #wp-submit
-				margin: 0.36667em 0
+		body.single &
+			nav#searchNav
+				display: none
+		#login
 			#loginform
 				@extend %clearfix
 				p
@@ -339,11 +365,26 @@ h4
 				p.login-remember label
 					line-height: 2.93334em
 					margin-left: 0.73334em
+		nav
+			.navUl
+				a
+					color: #fff
+		.bg
+			@extend %leftColWidth
+			@extend .stretchHeight
+			left: 0
+			background-color: $verdeescuro
+			padding: 0 1.46667em
 	#rightCol
 		@extend %fLeft
 		@extend %rightColWidth
 		padding: 1.46667em 1.46667em 1.46667em 1.4em
 		margin-left: 1px
+		section
+			position: relative
+			z-index: 1
+		section.feed
+			padding-top: 1.46667em
 		.bg
 			@extend %rightColWidth
 			@extend .stretchHeight
@@ -424,6 +465,7 @@ h4
 		article 
 			@extend %clearfix
 			position: relative
+			z-index: 1
 			padding: 0 1.46667em 1.46667em
 			font-size: 1em
 			line-height: 1.46667em
@@ -438,8 +480,9 @@ h4
 				li
 					list-style-position: inside
 					margin-bottom: 1.46667em
-			a[rel*="attachment"]
+			a.imgAnchor, a[rel*="attachment"]
 				display: block
+				line-height: 0
 			.lt-ie8 & p
 				clear: left
 
