@@ -148,7 +148,7 @@ $(document).ready(function(){
 						_input: $("#s"),
 						sVal: '',
 						lastSearch: '',
-						searchTimeout: null
+						sTimeout: null
 					}, options) );
 
 					var s = _this.data();
@@ -171,13 +171,16 @@ $(document).ready(function(){
 				$postList.loadState();
 				s.sVal = s._input.val();
 
-				clearTimeout(s.searchTimeout);
+				clearTimeout(s.sTimeout);
+
 
 				if(s.lastSearch == s.sVal) {
 					$postList.undoLoadState();
 				} else if(s.sVal != '') {
 					s.lastSearch = s.sVal;
-					app_router.navigate("#/busca/" + s.sVal);
+					s.sTimeout = setTimeout(function(){
+						app_router.navigate("#/busca/" + s.sVal);
+					}, 500);
 				} else
 					app_router.navigate("#/");
 
@@ -266,7 +269,7 @@ $(document).ready(function(){
 					type: 'GET',
 					url: baseUrl+"ajax-posts.php",
 					context: $postList,
-					cache: false, // for while cache is always disabled
+					//cache: false, // for while cache is always disabled
 					dataType: 'json',
 					data: data,
 					success: function ( response ) {
