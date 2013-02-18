@@ -283,9 +283,17 @@ $(document).ready(function(){
 			render: function() {
 				if($postList.data.type == 'post') {
 					var template = _.template( $("#postTEMPLATE").html() );
+					this.$el.attr({
+						'id': '',
+						'class': 'content'
+					});
 					$('body').addClass('single');
 				} else {
 					var template = _.template( $("#postList").html() );
+					this.$el.attr({
+						'id': 'articleLoop',
+						'class': ''
+					});
 					$('body').removeClass('single');
 				}
 				this.$el.html( template( { data: $postList.attr, type: $postList.data.type } ) );
