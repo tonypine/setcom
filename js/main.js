@@ -65,7 +65,9 @@ $(document).ready(function(){
 
 	})(jQuery);
 
-	$(".imgAnchor img").adjustVRhythm();
+	$(".attachment-excerpt-thumb, .imgAnchor img").load(function(){
+		adjustVRhythm();
+	});
 
 	/* ===============================
 		Ajax Login 
@@ -274,7 +276,9 @@ $(document).ready(function(){
 						$postList.render();
 						$postList.navigation.render();
 						$("#contentLoading").css("display",'none');
-						$(".attachment-excerpt-thumb, .imgAnchor img").adjustVRhythm();
+						$(".attachment-excerpt-thumb, .imgAnchor img").load( function(){
+							adjustVRhythm();
+							});
 						$postList.undoLoadState();
 
 					}
