@@ -16,6 +16,7 @@
         <!-- navigation -->
         <nav id="postNav" class="navigation"></nav>
             
+        <div id="contentLoading"><h1>Loading...</h1></div>
         <div class="bg"></div>
     </section>
     <?php 

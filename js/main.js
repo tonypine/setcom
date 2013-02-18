@@ -145,10 +145,10 @@ $(document).ready(function(){
 				return this.each( function() {
 					var _this = $(this);
 					_this.data( $.extend({
-						_input: $("#s"),
-						sVal: '',
-						lastSearch: '',
-						sTimeout: null
+						"_input": $("#s"),
+						"sVal": '',
+						"lastSearch": '',
+						"sTimeout": null
 					}, options) );
 
 					var s = _this.data();
@@ -169,6 +169,7 @@ $(document).ready(function(){
 					return false;
 
 				$postList.loadState();
+				$("#contentLoading").css("display",'block');
 				s.sVal = s._input.val();
 
 				clearTimeout(s.sTimeout);
@@ -203,11 +204,7 @@ $(document).ready(function(){
 	})();
 
 	// init search engine
-	window.s = search.apply( $("#searchform"), { _input: $("#s") } );
-
-	/* load main post list */
-
-		//dump(page);
+	window.s = search.apply( $("#searchform"), [ { _input: $("#s") } ] );
 
 
 		// Change underscore syntax to feel like Mustache templating syntax
@@ -252,7 +249,7 @@ $(document).ready(function(){
 			},
 			getPosts: function () {
 				$('html, body').animate({scrollTop:0}, 300);
-
+				$("#contentLoading").css("display",'block');
 				$postList.loadState();
 
 				var data = {
@@ -274,9 +271,9 @@ $(document).ready(function(){
 					data: data,
 					success: function ( response ) {
 						$postList.attr = response;
-
 						$postList.render();
 						$postList.navigation.render();
+						$("#contentLoading").css("display",'none');
 						$(".attachment-excerpt-thumb, .imgAnchor img").adjustVRhythm();
 						$postList.undoLoadState();
 
@@ -287,15 +284,17 @@ $(document).ready(function(){
 				if($postList.data.type == 'post') {
 					var template = _.template( $("#postTEMPLATE").html() );
 					this.$el.attr({
-						id: '',
-						class: 'content'
+						'id': '',
+						'class': 'content'
 					});
+					$('body').addClass('single');
 				} else {
 					var template = _.template( $("#postList").html() );
 					this.$el.attr({
-						id: 'articleLoop',
-						class: ''
+						'id': 'articleLoop',
+						'class': ''
 					});
+					$('body').removeClass('single');
 				}
 				this.$el.html( template( { data: $postList.attr, type: $postList.data.type } ) );
 			}

@@ -58,6 +58,13 @@ $yanone: #{"Yanone Kaffeesatz", calibri, sans-serif}
 $open: #{"Open Sans", calibri, sans-serif}
 
 // Mixins & Classes
+
+@mixin boxSizing()
+	-webkit-box-sizing: border-box
+ 	-moz-box-sizing: border-box
+ 	box-sizing: border-box *behavior: url(/js/boxsizing.htc)
+
+
 %clearfix
 	& 
 		*zoom: 1
@@ -417,6 +424,7 @@ h4
 	#contentCol
 		@extend %fLeft
 		@extend %centerWidth
+		position: relative
 		padding: 1.46667em 0
 		nav, section, div
 			position: relative
@@ -430,6 +438,14 @@ h4
 			@extend %centerWidthSingle
 			.bg
 				@extend %centerWidthSingle
+		#contentLoading
+			padding: 1.46667em 1.46667em 0
+			background-color: #fff
+			width: 100%
+			+boxSizing
+			position: absolute
+			top: 1.46667em
+			left: 0
 		#articleLoop, article.content
 			padding-top: 1.46667em
 		#articleLoop
