@@ -28,10 +28,10 @@
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
 
         <!--[if lt IE 8]>
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700|Open+Sans:400,700" type="text/css">
         <![endif]-->
 
         <!--[if lt IE 9]>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700|Open+Sans:400,700" type="text/css">
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <script src="<?php url(); ?>/js/respond.js"></script>
         <![endif]-->
