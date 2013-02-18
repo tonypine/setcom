@@ -269,24 +269,34 @@ $(document).ready(function(){
 					type: 'GET',
 					url: baseUrl+"ajax-posts.php",
 					context: $postList,
-					//cache: false, // for while cache is always disabled
+					cache: false, // for while cache is always disabled
 					dataType: 'json',
 					data: data,
 					success: function ( response ) {
-
 						$postList.attr = response;
 
 						$postList.render();
 						$postList.navigation.render();
-						$(".attachment-excerpt-thumb").adjustVRhythm();
+						$(".attachment-excerpt-thumb, .imgAnchor img").adjustVRhythm();
 						$postList.undoLoadState();
 
 					}
 				});
 			},
 			render: function() {
-
-				var template = _.template( $("#postList").html() );
+				if($postList.data.type == 'post') {
+					var template = _.template( $("#postTEMPLATE").html() );
+					this.$el.attr({
+						id: '',
+						class: 'content'
+					});
+				} else {
+					var template = _.template( $("#postList").html() );
+					this.$el.attr({
+						id: 'articleLoop',
+						class: ''
+					});
+				}
 				this.$el.html( template( { data: $postList.attr, type: $postList.data.type } ) );
 			}
 		});
@@ -428,6 +438,7 @@ $(document).ready(function(){
 		app_router.on('route:default', function (type, slug, page) {
 			//alert(type + '-' + slug + "-" + page);
 			// Note the variable in the route definition being passed in here
+			//console.log(type+"\n"+slug+"\n"+page+"\n");
 			var s = $(window.s).data();
 			if(type != 'busca') {  	
 				s.lastSearch = ''; 	

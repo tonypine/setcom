@@ -44,11 +44,21 @@
                         </strong> resultados encontrados para: <strong class='destaque'>{{ data.s }}</strong>
                     </p>
                 </header>
+                <hr>
+            {{# } else if(type == 'categoria') { }}
+                <header>
+                    <h1>{{ data.slug }}</h1>
+                    <p>
+                        <strong class='destaque'>
+                            {{ data.foundPosts }}
+                        </strong> posts publicados.
+                    </p>
+                </header>
+                <hr>
             {{# } }}
-
             {{# _.each(data.posts, function(p) { }}
                 <article class="excerpt-article">
-                    <h3><a class="titleLink" href="{{ p.link }}">{{ p.title }}</a></h3>
+                    <h3><a class="titleLink" href="{{ siteUrl }}/#/post/{{ p.slug }}">{{ p.title }}</a></h3>
                     <div class="excerpt-info">
                         <span class="date">{{ p.date }}</span>
                         <span class="cat">Categoria: 
@@ -59,16 +69,38 @@
                         {{ p.excerpt }}
                     </div>
                     {{# if(p.thumbnail != 0) { }}
-                        <a class="excerpt-thumb" href="{{ p.link }}" title="{{ p.title }}">
+                        <a class="excerpt-thumb" href="{{ siteUrl }}/#/post/{{ p.slug }}" title="{{ p.title }}">
                             {{ p.thumbnail }}
                         </a>
                     {{# } }}
-                    <a class="leiaMais" href="{{ p.link }}">continuar lendo →</a>
+                    <a class="leiaMais" href="{{ siteUrl }}/#/post/{{ p.slug }}">continuar lendo →</a>
                 </article>
                 <hr>
             {{# }); }}
 
+        </script>
+
+        <!-- Post TEMPLATE -->
+        <script type="text/html" id="postTEMPLATE">
+
+            {{# _.each(data.posts, function(p) { }}
+                <article class="content">
+                    <h1>{{ p.title }}</h1>
+                    <div class="excerpt-info">
+                        <span class="date">{{ p.date }}</span>
+                        <span class="cat">Categoria: 
+                            <a href="{{ siteUrl }}/#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
+                        </span>
+                    </div>
+                    <div class="excerpt-text">
+                        {{ p.content }}
+                    </div>
+                </article>
+            {{# }); }}
+
         </script>       
+
+
 
         <!-- Menu Item TEMPLATE -->
         <script type="text/html" id="menuItem">

@@ -1,4 +1,3 @@
-
         <aside id="leftCol">
             <header id="topo">
                 <h1><a id="logo" href="<?php echo site_url(); ?>/#/">Intranet MicrocampSP</a></h1>

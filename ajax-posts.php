@@ -21,6 +21,12 @@
 					'category_name' => $page->slug
 				);
 			break;
+		case 'post':
+			$args = array(
+					'post_type' => 'post',
+					'name' => $page->slug
+				);
+			break;
 		default:
 			$args = array(
 					'post_type' => 'post'
@@ -30,12 +36,13 @@
 	$args['paged'] = $page->page;
 
 	$query = new WP_Query( $args );
-	//var_dump($query);
-	//exit;
+
 	//echo json_encode($query->get_post());
 
 	$queryVars["numPages"]		=	$query->max_num_pages;
 	$queryVars["foundPosts"]	=	$query->found_posts;
+	$queryVars["type"]			=	$page->type;
+	$queryVars["slug"]			=	$page->slug;
 	$queryVars["posts"]			=	array();
 
 	$posts = array();
@@ -53,17 +60,23 @@
 		$p = array(
 			'title' 	=>	get_the_title(),
 			'link'		=>	get_permalink(),
-			'excerpt'	=>	get_the_excerpt(),
+			'slug'		=>	basename(get_permalink()),
 			'date'		=>	get_the_date(),
 			'thumbnail'	=>	$thumb,
 			'cat'		=>	$cat,
 			'catLink'	=>	$catLink
 		);
+		if($_GET['page']['type'] != 'post'):
+			$p['excerpt']	=	get_the_excerpt();
+		else:
+			$p['content']	=	apply_filters('the_content', get_the_content());
+		endif;
 		$queryVars['posts'][] = $p;
 
 	endwhile;
 	
 	$queryVars = (object) $queryVars;
+	
 
 	header("Cache-Control: max-age=".strtotime('-1 hours'));
     header("Expires: " . gmdate('D, d M Y H:i:s', strtotime('-1 hours')));
