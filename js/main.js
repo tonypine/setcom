@@ -500,7 +500,7 @@ $(document).ready(function(){
 					nCol.add( response );
 				});
 				
-			},
+			},	
 			setModelEl: function() {
 				$.each( this.models, function(index, m) {
 					m.el = $("#"+m.attributes.id);
@@ -529,8 +529,8 @@ $(document).ready(function(){
 			},
 			desativeAll: function() {
 				var nView = this;
-				$.each(nView.models, function(index, model) {
-					this.el.removeClass('ativo');
+				$.each(nView.collection.models, function(index, model) {
+					model.el.removeClass('ativo');
 				});
 			},
 			click: function(e) {
@@ -601,7 +601,7 @@ $(document).ready(function(){
 		// Start Backbone history a necessary step for bookmarkable URL's
 		Backbone.history.start();	
 
-		nCatView = new _navView({ 
+		window.nCatView = new _navView({ 
 			el: $("#dpMenu"), 
 			title: 'Categorias',
 			menuName: 'departamentos' 
