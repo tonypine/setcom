@@ -40,14 +40,16 @@ $(document).ready(function(){
 				});
 			},
 			getFeed: function ( args ) {
+				this.el.html("loading feeds...");
 				$.ajax({
-					url: this.el.data('url'),
+					type: 'GET',
+					url: baseUrl + "/getFeed.php",
 					dataType: 'json',
+					data: { feedUrl: this.el.data('url') },
 					context: this,
 					success: function ( response ) {
-						console.log( response );
 						var template = _.template( $("#feedTEMPLATE").html() );
-						$(this).html( template( response ) );
+						this.el.html( template( { feed: response } ) );
 					} 
 				});
 			}

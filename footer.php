@@ -135,10 +135,11 @@
         </script>       
 
         <script type="text/html" id="feedTEMPLATE">
+            {{# console.log(feed.channel.item); }}
             <ul class='list'>
                 {{# _.each(feed.channel.item, function(f) { }}
                     <li><a href='{{ f.link }}' title='{{ f.title }}'>{{ f.title }}</a></li>
-                {{# } }
+                {{# }); }}
             </ul>
         </script>
 
