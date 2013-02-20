@@ -8,7 +8,6 @@
 
 	// set menu name
 	$menu_name = $menuName;
-	$menu_name;
 
 	$menu = wp_get_nav_menu_object( $menu_name );
 	$args = array(

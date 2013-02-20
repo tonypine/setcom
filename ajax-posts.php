@@ -1,5 +1,6 @@
 <?php 
 
+	/** Sets up the WordPress Environment. */
 	$loadFile = "../../../wp-load.php";
 	if (file_exists($loadFile))
 	    require_once($loadFile);
@@ -58,6 +59,7 @@
         	$thumb = get_the_post_thumbnail( get_the_ID(), 'excerpt-thumb' );
 
 		$p = array(
+			'id'		=>	get_the_ID(),
 			'title' 	=>	get_the_title(),
 			'link'		=>	get_permalink(),
 			'slug'		=>	basename(get_permalink()),

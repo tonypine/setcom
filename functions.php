@@ -202,7 +202,7 @@ function my_addlightboxrel($content) {
 		<div class="comment-author vcard">
 			<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?>
 			<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
-			<div class="date"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
+			<div class="date"><a id="comment-<?php echo $comment->comment_ID; ?>" class="commentLink" href="javascript:void(0);">
 				<?php
 				/* translators: 1: date, 2: time */
 				$date = preg_replace("/^([0-9]+)/", "<strong>$1</strong>", get_comment_date());
@@ -281,7 +281,8 @@ function my_addlightboxrel($content) {
 	                                        <form action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
 	                                                <?php do_action( 'comment_form_top' ); ?>
 	                                                <?php if ( is_user_logged_in() ) : ?>
-	                                                        <?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
+	                                                		<?php 	$args['logged_in_as'] = '<p class="logged-in-as">' . sprintf( __( 'Conectado como <a href="%1$s">%2$s</a>. <a id="commentLogout" href="%3$s" title="Desconectar">Desconectar?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( get_permalink() ) ) . '</p>';
+	                                                        		echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
 	                                                        <?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
 	                                                <?php else : ?>
 	                                                        <?php echo $args['comment_notes_before']; ?>

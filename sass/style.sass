@@ -61,8 +61,8 @@ $open: #{"Open Sans", calibri, sans-serif}
 
 @mixin boxSizing()
 	-webkit-box-sizing: border-box
- 	-moz-box-sizing: border-box
- 	box-sizing: border-box *behavior: url(/js/boxsizing.htc)
+	-moz-box-sizing: border-box
+	box-sizing: border-box //*behavior: url(/js/boxsizing.htc)
 
 
 %clearfix
@@ -212,7 +212,8 @@ h4
 	margin-bottom: 0!important
 
 %titleShadow
-	text-shadow: 3px 3px 0px lighten($verdeclaro, 25%)
+	//text-shadow: 3px 3px 0px lighten($verdeclaro, 25%)
+	text-shadow: none
 
 %singleTittle
 	@extend %titleShadow
@@ -223,15 +224,15 @@ h4
 .titleLink
 	color: #000
 	display: inline-block
-	text-shadow: 3px 3px 0px lighten($verdeclaro, 30%)
+	//text-shadow: 3px 3px 0px lighten($verdeclaro, 30%)
 	&:visited
 		color: #609
 	&:hover
 		color: #000
-		text-shadow: 2px 2px 0px $verdeclaro
+		//text-shadow: 2px 2px 0px $verdeclaro
 		background-color: lighten($verdeclaro, 40%)
 	&:active
-		text-shadow: 1px 1px 0px $verdeclaro
+		//text-shadow: 1px 1px 0px $verdeclaro
 		background-color: transparent
 
 .button
@@ -359,9 +360,6 @@ h4
 		nav, section
 			@extend %clearfix
 			margin-bottom: 1.46667em
-		body.single &
-			nav#searchNav
-				display: none
 		#login
 
 			#loginform
@@ -485,11 +483,6 @@ h4
 			line-height: 1.46667em
 			.cat
 				margin-left: 1.46667em
-			body.single &
-				h1
-					@extend %titleShadow
-				h3
-					@extend %singleTittle
 			ul, ol
 				li
 					list-style-position: inside
@@ -544,7 +537,7 @@ input[type=submit]
 		display: block
 		margin-bottom: -1px
 	textarea
-		height: 143px
+		height: 145px
 	code
 		font-size: 0.8em
 		line-height: 1.83334em

@@ -95,16 +95,56 @@
                     <div class="excerpt-text">
                         {{ p.content }}
                     </div>
+                    <div id="comments"></div>
                 </article>
             {{# }); }}
 
         </script>       
 
+        <!-- comments TEMPLATE -->
+        <script type="text/html" id="commentsTEMPLATE">
+            <hr>
+            <h3>Comentários</h3>
+            <ul class="commentlist">
+                {{# _.each(data.comments, function(c) { }}
+                    <li class="comment even thread-even depth-1" id="comment-{{ c.comment_ID }}">
+                        <div id="div-comment-{{ c.comment_ID }}" class="comment-body">
+                        <div class="comment-author vcard">
+                            {{ c.avatar }}
+                            <cite class="fn">{{ c.comment_author }}</cite>
+                            <div class="date">
+                                <a href="http://localhost/menusetcom/designer-vs-programador/#comment-{{ c.comment_ID }}">
+                                    {{ c.comment_date }}
+                                </a>
+                            </div>
+                        </div>
 
+                        <p class="commentText">{{ c.comment_content }}</p>
+                        <div class="reply">
+                            <a class="comment-reply-link" 
+                                href="{{ siteUrl + "/" + data.slug }}/?replytocom={{ c.comment_ID }}#respond" 
+                                onclick="return addComment.moveForm(&quot;div-comment-8&quot;, &quot;8&quot;, &quot;respond&quot;, &quot;20&quot;)">
+                                    Responder
+                                </a>
+                            </div>
+                        </div>
+                    </li>                
+                {{# }); }}
+            </ul>
+
+        </script>       
+
+        <script type="text/html" id="feedTEMPLATE">
+            <ul class='list'>
+                {{# _.each(feed.channel.item, function(f) { }}
+                    <li><a href='{{ f.link }}' title='{{ f.title }}'>{{ f.title }}</a></li>
+                {{# } }
+            </ul>
+        </script>
 
         <!-- Menu Item TEMPLATE -->
         <script type="text/html" id="menuItem">
-            <h4>Categorias</h4>
+            <h4>{{ title }}</h4>
             <ul class="navUl">
                 {{# _.each(menuItens, function(li) { }}
                     <li>
@@ -168,7 +208,7 @@
 
             // load the my-script-file.js and display an alert dialog once the script has been loaded
             //loadScript('<?php url(); ?>/js/plugins.js?v=1.2', function() { console.log('loaded plugins'); });
-            loadScript('<?php url(); ?>/js/main.js?v=3.9.2');
+            loadScript('<?php url(); ?>/js/main.js?v=3.9.3');
             loadScript('<?php url(); ?>/js/lightbox-min.js?v=1');
 
         </script>

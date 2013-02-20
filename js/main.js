@@ -1,9 +1,15 @@
 $(document).ready(function(){
 	$('a').click(function(){
 		var anchor = $(this);
-		var href = anchor.attr('href');
+		var href = anchor.prop('href');
+		var comment = anchor.attr('class');
+		
 		var patt = /#/g;
 		if(patt.test(href))
+			return
+
+		patt = /commentLink/g;
+		if(patt.test(comment))
 			return
 
 		var rel = /lightbox/g;
@@ -16,6 +22,53 @@ $(document).ready(function(){
 	var baseUrl = url+"/";
 
 	var h = 246;
+
+	/* =====================================================
+		Get Feed
+	======================================================= */
+
+	(function ($) {
+
+		var methods = {
+			init: function (options) {
+				return this.each(function() {
+					this.el = $(this);
+					this.el.data( $.extend({
+						url: String
+					}, options) );
+					methods.getFeed.apply( this );
+				});
+			},
+			getFeed: function ( args ) {
+				$.ajax({
+					url: this.el.data('url'),
+					dataType: 'json',
+					context: this,
+					success: function ( response ) {
+						console.log( response );
+						var template = _.template( $("#feedTEMPLATE").html() );
+						$(this).html( template( response ) );
+					} 
+				});
+			}
+		};
+
+		$.fn.getFeed = function ( method ) {
+			
+			if (methods[method])
+				return methods[method].apply( this, Array.prototype.slice.call( arguments, 1) );
+			else if ( typeof method === 'object' || ! method )
+				return methods['init'].apply( this, arguments );
+			else
+				$.error( 'Method ' + method + ' does not exist on this function' );
+
+		};
+
+	})(jQuery);
+
+	$('#newsFeed').getFeed({
+		url: "http://chocoladesign.com/feed"
+	});
 
 	/* =====================================================
 		Adjust vertical rhythm of images 
@@ -66,7 +119,7 @@ $(document).ready(function(){
 	})(jQuery);
 
 	$(".attachment-excerpt-thumb, .imgAnchor img").load(function(){
-		adjustVRhythm();
+		$(this).adjustVRhythm();
 	});
 
 	/* ===============================
@@ -132,6 +185,8 @@ $(document).ready(function(){
 		form.bind('submit', methods.login );
 		$("#btnLogout").bind('click', methods.logout );
 
+		window.logout = methods.logout;
+
 	})();
 
 	/* ====================================================
@@ -165,13 +220,12 @@ $(document).ready(function(){
 				var _this = $(this);
 				var s = _this.data();
 
-				$navView.desativeAll();
+				nCatView.desativeAll();
 
 				if(s.sVal == s._input.val())
 					return false;
 
 				$postList.loadState();
-				$("#contentLoading").css("display",'block');
 				s.sVal = s._input.val();
 
 				clearTimeout(s.sTimeout);
@@ -232,6 +286,7 @@ $(document).ready(function(){
 				slug: '',
 				page: 1
 			},
+			newComment: false,
 			html: '',
 			initialize: function( op ) {
 				$postList = this;
@@ -242,16 +297,19 @@ $(document).ready(function(){
 			loadState: function () {
 				// please wait
 				$('body').addClass('wait');
+				//$('html, body').animate({scrollTop:0}, 300);
+				$("#contentLoading").css("display",'block');
 				$postList.$el.css('opacity', 0.2);
+				return $postList;
 			},
 			undoLoadState: function () {
 				// wait status off
 				$postList.$el.stop().css('opacity', 1);
+				$("#contentLoading").css("display",'none');
 				$('body').removeClass('wait');
+				return $postList;
 			},
 			getPosts: function () {
-				$('html, body').animate({scrollTop:0}, 300);
-				$("#contentLoading").css("display",'block');
 				$postList.loadState();
 
 				var data = {
@@ -275,18 +333,81 @@ $(document).ready(function(){
 						$postList.attr = response;
 						$postList.render();
 						$postList.navigation.render();
-						$("#contentLoading").css("display",'none');
 						$(".attachment-excerpt-thumb, .imgAnchor img").load( function(){
-							adjustVRhythm();
+							$(this).adjustVRhythm();
 							});
 						$postList.undoLoadState();
 
 					}
+				});		
+			},
+			getComments: function (postID) {
+				loadScript(siteUrl+"/wp-includes/js/comment-reply.min.js?ver=3.5");
+				$.ajax({
+					type: 'GET',
+					url: baseUrl+"get-comments.php",
+					context: $postList,
+					cache: false, // for while cache is always disabled
+					//dataType: 'json',
+					data: { postID: postID },
+					success: function ( response ) {
+
+						var _p = $postList;
+
+						$('#comments').html( response );
+
+						if(_p.newComment) {
+							var top = $("#div-comment-" + _p.commentID).offset();
+							top = top.top;
+							$("html, body").animate({
+								scrollTop: top - 22
+							}, 700);
+							_p.newComment = false;
+						}
+
+						//binding
+						$("#commentLogout").bind('click', logout);
+						$("#commentform").bind('submit', _p.postComment);
+						$(".commentLink").bind('click', _p.scrollToComment);
+						return response;
+
+						_p.cData = response;
+						_p.renderComments();
+					}
 				});
+				return $postList;
+			},
+			postComment: function(evt) {
+				var _p = $postList;
+				_p.loadState();
+				$.ajax({
+					type: 'POST',
+					url: baseUrl+"post-comment.php",
+					context: _p,
+					cache: false, // for while cache is always disabled
+					//dataType: 'json',
+					data: $(this).serialize(),
+					success: function ( response ) {
+						// this is $postList
+						this.newComment = true;
+						this.commentID = response;
+						this.undoLoadState().getComments( this.attr.posts[0].id );
+					}
+				});	
+				return false;
+			},
+			scrollToComment: function(evt) {
+				var topOffset = evt.target.offset().top;
+				$("html, body").scrollTop( topOffset );
+			},
+			renderComments: function() {
+				var template = _.template( $("#commentsTEMPLATE").html() );
+				this.$el.find('.content').append( template( { data: $postList.cData } ) );
 			},
 			render: function() {
 				if($postList.data.type == 'post') {
 					var template = _.template( $("#postTEMPLATE").html() );
+					$postList.getComments( $postList.attr.posts[0].id );
 					this.$el.attr({
 						'id': '',
 						'class': 'content'
@@ -352,13 +473,18 @@ $(document).ready(function(){
 
 		window._navCollection = Backbone.Collection.extend({
 			model: _navModel,
-			initialize: function() {
-				$navCollection = this;
+			menuName: '',
+			initialize: function( args ) {
+				$.extend( this, args );
+				//$navCollection = this;
 			},
 			getNav: function () {
+
+				var nCol = this;
 				var data = {
-					menuName: "Departamentos"
+					menuName: this.menuName
 				};
+
 				if(logged) 	data.logged = 1;
 				else 		data.logged = 0;
 
@@ -369,11 +495,12 @@ $(document).ready(function(){
 					dataType: 'json',
 					data: data
 				}).done(function ( response ) {
-					$navCollection.add( response );
+					nCol.add( response );
 				});
+				
 			},
 			setModelEl: function() {
-				$.each( $navCollection.models, function(index, m) {
+				$.each( this.models, function(index, m) {
 					m.el = $("#"+m.attributes.id);
 				});
 			}
@@ -381,15 +508,17 @@ $(document).ready(function(){
 
 		window._navView = Backbone.View.extend({
 			template: $("#menuItem").html(),
-			initialize: function(){
-				$navView = this;
-				$navView.$el.html("loading...").css({
+			initialize: function( data ) {
+				var nView = this;
+				this.$el.html("loading...").css({
 					display: 'block'
 				});
-				this.collection = new _navCollection;
+				this.collection = new _navCollection({ 
+					menuName: this.options.menuName 
+				});
 				this.collection.bind('add', function(){ 
-					$navView.render();
-					$navCollection.setModelEl();
+					nView.render();
+					nView.collection.setModelEl();
 				});
 				this.collection.getNav();
 			},
@@ -397,19 +526,21 @@ $(document).ready(function(){
 				"click a": "click"//$postList.getPosts()
 			},
 			desativeAll: function() {
-				$.each($navCollection.models, function(index, model) {
+				var nView = this;
+				$.each(nView.models, function(index, model) {
 					this.el.removeClass('ativo');
 				});
 			},
 			click: function(e) {
-				$navView.desativeAll();
+				this.desativeAll();
 				var link = $(e.target);
 				link.addClass('ativo');
 			},
 			render: function() {
 				var template = _.template( this.template );
 				this.$el.html( template( { 
-					menuItens: this.collection.models 
+					menuItens: this.collection.models,
+					title: this.options.title
 				} ) );
 				this.$el.stop().css("display","none").slideDown(800, function(){
 					$(this).css('overflow','initial');
@@ -439,9 +570,7 @@ $(document).ready(function(){
 		var app_router = new AppRouter;
 
 		app_router.on('route:default', function (type, slug, page) {
-			//alert(type + '-' + slug + "-" + page);
 			// Note the variable in the route definition being passed in here
-			//console.log(type+"\n"+slug+"\n"+page+"\n");
 			var s = $(window.s).data();
 			if(type != 'busca') {  	
 				s.lastSearch = ''; 	
@@ -470,7 +599,15 @@ $(document).ready(function(){
 		// Start Backbone history a necessary step for bookmarkable URL's
 		Backbone.history.start();	
 
-		navView = new _navView({ el: $("#dpMenu") }); 		// view
-		//window.navCollection = new _navCollection; 		// collection
+		nCatView = new _navView({ 
+			el: $("#dpMenu"), 
+			title: 'Categorias',
+			menuName: 'departamentos' 
+		});
+		nLinksView = new _navView({ 
+			el: $("#linksUteis"), 
+			title: 'Links úteis',
+			menuName: 'links-uteis' 
+		});
 
 });
