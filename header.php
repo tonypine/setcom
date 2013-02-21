@@ -23,21 +23,12 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="<?php url(); ?>/css/style.css?v=1.7" type="text/css">
-        <!-- fonts from google 
-        -->
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
-
-        <!--[if lt IE 8]>
-        <![endif]-->
 
         <!--[if lt IE 9]>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,700|Open+Sans:400,700" type="text/css">
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <script src="<?php url(); ?>/js/respond.js"></script>
-        <![endif]-->
-
-        <!--[if (gte IE 6)&(lte IE 8)]>
-          <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
         <![endif]-->
 
         <?php wp_head() ?>

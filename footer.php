@@ -194,6 +194,11 @@
 
         <!-- All js -->
         <script src="<?php url(); ?>/js/plugins.js?v=1.1"></script>
+
+        <!-- >
+          <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
+        <! -->
+
         <script type="text/javascript">
         
             // JavaScript
