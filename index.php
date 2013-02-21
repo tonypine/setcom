@@ -4,6 +4,7 @@
     $loadFile = "../../../wp-load.php";
     if (file_exists($loadFile))
         require_once($loadFile);
+    
     get_header();
 ?>
     <!--[if lt IE 7]>

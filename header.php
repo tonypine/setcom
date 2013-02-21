@@ -22,7 +22,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="<?php echo $u; ?>/css/style.css?v=1.7" type="text/css">
+        <link rel="stylesheet" href="<?php url(); ?>/css/style.css?v=1.7" type="text/css">
         <!-- fonts from google 
         -->
         <link rel="shortcut icon" href="<?php url(); ?>/favicon.ico">
@@ -40,7 +40,7 @@
           <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
         <![endif]-->
 
-        <?php //wp_head() ?>
+        <?php wp_head() ?>
     </head>
     <body class="<?php echo $class; ?>">
         <div id="hrtopo"></div>

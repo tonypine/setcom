@@ -218,7 +218,7 @@
 
             // load the my-script-file.js and display an alert dialog once the script has been loaded
             //loadScript('<?php url(); ?>/js/plugins.js?v=1.2', function() { console.log('loaded plugins'); });
-            loadScript('<?php url(); ?>/js/main.js?v=4');
+            loadScript('<?php url(); ?>/js/main.js?v=4.1');
             loadScript('<?php url(); ?>/js/lightbox-min.js?v=1');
 
         </script>

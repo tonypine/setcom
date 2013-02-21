@@ -1,5 +1,4 @@
-$(document).ready(function(){
-	$('a').click(function(){
+$(document).ready(function(){$('a').click(function(){
 		var anchor = $(this);
 		var href = anchor.prop('href');
 		var comment = anchor.attr('class');
