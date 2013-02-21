@@ -63,7 +63,7 @@ $(document).ready(function(){
 							el.data('empty', 0);
 						} 
 					});
-					
+
 				});
 			}
 		};
@@ -318,7 +318,7 @@ $(document).ready(function(){
 			loadState: function () {
 				// please wait
 				$('body').addClass('wait');
-				//$('html, body').animate({scrollTop:0}, 300);
+				$('html, body').animate({scrollTop:0}, 700);
 				$("#contentLoading").css("display",'block');
 				$postList.$el.css('opacity', 0.2);
 				return $postList;
@@ -461,7 +461,14 @@ $(document).ready(function(){
 			},
 			goPage: function ( evt ) {
 				var p = $(evt.target).attr('href');
-				app_router.navigate("#/" + $postList.data.type + "/" + $postList.data.slug + "/" + p);
+				page = $.fn.basename( p );
+				console.log($postList.data);
+
+				var type, slug, page;
+				type = typeof $postList.data.type === 'undefined' || $postList.data.type == 'index' ? 'page' : $postList.data.type; + "";
+				slug = typeof $postList.data.slug === 'undefined' ? '' : "/" + $postList.data.slug;
+
+				app_router.navigate("#/" + type + slug + "/" + page);
 				return false;
 			},
 			render: function() {
@@ -583,6 +590,7 @@ $(document).ready(function(){
 			initialize: function(op) {
 			},
 			routes: {
+				"page(/:page)": "indexPage",
 				"(:type)(/:slug)(/:page)": "default"
 				//"*": "defaultRoute" // Backbone will try match the route above first
 			}
@@ -600,13 +608,27 @@ $(document).ready(function(){
 				s._input.val(slug);
 			}
 
+			//alert( type + ' - ' + slug + ' - ' + page );
+
 			if(type == undefined)  	type = 'index';
-			if(page == undefined)  	page = 1;
+			if(page == undefined || page == '')  	page = 1;
 
 			$postList.data['page'] = page;
 			$postList.data['type'] = type;
 			$postList.data['slug'] = slug;
 			$postList.getPosts();
+		});
+		
+		app_router.on('route:indexPage', function (page) {
+			// Note the variable in the route definition being passed in here
+			
+			if(page == undefined || page == '')  	page = 1;
+
+			$postList.data['type'] = 'index';
+			$postList.data['slug'] = undefined;
+			$postList.data['page'] = page;
+			$postList.getPosts();
+
 		});
 		app_router.on('route:defaultRoute', function (actions, page) {
 			if(page != undefined)
@@ -630,5 +652,6 @@ $(document).ready(function(){
 			title: 'Links úteis',
 			menuName: 'links-uteis' 
 		});
+
 
 });

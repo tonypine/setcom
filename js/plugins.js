@@ -64,4 +64,11 @@ function dump(obj) {
     return(out);
 }
 
+(function($) {
+	$.fn.basename = function (url) {
+		var base = new String(url).substring(url.lastIndexOf('/') + 1); 
+	   	return base;
+	}
+})(jQuery);
+
 // Place any jQuery/helper plugins in here.

@@ -184,7 +184,6 @@
             {{#     if(i >= data.numPages) break;
                 } }}
 
-
             {{# if(data.page < data.numPages){ }}
                 <a class="btnNext" href="{{ data.page + 1 }}">►</a>
                 <a class="btnLast" href="{{ data.numPages }}">Última</a>
@@ -219,7 +218,7 @@
 
             // load the my-script-file.js and display an alert dialog once the script has been loaded
             //loadScript('<?php url(); ?>/js/plugins.js?v=1.2', function() { console.log('loaded plugins'); });
-            loadScript('<?php url(); ?>/js/main.js?v=3.9.3');
+            loadScript('<?php url(); ?>/js/main.js?v=4');
             loadScript('<?php url(); ?>/js/lightbox-min.js?v=1');
 
         </script>
@@ -245,11 +244,6 @@
               fixFlash: true,
               size: 960
             };
-            createGridder = function() {
-              document.body.appendChild(
-                document.createElement('script'))
-                .src='http://gridder.andreehansson.se/releases/latest/960.gridder.js';
-            }
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -261,10 +255,6 @@
                 s.parentNode.insertBefore(g,s)}(document,'script'));
             */
         </script>
-        <?php
-          if ( is_singular() && comments_open() && get_option('thread_comments') )
-          wp_enqueue_script( 'comment-reply' );
-              ?>
 
         <?php wp_footer() ?>
     </body>
