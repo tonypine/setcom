@@ -255,7 +255,8 @@
                 s.parentNode.insertBefore(g,s)}(document,'script'));
             */
         </script>
-
-        <?php wp_footer() ?>
+    
+        <?php //wp_footer() ?>
+        <?php echo get_num_queries(); ?> queries in <?php timer_stop(1); ?> seconds.
     </body>
 </html>

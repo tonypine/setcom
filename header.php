@@ -40,7 +40,7 @@
           <script type="text/javascript" src="<?php url(); ?>/js/selectivizr.js"></script>
         <![endif]-->
 
-        <?php wp_head() ?>
+        <?php //wp_head() ?>
     </head>
     <body class="<?php echo $class; ?>">
         <div id="hrtopo"></div>
