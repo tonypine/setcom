@@ -79,7 +79,6 @@
     <!-- right col -->
     <aside id="rightCol">
         <section class="feed">
-            <h3 class="nopad">Notícias</h3>
             <div id="newsFeed"></div>
             <?php //getFeed("http://chocoladesign.com/feed"); ?>
         </section>

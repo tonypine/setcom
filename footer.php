@@ -141,12 +141,16 @@
 
         </script>       
 
+        <!-- feed TEMPLATE -->
         <script type="text/html" id="feedTEMPLATE">
-            <ul class='list'>
-                {{# _.each(feed.channel.item, function(f) { }}
-                    <li><a href='{{ f.link }}' title='{{ f.title }}'>{{ f.title }}</a></li>
-                {{# }); }}
-            </ul>
+            <div class="feed">
+                <h4>{{ feed.title }}</h4>
+                <ul class='list'>
+                    {{# _.each(feed.channel.item, function(f) { }}
+                        <li><a href='{{ f.link }}' title='{{ f.title }}'>{{ f.title }}</a></li>
+                    {{# }); }}
+                </ul>
+            </div>
         </script>
 
         <!-- Menu Item TEMPLATE -->

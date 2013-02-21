@@ -34,24 +34,36 @@ $(document).ready(function(){
 				return this.each(function() {
 					this.el = $(this);
 					this.el.data( $.extend({
-						url: String
+						feeds: [],
+						empty: 1
 					}, options) );
 					methods.getFeed.apply( this );
 				});
 			},
 			getFeed: function ( args ) {
-				this.el.html("loading feeds...");
-				$.ajax({
-					type: 'GET',
-					url: baseUrl + "/getFeed.php",
-					dataType: 'json',
-					data: { feedUrl: this.el.data('url') },
-					context: this,
-					success: function ( response ) {
-						console.log( response );
-						var template = _.template( $("#feedTEMPLATE").html() );
-						this.el.html( template( { feed: response } ) );
-					} 
+				var _this = this;
+				var el = _this.el;
+				$.each(this.el.data('feeds'), function (index, feed) {
+
+					el.append($("<div>", {
+						'id': 'feed' + index
+					}).text("loading feed..."));
+					
+					$.ajax({
+						type: 'GET',
+						url: baseUrl + "/getFeed.php",
+						dataType: 'json',
+						data: { feedUrl: feed.url },
+						context: _this,
+						success: function ( response ) {
+
+							var template = _.template( $("#feedTEMPLATE").html() );
+							response.title = feed.title;
+							el.find( '#feed' + index ).html( template( { feed: response } ) );
+							el.data('empty', 0);
+						} 
+					});
+					
 				});
 			}
 		};
@@ -70,7 +82,13 @@ $(document).ready(function(){
 	})(jQuery);
 
 	$('#newsFeed').getFeed({
-		url: "http://chocoladesign.com/feed"
+		feeds: [ 
+			{	title: 'Web Design',	url: "http://feeds.feedburner.com/CursoWebDesignMicrocampSP"			},
+			{	title: 'Informática',	url: "http://feeds.feedburner.com/CursoInformaticaMicrocampSP"			},
+			{	title: 'TI',			url: "http://feeds.feedburner.com/CursoTIMicrocampSP"					},
+			{	title: 'ABC',			url: "http://feeds.feedburner.com/CursoABCMicrocampSP"					},
+			{	title: 'Hardware',		url: "http://feeds.feedburner.com/BlogDoCursoHardware-MicrocampSp"		}
+		]
 	});
 
 	/* =====================================================
