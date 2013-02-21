@@ -58,7 +58,7 @@ $(document).ready(function(){$('a').click(function(){
 
 							var template = _.template( $("#feedTEMPLATE").html() );
 							response.title = feed.title;
-							el.find( '#feed' + index ).html( template( { feed: response } ) );
+							el.find( '#feed' + index ).html( template( { feed: response } ) ).css("display","none").slideDown(800);
 							el.data('empty', 0);
 						} 
 					});
@@ -540,9 +540,9 @@ $(document).ready(function(){$('a').click(function(){
 				this.$el.html("loading...").css({
 					display: 'block'
 				});
-				this.collection = new _navCollection({ 
-					menuName: this.options.menuName 
-				});
+				this.collection = new _navCollection();
+				this.collection.menuName = this.options.menuName;
+
 				this.collection.bind('add', function(){ 
 					nView.render();
 					nView.collection.setModelEl();
