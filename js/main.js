@@ -48,6 +48,7 @@ $(document).ready(function(){
 					data: { feedUrl: this.el.data('url') },
 					context: this,
 					success: function ( response ) {
+						console.log( response );
 						var template = _.template( $("#feedTEMPLATE").html() );
 						this.el.html( template( { feed: response } ) );
 					} 

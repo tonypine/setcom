@@ -34,7 +34,6 @@
 
         <!-- Post List TEMPLATE -->
         <script type="text/html" id="postList">
-
             {{# if(type == 'busca') { }}
                 <header id="search-info">
                     <h1>Resultados da busca:</h1>
@@ -62,7 +61,11 @@
                     <div class="excerpt-info">
                         <span class="date">{{ p.date }}</span>
                         <span class="cat">Categoria: 
-                            <a href="{{ siteUrl }}/#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
+                            {{# var i = 0;
+                                _.each(p.cat, function (c) { i++; }}
+                                    <a href="{{ siteUrl }}/#/categoria/{{ c.slug }}">{{ c.cat_name }}</a>
+                                    {{# if(i < p.cat.length) }},
+                            {{# }); }}
                         </span>
                     </div>
                     <div class="excerpt-text">
@@ -89,7 +92,11 @@
                     <div class="excerpt-info">
                         <span class="date">{{ p.date }}</span>
                         <span class="cat">Categoria: 
-                            <a href="{{ siteUrl }}/#/categoria/{{ p.catLink }}">{{ p.cat }}</a>
+                            {{# var i = 0;
+                                _.each(p.cat, function (c) { i++; }}
+                                    <a href="{{ siteUrl }}/#/categoria/{{ c.slug }}">{{ c.cat_name }}</a>
+                                    {{# if(i < p.cat.length) }},
+                            {{# }); }}
                         </span>
                     </div>
                     <div class="excerpt-text">

@@ -50,6 +50,7 @@
 	while ($query->have_posts()): $query->the_post();
 		
         $c = get_the_category();
+        $c = array_slice( $c, 0, 5 );
         $cat = $c[0]->cat_name;
         $catLink = $c[0]->slug;
 
@@ -65,7 +66,7 @@
 			'slug'		=>	basename(get_permalink()),
 			'date'		=>	get_the_date(),
 			'thumbnail'	=>	$thumb,
-			'cat'		=>	$cat,
+			'cat'		=>	$c,
 			'catLink'	=>	$catLink
 		);
 		if($_GET['page']['type'] != 'post'):
@@ -80,8 +81,9 @@
 	$queryVars = (object) $queryVars;
 	
 
-	header("Cache-Control: max-age=".strtotime('-1 hours'));
-    header("Expires: " . gmdate('D, d M Y H:i:s', strtotime('-1 hours')));
+	header("Cache-Control: max-age=".strtotime('-170 minutes'));
+    header("Date: " . gmdate('D, d M Y H:i:s', strtotime('-3 hours')));
+    header("Expires: " . gmdate('D, d M Y H:i:s', strtotime('-179 minutes')));
 	header('Content-type: application/json');
 	echo json_encode($queryVars);
 ?>
