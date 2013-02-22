@@ -24,8 +24,6 @@
 				'url'		=>	basename($menu_item->url),
 				'id'		=>	'navItem'.$i
 			);
-
-		$item = $menu_item;
 	    $json[] = $item;
 	}
 	//$json = (object) $json;	
