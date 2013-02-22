@@ -576,8 +576,8 @@ $(document).ready(function(){$('a').click(function(){
 		});
 
 		var postList = new _postList({
-			el: $("#articleLoop"),
-			page: page
+			el: $("#articleLoop")
+//			page: page
 		});
 
 
