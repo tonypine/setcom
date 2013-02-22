@@ -461,7 +461,6 @@ $(document).ready(function(){$('a').click(function(){
 			goPage: function ( evt ) {
 				var p = $(evt.target).attr('href');
 				page = $.fn.basename( p );
-				console.log($postList.data);
 
 				var type, slug, page;
 				type = typeof $postList.data.type === 'undefined' || $postList.data.type == 'index' ? 'page' : $postList.data.type; + "";
@@ -522,7 +521,6 @@ $(document).ready(function(){$('a').click(function(){
 					dataType: 'json',
 					data: data
 				}).done(function ( response ) {
-					console.log( response );
 					nCol.add( response );
 				});
 				

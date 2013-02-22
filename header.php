@@ -1,5 +1,4 @@
 <?php 
-    $u = get_bloginfo('template_url');
     $class = '';
     if(is_single()):
         $class = ' single';
@@ -31,7 +30,7 @@
         <script src="<?php url(); ?>/js/respond.js"></script>
         <![endif]-->
 
-        <?php wp_head() ?>
+        <?php //wp_head() ?>
     </head>
     <body class="<?php echo $class; ?>">
         <div id="hrtopo"></div>

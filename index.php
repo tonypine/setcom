@@ -1,7 +1,7 @@
 <?php 
 
     /** Sets up the WordPress Environment. */
-    $loadFile = "../../../wp-load.php";
+    $loadFile = "../../../wp-config.php";
     if (file_exists($loadFile))
         require_once($loadFile);
     
