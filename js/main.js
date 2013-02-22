@@ -163,6 +163,7 @@ $(document).ready(function(){$('a').click(function(){
 				section.css('opacity',1);
 			},
 			login: function() {
+				alert('oi');
 				methods.wait();
 				$.ajax({
 					type: 'POST',
@@ -207,6 +208,9 @@ $(document).ready(function(){$('a').click(function(){
 					context: $("section#login"),
 					success: function ( response ) {
 						this.html( response );
+						section = $("#login");
+						form = section.find("#loginform");
+
 						// bindings
 						form.bind('submit', methods.login );
 						$("#btnLogout").bind('click', methods.logout );

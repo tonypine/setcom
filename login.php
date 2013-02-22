@@ -4,6 +4,8 @@
     if (file_exists($loadFile))
         require_once($loadFile);
 
+    require_once 'config.php';
+
     $loggedin = '';
     $notLogged = '';
     if(is_user_logged_in()): 
@@ -18,7 +20,7 @@
 </div>
 <div id="notLogged" <?php echo $loggedin; ?>>
     <h4>Login</h4>
-    <form name="loginform" id="loginform" action="http://localhost/menusetcom/wp-login.php" method="post">
+    <form name="loginform" id="loginform" action="<?php echo $siteUrl; ?>/wp-login.php" method="post">
         <p class="login-username">
             <label for="user_login">Nome de usuário</label>
             <input type="text" name="log" id="user_login" class="input" value="" size="20">
