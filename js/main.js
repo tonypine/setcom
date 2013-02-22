@@ -163,7 +163,6 @@ $(document).ready(function(){$('a').click(function(){
 				section.css('opacity',1);
 			},
 			login: function() {
-				alert('oi');
 				methods.wait();
 				$.ajax({
 					type: 'POST',
