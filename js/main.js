@@ -198,13 +198,24 @@ $(document).ready(function(){$('a').click(function(){
 					}
 				});
 				return false;
+			},
+			render: function () {
+				$.ajax({
+					type: 'GET',
+					url: baseUrl + '/login.php',
+					dataType: 'html',
+					context: $("section#login"),
+					success: function ( response ) {
+						this.html( response );
+						// bindings
+						form.bind('submit', methods.login );
+						$("#btnLogout").bind('click', methods.logout );
+					}
+				});
 			}
 		};
 
-		// bindings
-		form.bind('submit', methods.login );
-		$("#btnLogout").bind('click', methods.logout );
-
+		methods.render();
 		window.logout = methods.logout;
 
 	})();
@@ -298,6 +309,10 @@ $(document).ready(function(){$('a').click(function(){
 			ie = true;
 		}
 
+		$('html, body').scroll(function() {
+			$(this).stop();
+		});
+
 		// Post List
 		// ====================================================
 		window._postList = Backbone.View.extend({
@@ -317,7 +332,7 @@ $(document).ready(function(){$('a').click(function(){
 			loadState: function () {
 				// please wait
 				$('body').addClass('wait');
-				$('html, body').animate({scrollTop:0}, 700);
+				$('html, body').stop().animate({scrollTop:0}, 700);
 				$("#contentLoading").css("display",'block');
 				$postList.$el.css('opacity', 0.2);
 				return $postList;
@@ -511,8 +526,10 @@ $(document).ready(function(){$('a').click(function(){
 					menuName: this.menuName
 				};
 
-				if(logged) 	data.logged = 1;
-				else 		data.logged = 0;
+				// if(logged) 	data.logged = 1;
+				// else 		data.logged = 0;
+
+				data.logged = 0;
 
 				$.ajax({
 					type: 'GET',

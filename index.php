@@ -65,6 +65,8 @@
                 </div>
             </form>
         </nav>
+        <section id="login"></section>
+        <?php //require_once 'login.php'; ?>
         <div class="bg"></div>
     </aside>
 
@@ -234,7 +236,7 @@
         <script type="text/html" id="menuItem">
             <h4>{{ title }}</h4>
             <ul class="navUl">
-                {{# _.each(menuItens, function(li) { console.log(li); }}
+                {{# _.each(menuItens, function(li) { }}
                     <li>
                         <a id="{{ li.attributes.id }}" href="{{ siteUrl }}/#/categoria/{{ li.attributes.url }}">{{ li.attributes.title }}</a>
                     </li>
