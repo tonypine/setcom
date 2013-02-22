@@ -24,10 +24,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <?php
-            $url = "wp-content/themes/setcom";
-            $siteUrl = "/menusetcom";
-        ?>
+        <?php require_once 'config.php'; ?>
 
         <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css?v=1.7" type="text/css">
         <link rel="shortcut icon" href="<?php echo $url; ?>/favicon.ico">
