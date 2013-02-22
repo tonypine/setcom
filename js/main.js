@@ -522,6 +522,7 @@ $(document).ready(function(){$('a').click(function(){
 					dataType: 'json',
 					data: data
 				}).done(function ( response ) {
+					console.log( response );
 					nCol.add( response );
 				});
 				
